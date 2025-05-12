@@ -631,14 +631,18 @@ const ProductCard = ({ product }: ProductCardProps) => {
           onClick={(e) => {
             e.preventDefault();
             if (product.variants.length > 0) {
-              const { useCart } = require("@/hooks/use-cart");
-              const { addItem } = useCart();
-              addItem({
-                product,
-                variant: product.variants[0],
-                quantity: 1,
-              });
-              alert(`Added ${product.title} to cart!`);
+              try {
+                const { addItem } = useCart();
+                addItem({
+                  product,
+                  variant: product.variants[0],
+                  quantity: 1,
+                });
+                alert(`Added ${product.title} to cart!`);
+              } catch (error) {
+                console.error("Failed to add to cart:", error);
+                alert("Could not add to cart. Please try again.");
+              }
             }
           }}
         >

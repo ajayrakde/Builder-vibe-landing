@@ -19,7 +19,7 @@ const navigation = [
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const isMobile = useIsMobile();
-  const { itemCount } = useCart();
+  const { itemCount = 0 } = useCart() || {}; // Use default value if context is undefined
 
   return (
     <header className="bg-white border-b border-gray-100 sticky top-0 z-50">
