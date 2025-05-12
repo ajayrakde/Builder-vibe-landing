@@ -502,12 +502,8 @@ const Shop = () => {
                   {isMobile && (
                     <div className="sticky bottom-0 bg-white pt-4 pb-4 border-t mt-4">
                       <div className="flex gap-4">
-                        <Button
-                          variant="outline"
-                          className="w-1/2"
-                          onClick={clearAllFilters}
-                        >
-                          Clear All
+                        <Button className="w-full bg-[#1a5de6] text-white py-2 rounded-full font-medium hover:bg-[#1a5de6]/90 transition-colors font-quicksand">
+                          Add to Cart
                         </Button>
                         <Button className="w-1/2" onClick={toggleFilters}>
                           Apply Filters
@@ -582,11 +578,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
             Bestseller
           </span>
         )}
-        {product.kidFriendly && (
-          <span className="absolute bottom-2 right-2 bg-pastel-purple text-secondary text-xs px-2 py-1 rounded-full flex items-center">
-            <span className="mr-1">🧒</span> Kid Friendly
-          </span>
-        )}
+        {/* Kid Friendly label removed */}
         <img
           src={product.images[0].url}
           alt={product.title}
