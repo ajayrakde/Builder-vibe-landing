@@ -32,19 +32,6 @@ const Contact = () => {
         <Header />
 
         <main className="flex-grow">
-          {/* Hero section */}
-          <section className="bg-[#E2D9F3] py-16">
-            <div className="max-w-7xl mx-auto px-4 text-center">
-              <h1 className="text-3xl md:text-4xl font-bold text-slate-800 mb-6 font-quicksand">
-                Contact Us
-              </h1>
-              <p className="text-slate-600 max-w-2xl mx-auto font-quicksand">
-                We're here to answer your questions about our organic baby food
-                products. Our team is just a message away.
-              </p>
-            </div>
-          </section>
-
           {/* Contact section */}
           <section className="py-16 px-4">
             <div className="max-w-7xl mx-auto">

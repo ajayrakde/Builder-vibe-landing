@@ -19,19 +19,6 @@ const FAQ = () => {
         <Header />
 
         <main className="flex-grow">
-          {/* Hero section */}
-          <section className="bg-[#E2D9F3] py-16">
-            <div className="max-w-7xl mx-auto px-4 text-center">
-              <h1 className="text-3xl md:text-4xl font-bold text-slate-800 mb-6">
-                Frequently Asked Questions
-              </h1>
-              <p className="text-slate-600 max-w-2xl mx-auto">
-                Find answers to common questions about our products,
-                ingredients, ordering process, and more.
-              </p>
-            </div>
-          </section>
-
           {/* FAQ Content */}
           <section className="py-16 px-4">
             <div className="max-w-4xl mx-auto">
