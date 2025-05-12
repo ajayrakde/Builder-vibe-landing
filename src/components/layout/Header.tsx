@@ -5,6 +5,7 @@ import { ShoppingCart, Menu, X, Search, User, CloudSun } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { useCart } from "@/hooks/use-cart";
+import UserButton from "@/components/ui/UserButton";
 
 const navigation = [
   { name: "Home", href: "/" },
@@ -63,14 +64,7 @@ const Header = () => {
             >
               <Search className="h-5 w-5" />
             </Button>
-            <Button
-              variant="ghost"
-              size="icon"
-              aria-label="Account"
-              className="text-primary hover:bg-skyBlue-light/30 rounded-full"
-            >
-              <User className="h-5 w-5" />
-            </Button>
+            <UserButton />
             <Button
               variant="ghost"
               size="icon"
@@ -163,9 +157,7 @@ const Header = () => {
                 <Button variant="ghost" size="icon" aria-label="Search">
                   <Search className="h-5 w-5" />
                 </Button>
-                <Button variant="ghost" size="icon" aria-label="Account">
-                  <User className="h-5 w-5" />
-                </Button>
+                <UserButton />
                 <Button variant="default" className="ml-auto">
                   Sign In
                 </Button>
