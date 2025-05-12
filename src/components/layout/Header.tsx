@@ -28,23 +28,19 @@ const Header = () => {
           {/* Logo */}
           <div className="flex-shrink-0 flex items-center">
             <Link to="/" className="flex items-center gap-1">
-              <CloudSun className="h-7 w-7 text-primary animate-pulse" />
-              <span className="font-quicksand text-primary font-bold text-3xl">
+              <CloudSun className="h-7 w-7 text-[#1a5de6] animate-pulse" />
+              <span className="font-quicksand text-[#1a5de6] font-bold text-[30px] leading-9">
                 Kanhaa
-              </span>
-              <span className="ml-1 text-xs bg-pastel-purple text-secondary px-2 py-0.5 rounded-full font-bold">
-                Baby
               </span>
             </Link>
           </div>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex space-x-6">
+          <nav className="hidden md:flex space-x-8">
             {navigation.map((item) => (
               <Link
                 key={item.name}
                 to={item.href}
-                className="text-neutral-black hover:text-neutral-charcoal px-3 py-1 text-base font-medium rounded-full transition-all hover:bg-skyBlue-light/30"
+                className="font-quicksand font-medium transition rounded-full px-3 py-1"
               >
                 {item.name}
               </Link>
@@ -135,11 +131,8 @@ const Header = () => {
 
             <div className="flex-1 h-0 pt-5 pb-4 overflow-y-auto">
               <div className="flex-shrink-0 flex items-center px-4">
-                <span className="font-bold text-2xl tracking-tight text-slate-800">
+                <span className="font-quicksand text-[#1a5de6] font-bold text-[30px] leading-9">
                   Kanhaa
-                </span>
-                <span className="ml-1 text-xs bg-[#F8D7DA] text-[#6E6E6E] px-1.5 py-0.5 rounded-md">
-                  Baby
                 </span>
               </div>
               <nav className="mt-5 px-2 space-y-1">
