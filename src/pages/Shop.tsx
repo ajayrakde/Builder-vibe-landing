@@ -540,8 +540,17 @@ interface ProductCardProps {
 
 const ProductCard = ({ product }: ProductCardProps) => {
   const { addItem } = useCart();
+  const navigate = useNavigate();
+
+  const handleCardClick = () => {
+    navigate(`/product/${product.handle}`);
+  };
+
   return (
-    <Card className="overflow-hidden hover:shadow-md transition-shadow border-slate-100">
+    <Card
+      className="overflow-hidden hover:shadow-md transition-shadow border-slate-100 cursor-pointer"
+      onClick={handleCardClick}
+    >
       <div className="relative">
         {product.isNew && (
           <span className="absolute top-2 left-2 bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">
@@ -630,7 +639,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
         <Button
           className="w-full rounded-full"
           onClick={(e) => {
-            e.preventDefault();
+            e.stopPropagation(); // Prevent card click when button is clicked
             if (product.variants.length > 0) {
               try {
                 addItem({
