@@ -255,7 +255,7 @@ const ProductDetail = () => {
 
                 <div className="mb-4">
                   {product.priceRange.originalPrice ? (
-                    <div className="flex items-baseline gap-2">
+                    <div className="flex items-baseline gap-2 flex-wrap">
                       <p className="text-2xl font-semibold text-primary">
                         ₹
                         {selectedVariant?.price.amount ||

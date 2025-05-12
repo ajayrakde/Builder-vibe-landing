@@ -621,7 +621,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
         </p>
 
         <div className="flex items-baseline justify-between">
-          <div className="flex flex-col">
+          <div className="flex items-baseline gap-2">
             {product.priceRange.originalPrice ? (
               <>
                 <span className="text-lg font-semibold text-primary">
