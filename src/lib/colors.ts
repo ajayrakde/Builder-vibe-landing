@@ -1,7 +1,7 @@
 // Pastel and vibrant kid-friendly colors without red
 export const colors = {
   // Base theme colors
-  primary: "#5B9AD9", // Sky blue - primary brand color
+  primary: "#2662d9", // Blue for fonts - primary brand color
   secondary: "#9D8DF1", // Soft purple
   accent: "#FFD166", // Sunshine yellow
 
