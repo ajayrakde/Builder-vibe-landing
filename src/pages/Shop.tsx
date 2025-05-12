@@ -276,10 +276,10 @@ const Shop = () => {
     (searchTerm ? 1 : 0);
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col bg-skyBlue-light relative">
       <SkyBackground />
       <KidFriendlyElements />
-      <div className="relative z-10">
+      <div className="relative z-20">
         <Header />
 
         <main className="flex-grow">
@@ -568,7 +568,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
 
   return (
     <Card
-      className="kid-friendly-card border-neutral-cream bg-neutral-white/90 backdrop-blur-sm cursor-pointer hover:bg-white"
+      className="rounded-xl border-2 border-neutral-cream bg-white cursor-pointer transition-all duration-200 hover:shadow-lg hover:-translate-y-1"
       onClick={handleCardClick}
     >
       <div className="relative">

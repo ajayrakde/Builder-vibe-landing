@@ -41,26 +41,11 @@ const config = {
           "0%, 100%": { transform: "translateY(0)" },
           "50%": { transform: "translateY(-10px)" },
         },
-        twinkle: {
-          "0%, 100%": { opacity: "0.2", transform: "scale(0.8)" },
-          "50%": { opacity: "1", transform: "scale(1.2)" },
-        },
-        wiggle: {
-          "0%, 100%": { transform: "rotate(-3deg)" },
-          "50%": { transform: "rotate(3deg)" },
-        },
-        bounce: {
-          "0%, 100%": { transform: "translateY(0)" },
-          "50%": { transform: "translateY(-15px)" },
-        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         float: "float 6s ease-in-out infinite",
-        twinkle: "twinkle 5s ease-in-out infinite",
-        wiggle: "wiggle 1s ease-in-out infinite",
-        bounce: "bounce 1s ease-in-out infinite",
       },
       boxShadow: {
         soft: "0 2px 15px -3px rgba(0, 0, 0, 0.07), 0 10px 20px -2px rgba(0, 0, 0, 0.04)",
