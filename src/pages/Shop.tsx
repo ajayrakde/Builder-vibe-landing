@@ -332,7 +332,7 @@ const Shop = () => {
             {product.description}
           </p>
 
-          <div className="flex items-baseline justify-between">
+          <div className="flex items-center justify-between">
             <div className="flex items-baseline gap-2">
               {product.priceRange.originalPrice ? (
                 <>
@@ -349,17 +349,14 @@ const Shop = () => {
                 </span>
               )}
             </div>
+            <Button
+              className="bg-[#1a5de6] hover:bg-[#1a5de6]/90 text-white font-medium rounded-full px-4 py-1 h-8"
+              onClick={handleAddToCart}
+            >
+              Add
+            </Button>
           </div>
         </CardContent>
-
-        <CardFooter className="p-4 pt-0">
-          <Button
-            className="w-full bg-[#1a5de6] hover:bg-[#1a5de6]/90 text-white font-medium rounded-full"
-            onClick={handleAddToCart}
-          >
-            Add to Cart
-          </Button>
-        </CardFooter>
       </Card>
     );
   };
