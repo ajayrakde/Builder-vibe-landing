@@ -13,6 +13,7 @@ import Community from "./pages/Community";
 import ProductDetail from "./pages/ProductDetail";
 import FAQ from "./pages/FAQ";
 import Contact from "./pages/Contact";
+import Profile from "./pages/Profile";
 import Welcome from "./pages/Welcome";
 import NotFound from "./pages/NotFound";
 
@@ -35,6 +36,7 @@ const App = () => (
             <Route path="/product/:productHandle" element={<ProductDetail />} />
             <Route path="/faq" element={<FAQ />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/profile" element={<Profile />} />
             <Route path="/welcome" element={<Welcome />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
