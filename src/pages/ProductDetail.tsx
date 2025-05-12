@@ -253,11 +253,35 @@ const ProductDetail = () => {
                   )}
                 </div>
 
-                <p className="text-2xl font-semibold text-slate-800 mb-4">
-                  ₹
-                  {selectedVariant?.price.amount ||
-                    product.priceRange.minPrice.amount}
-                </p>
+                <div className="mb-4">
+                  {product.priceRange.originalPrice ? (
+                    <div className="flex items-baseline gap-2">
+                      <p className="text-2xl font-semibold text-primary">
+                        ₹
+                        {selectedVariant?.price.amount ||
+                          product.priceRange.minPrice.amount}
+                      </p>
+                      <p className="text-lg text-slate-500 line-through">
+                        ₹{product.priceRange.originalPrice.amount}
+                      </p>
+                      <span className="text-sm bg-green-100 text-green-800 px-2 py-0.5 rounded-full">
+                        {Math.round(
+                          ((Number(product.priceRange.originalPrice.amount) -
+                            Number(product.priceRange.minPrice.amount)) /
+                            Number(product.priceRange.originalPrice.amount)) *
+                            100,
+                        )}
+                        % OFF
+                      </span>
+                    </div>
+                  ) : (
+                    <p className="text-2xl font-semibold text-slate-800">
+                      ₹
+                      {selectedVariant?.price.amount ||
+                        product.priceRange.minPrice.amount}
+                    </p>
+                  )}
+                </div>
 
                 <p className="text-slate-600 mb-6">{product.description}</p>
               </div>

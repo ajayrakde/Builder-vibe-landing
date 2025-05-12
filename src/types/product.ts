@@ -72,6 +72,7 @@ export interface Product {
   priceRange: {
     minPrice: ProductPrice;
     maxPrice: ProductPrice;
+    originalPrice?: ProductPrice; // Original price before discount
   };
   images: ProductImage[];
   variants: ProductVariant[];
@@ -230,8 +231,9 @@ export const getMockProducts = (): Product[] => {
       description:
         "Crunchy yet soft cookies made with carrots and oats, perfect for toddlers learning to self-feed.",
       priceRange: {
-        minPrice: { amount: "179", currencyCode: "INR" },
-        maxPrice: { amount: "179", currencyCode: "INR" },
+        minPrice: { amount: "149", currencyCode: "INR" },
+        maxPrice: { amount: "149", currencyCode: "INR" },
+        originalPrice: { amount: "179", currencyCode: "INR" },
       },
       images: [
         {
@@ -319,8 +321,9 @@ export const getMockProducts = (): Product[] => {
       description:
         "Wholesome cookies made with nutritious ragi and sweet bananas for toddlers.",
       priceRange: {
-        minPrice: { amount: "199", currencyCode: "INR" },
-        maxPrice: { amount: "199", currencyCode: "INR" },
+        minPrice: { amount: "159", currencyCode: "INR" },
+        maxPrice: { amount: "159", currencyCode: "INR" },
+        originalPrice: { amount: "199", currencyCode: "INR" },
       },
       images: [
         {

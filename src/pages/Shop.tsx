@@ -621,9 +621,22 @@ const ProductCard = ({ product }: ProductCardProps) => {
         </p>
 
         <div className="flex items-baseline justify-between">
-          <span className="text-lg font-semibold text-slate-800">
-            ₹{product.priceRange.minPrice.amount}
-          </span>
+          <div className="flex flex-col">
+            {product.priceRange.originalPrice ? (
+              <>
+                <span className="text-lg font-semibold text-primary">
+                  ₹{product.priceRange.minPrice.amount}
+                </span>
+                <span className="text-sm text-slate-500 line-through">
+                  ₹{product.priceRange.originalPrice.amount}
+                </span>
+              </>
+            ) : (
+              <span className="text-lg font-semibold text-slate-800">
+                ₹{product.priceRange.minPrice.amount}
+              </span>
+            )}
+          </div>
           {product.rating && (
             <div className="flex items-center">
               <span className="text-yellow-500">★</span>
