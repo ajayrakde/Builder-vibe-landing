@@ -169,9 +169,27 @@ export default function MyComponent(props) {
                         <span className="text-yellow-500">★★★★★</span>
                       </div>
                     </div>
-                    <button className="w-full bg-[#1a5de6] text-white py-2 rounded-full font-medium hover:bg-[#1a5de6]/90 transition-colors font-quicksand">
+                    <Button
+                      className="kid-button-primary w-full text-base font-medium"
+                      onClick={(e) => {
+                        e.stopPropagation(); // Prevent card click when button is clicked
+                        if (product.variants.length > 0) {
+                          try {
+                            addItem({
+                              product,
+                              variant: product.variants[0],
+                              quantity: 1,
+                            });
+                            alert(`Added ${product.title} to cart!`);
+                          } catch (error) {
+                            console.error("Failed to add to cart:", error);
+                            alert("Could not add to cart. Please try again.");
+                          }
+                        }
+                      }}
+                    >
                       Add to Cart
-                    </button>
+                    </Button>
                   </div>
                 </div>
               ))}

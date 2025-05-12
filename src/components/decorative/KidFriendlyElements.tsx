@@ -13,12 +13,7 @@ const KidFriendlyElements = ({ className }: KidFriendlyElementsProps) => {
         className,
       )}
     >
-      {/* Simple circular elements instead of SVGs */}
-      <div className="absolute top-36 right-[5%] w-8 h-8 bg-pastel-purple rounded-full opacity-70"></div>
-      <div className="absolute top-60 left-[10%] w-10 h-10 bg-pastel-blue rounded-full opacity-70"></div>
-      <div className="absolute bottom-40 right-[15%] w-6 h-6 bg-pastel-yellow rounded-full opacity-70"></div>
-
-      {/* Simple stars */}
+      {/* Simple decorative elements - only small dots/circles */}
       <div className="absolute top-1/4 left-[20%] w-4 h-4 bg-accent rounded-full opacity-70"></div>
       <div className="absolute bottom-1/4 right-[25%] w-3 h-3 bg-vibrant-purple rounded-full opacity-70"></div>
       <div className="absolute top-2/3 left-[40%] w-2 h-2 bg-vibrant-green rounded-full opacity-70"></div>
