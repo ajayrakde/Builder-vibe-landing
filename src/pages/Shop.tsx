@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/select";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Badge } from "@/components/ui/badge";
-import { Search, SlidersHorizontal, X } from "lucide-react";
+import { Search, SlidersHorizontal, X, CloudSun } from "lucide-react";
 import {
   getMockProducts,
   Product,
@@ -26,7 +26,7 @@ import { useIsMobile } from "@/hooks/use-mobile";
 import { useCart } from "@/hooks/use-cart";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
-import BackgroundElements from "@/components/decorative/BackgroundElements";
+import SkyBackground from "@/components/decorative/SkyBackground";
 import KidFriendlyElements from "@/components/decorative/KidFriendlyElements";
 
 type FilterOption = {
@@ -271,7 +271,7 @@ const Shop = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <BackgroundElements density="low" />
+      <SkyBackground />
       <KidFriendlyElements />
       <Header />
 
@@ -550,7 +550,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
 
   return (
     <Card
-      className="kid-friendly-card border-slate-200 cursor-pointer"
+      className="kid-friendly-card border-neutral-cream bg-neutral-white/90 backdrop-blur-sm cursor-pointer hover:bg-white"
       onClick={handleCardClick}
     >
       <div className="relative">
@@ -657,7 +657,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
 
       <CardFooter className="p-4 pt-0">
         <Button
-          className="w-full rounded-full font-medium text-base"
+          className="kid-button-primary w-full text-base"
           onClick={(e) => {
             e.stopPropagation(); // Prevent card click when button is clicked
             if (product.variants.length > 0) {

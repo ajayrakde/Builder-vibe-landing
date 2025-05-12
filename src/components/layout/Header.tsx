@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { ShoppingCart, Menu, X, Search, User } from "lucide-react";
+import { ShoppingCart, Menu, X, Search, User, CloudSun } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { useCart } from "@/hooks/use-cart";
@@ -22,16 +22,17 @@ const Header = () => {
   const { itemCount = 0 } = useCart() || {}; // Use default value if context is undefined
 
   return (
-    <header className="bg-white border-b border-gray-100 sticky top-0 z-50">
+    <header className="bg-white/80 backdrop-blur-md border-b border-primary/10 sticky top-0 z-50 shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <div className="flex-shrink-0 flex items-center">
-            <Link to="/" className="flex items-center">
-              <span className="font-bold text-2xl tracking-tight text-slate-800">
+            <Link to="/" className="flex items-center gap-1">
+              <CloudSun className="h-7 w-7 text-primary animate-pulse" />
+              <span className="font-bold text-2xl tracking-tight text-primary">
                 Kanhaa
               </span>
-              <span className="ml-1 text-xs bg-[#F8D7DA] text-[#6E6E6E] px-1.5 py-0.5 rounded-md">
+              <span className="ml-1 text-xs bg-pastel-pink text-secondary px-2 py-0.5 rounded-full font-bold">
                 Baby
               </span>
             </Link>
@@ -43,7 +44,7 @@ const Header = () => {
               <Link
                 key={item.name}
                 to={item.href}
-                className="text-slate-600 hover:text-slate-900 px-2 py-1 text-sm font-medium rounded-md transition-colors"
+                className="text-primary hover:text-primary/80 px-3 py-1 text-base font-medium rounded-full transition-all hover:bg-skyBlue-light/30"
               >
                 {item.name}
               </Link>
@@ -52,13 +53,28 @@ const Header = () => {
 
           {/* Desktop Actions */}
           <div className="hidden md:flex items-center space-x-3">
-            <Button variant="ghost" size="icon" aria-label="Search">
+            <Button
+              variant="ghost"
+              size="icon"
+              aria-label="Search"
+              className="text-primary hover:bg-skyBlue-light/30 rounded-full"
+            >
               <Search className="h-5 w-5" />
             </Button>
-            <Button variant="ghost" size="icon" aria-label="Account">
+            <Button
+              variant="ghost"
+              size="icon"
+              aria-label="Account"
+              className="text-primary hover:bg-skyBlue-light/30 rounded-full"
+            >
               <User className="h-5 w-5" />
             </Button>
-            <Button variant="ghost" size="icon" aria-label="Shopping cart">
+            <Button
+              variant="ghost"
+              size="icon"
+              aria-label="Shopping cart"
+              className="text-primary hover:bg-skyBlue-light/30 rounded-full"
+            >
               <ShoppingCart className="h-5 w-5" />
               {itemCount > 0 && (
                 <span className="absolute top-1 right-1 h-4 w-4 bg-primary text-[10px] flex items-center justify-center text-white rounded-full">
@@ -70,10 +86,15 @@ const Header = () => {
 
           {/* Mobile menu button */}
           <div className="md:hidden flex items-center space-x-3">
-            <Button variant="ghost" size="icon" aria-label="Shopping cart">
+            <Button
+              variant="ghost"
+              size="icon"
+              aria-label="Shopping cart"
+              className="text-primary hover:bg-skyBlue-light/30 rounded-full"
+            >
               <ShoppingCart className="h-5 w-5" />
               {itemCount > 0 && (
-                <span className="absolute top-1 right-1 h-4 w-4 bg-primary text-[10px] flex items-center justify-center text-white rounded-full">
+                <span className="absolute top-1 right-1 h-5 w-5 bg-secondary text-[10px] flex items-center justify-center text-white rounded-full animate-pulse">
                   {itemCount}
                 </span>
               )}
