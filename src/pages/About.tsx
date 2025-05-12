@@ -13,19 +13,6 @@ const About = () => {
         <Header />
 
         <main className="flex-grow">
-          {/* Hero section */}
-          <section className="bg-[#E2D9F3] py-16">
-            <div className="max-w-7xl mx-auto px-4 text-center">
-              <h1 className="text-3xl md:text-4xl font-bold text-slate-800 mb-6">
-                About Kanhaa
-              </h1>
-              <p className="text-slate-600 max-w-2xl mx-auto">
-                We're on a mission to provide the most nutritious, organic baby
-                food that helps little ones grow healthy and strong.
-              </p>
-            </div>
-          </section>
-
           {/* Our Story section */}
           <section className="py-16 px-4">
             <div className="max-w-7xl mx-auto">
