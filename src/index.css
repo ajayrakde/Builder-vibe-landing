@@ -1,7 +1,146 @@
-.kid-button-primary {
-  @apply kid-button from-primary via-primary to-blue-400 text-white;
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 213 100% 98%;
+    --foreground: 222 47% 11%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+
+    --primary: 210 75% 60%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 333 90% 75%;
+    --secondary-foreground: 222 47% 11%;
+
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --accent: 40 100% 70%;
+    --accent-foreground: 222 47% 11%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222 47% 11%;
+
+    --radius: 1rem;
+  }
 }
 
-.kid-button-secondary {
-  @apply kid-button from-secondary via-secondary to-pastel-purple text-white;
+@layer utilities {
+  .animation-delay-2000 {
+    animation-delay: 2s;
+  }
+  .animation-delay-4000 {
+    animation-delay: 4s;
+  }
+
+  .animate-bounce-slow {
+    animation: bounce 3s infinite;
+  }
+
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+    100% {
+      transform: translateY(0px);
+    }
+  }
+
+  /* Kid-friendly rounded corners */
+  .kid-friendly-card {
+    @apply rounded-3xl overflow-hidden border-2 transition-all duration-200;
+  }
+
+  .kid-friendly-card:hover {
+    @apply shadow-lg border-primary -translate-y-1;
+  }
+
+  /* Cloud and sky animations */
+  .animate-twinkle {
+    animation: twinkle-animation 5s ease-in-out infinite;
+  }
+
+  @keyframes twinkle-animation {
+    0% {
+      opacity: 0.2;
+      transform: scale(0.8);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.2);
+    }
+    100% {
+      opacity: 0.2;
+      transform: scale(0.8);
+    }
+  }
+
+  .animate-cloud-drift {
+    animation: cloud-drift 30s linear infinite;
+  }
+
+  @keyframes cloud-drift {
+    from {
+      transform: translateX(-10%);
+    }
+    to {
+      transform: translateX(110%);
+    }
+  }
+
+  /* Rainbow fade animation */
+  .animate-rainbow {
+    animation: rainbow-fade 8s ease-in-out infinite;
+  }
+
+  @keyframes rainbow-fade {
+    0%,
+    100% {
+      opacity: 0.3;
+    }
+    50% {
+      opacity: 0.6;
+    }
+  }
+
+  /* Button animations */
+  .kid-button {
+    @apply rounded-full font-medium bg-gradient-to-r transition-all duration-300 shadow-md;
+  }
+
+  .kid-button:hover {
+    @apply shadow-lg -translate-y-1 scale-105;
+  }
+
+  .kid-button-primary {
+    @apply kid-button from-primary via-primary to-blue-400 text-white;
+  }
+
+  .kid-button-secondary {
+    @apply kid-button from-secondary via-secondary to-pastel-purple text-white;
+  }
+
+  .kid-button-accent {
+    @apply kid-button from-accent via-accent to-yellow-300 text-black;
+  }
 }
