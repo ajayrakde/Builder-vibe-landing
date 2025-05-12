@@ -273,19 +273,6 @@ const Shop = () => {
       <Header />
 
       <main className="flex-grow">
-        {/* Hero section */}
-        <div className="bg-[#E2D9F3] py-10 mb-8">
-          <div className="max-w-7xl mx-auto px-4">
-            <h1 className="text-3xl md:text-4xl font-bold text-slate-800 mb-4">
-              Shop Kanhaa Baby Food
-            </h1>
-            <p className="text-slate-600 max-w-2xl">
-              Discover our range of nutritious, organic baby foods crafted with
-              love for every stage of your baby's growth journey.
-            </p>
-          </div>
-        </div>
-
         <div className="max-w-7xl mx-auto px-4 pb-16">
           {/* Search and sort */}
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
@@ -301,19 +288,6 @@ const Shop = () => {
             </div>
 
             <div className="flex items-center gap-4 w-full md:w-auto">
-              <Select value={sortBy} onValueChange={setSortBy}>
-                <SelectTrigger className="w-full md:w-[200px]">
-                  <SelectValue placeholder="Sort by" />
-                </SelectTrigger>
-                <SelectContent>
-                  {sortOptions.map((option) => (
-                    <SelectItem key={option.value} value={option.value}>
-                      {option.label}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-
               {isMobile && (
                 <Button
                   variant="outline"
@@ -337,7 +311,7 @@ const Shop = () => {
             {isFilterOpen && (
               <div
                 className={cn(
-                  "w-full md:w-64 bg-white p-5 rounded-lg shadow-sm",
+                  "w-full md:w-[188px] bg-white p-5 rounded-lg shadow-sm",
                   isMobile
                     ? "fixed inset-0 z-50 overflow-auto"
                     : "sticky top-24 h-fit",
