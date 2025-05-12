@@ -1,24 +1,11 @@
 import { useState, useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Badge } from "@/components/ui/badge";
-import {
-  Search,
-  SlidersHorizontal,
-  X,
-  CloudSun,
-  ShoppingBag,
-} from "lucide-react";
+import { Search, SlidersHorizontal, X } from "lucide-react";
 import {
   getMockProducts,
   Product,
@@ -26,20 +13,19 @@ import {
   ProductType,
   IngredientType,
 } from "@/types/product";
-import { Link } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { useCart } from "@/hooks/use-cart";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
-import SkyBackground from "@/components/decorative/SkyBackground";
-import KidFriendlyElements from "@/components/decorative/KidFriendlyElements";
 
+// Type definition for filter options
 type FilterOption = {
   value: string;
   label: string;
 };
 
+// Filter options data
 const ageRanges: FilterOption[] = [
   { value: "0-6", label: "0-6 months" },
   { value: "6-12", label: "6-12 months" },
@@ -67,18 +53,11 @@ const ingredientTypes: FilterOption[] = [
   { value: "oats", label: "Oats" },
 ];
 
-const sortOptions: FilterOption[] = [
-  { value: "featured", label: "Featured" },
-  { value: "new", label: "What's New" },
-  { value: "price-low", label: "Price: Low to High" },
-  { value: "price-high", label: "Price: High to Low" },
-  { value: "best-selling", label: "Best Selling" },
-];
-
 const Shop = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const isMobile = useIsMobile();
+  const { addItem } = useCart();
 
   const [products, setProducts] = useState<Product[]>([]);
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
@@ -171,36 +150,6 @@ const Shop = () => {
       );
     }
 
-    // Apply sorting
-    switch (sortBy) {
-      case "price-low":
-        result.sort(
-          (a, b) =>
-            Number(a.priceRange.minPrice.amount) -
-            Number(b.priceRange.minPrice.amount),
-        );
-        break;
-      case "price-high":
-        result.sort(
-          (a, b) =>
-            Number(b.priceRange.minPrice.amount) -
-            Number(a.priceRange.minPrice.amount),
-        );
-        break;
-      case "new":
-        result.sort((a, b) => (b.isNew ? 1 : 0) - (a.isNew ? 1 : 0));
-        break;
-      case "best-selling":
-        result.sort(
-          (a, b) => (b.isBestSeller ? 1 : 0) - (a.isBestSeller ? 1 : 0),
-        );
-        break;
-      case "featured":
-      default:
-        // Keep the original order or implement featured logic
-        break;
-    }
-
     setFilteredProducts(result);
 
     // Update URL with current filters
@@ -275,420 +224,404 @@ const Shop = () => {
     selectedIngredients.length +
     (searchTerm ? 1 : 0);
 
-  return (
-    <div className="min-h-screen flex flex-col bg-skyBlue-light relative">
-      <SkyBackground />
-      <KidFriendlyElements />
-      <div className="relative z-20">
-        <Header />
+  // Render product card
+  const renderProductCard = (product: Product) => {
+    const handleCardClick = () => {
+      navigate(`/product/${product.handle}`);
+    };
 
-        <main className="flex-grow">
-          <div className="max-w-7xl mx-auto px-4 pb-16">
-            {/* Search and sort */}
-            <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
-              <div className="relative w-full md:w-80">
-                <Search className="absolute left-3 top-2.5 h-4 w-4 text-slate-400" />
-                <Input
-                  type="search"
-                  placeholder="Search products..."
-                  className="pl-10 rounded-full"
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                />
-              </div>
+    const handleAddToCart = (e: React.MouseEvent) => {
+      e.stopPropagation();
+      if (product.variants.length > 0) {
+        try {
+          addItem({
+            product,
+            variant: product.variants[0],
+            quantity: 1,
+          });
+          alert(`Added ${product.title} to cart!`);
+        } catch (error) {
+          console.error("Failed to add to cart:", error);
+          alert("Could not add to cart. Please try again.");
+        }
+      }
+    };
 
-              <div className="flex items-center gap-4 w-full md:w-auto">
-                {isMobile && (
-                  <Button
-                    variant="outline"
-                    className="flex items-center gap-2"
-                    onClick={toggleFilters}
-                  >
-                    <SlidersHorizontal className="h-4 w-4" />
-                    Filters
-                    {activeFilterCount > 0 && (
-                      <Badge className="ml-1 h-5 w-5 p-0 flex items-center justify-center">
-                        {activeFilterCount}
-                      </Badge>
-                    )}
-                  </Button>
-                )}
-              </div>
-            </div>
+    return (
+      <Card
+        key={product.id}
+        className="rounded-xl border-2 border-neutral-cream bg-white cursor-pointer transition-all duration-200 hover:shadow-lg hover:-translate-y-1"
+        onClick={handleCardClick}
+      >
+        <div className="relative">
+          {product.isNew && (
+            <span className="absolute top-2 left-2 bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">
+              New
+            </span>
+          )}
+          {product.isBestSeller && (
+            <span className="absolute top-2 right-2 bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">
+              Bestseller
+            </span>
+          )}
+          <img
+            src={product.images[0].url}
+            alt={product.title}
+            className="h-48 w-full object-cover"
+          />
+        </div>
 
-            <div className="flex flex-col md:flex-row gap-8">
-              {/* Filters sidebar */}
-              {isFilterOpen && (
-                <div
-                  className={cn(
-                    "bg-neutral-white/90 backdrop-blur-sm p-5 rounded-lg shadow-sm",
-                    isMobile
-                      ? "fixed inset-0 z-50 overflow-auto"
-                      : "sticky top-24 h-fit w-full md:w-[188px]",
-                  )}
-                >
-                  <div className="flex items-center justify-between mb-6">
-                    <h2 className="font-semibold text-lg">Filters</h2>
-                    {isMobile && (
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        onClick={toggleFilters}
-                      >
-                        <X className="h-5 w-5" />
-                      </Button>
-                    )}
-                  </div>
-
-                  {/* Active filters */}
-                  {activeFilterCount > 0 && (
-                    <div className="mb-4">
-                      <div className="flex items-center justify-between mb-2">
-                        <h3 className="text-sm font-medium">Active Filters</h3>
-                        <Button
-                          variant="ghost"
-                          className="text-xs h-auto p-1"
-                          onClick={clearAllFilters}
-                        >
-                          Clear All
-                        </Button>
-                      </div>
-                      <div className="flex flex-wrap gap-2">
-                        {searchTerm && (
-                          <Badge
-                            variant="secondary"
-                            className="flex gap-1 items-center"
-                          >
-                            Search: {searchTerm}
-                            <X
-                              className="h-3 w-3 cursor-pointer"
-                              onClick={() => setSearchTerm("")}
-                            />
-                          </Badge>
-                        )}
-
-                        {selectedAges.map((age) => (
-                          <Badge
-                            key={age}
-                            variant="secondary"
-                            className="flex gap-1 items-center"
-                          >
-                            {ageRanges.find((a) => a.value === age)?.label}
-                            <X
-                              className="h-3 w-3 cursor-pointer"
-                              onClick={() => toggleAgeFilter(age)}
-                            />
-                          </Badge>
-                        ))}
-
-                        {selectedTypes.map((type) => (
-                          <Badge
-                            key={type}
-                            variant="secondary"
-                            className="flex gap-1 items-center"
-                          >
-                            {productTypes.find((t) => t.value === type)?.label}
-                            <X
-                              className="h-3 w-3 cursor-pointer"
-                              onClick={() => toggleTypeFilter(type)}
-                            />
-                          </Badge>
-                        ))}
-
-                        {selectedIngredients.map((ingredient) => (
-                          <Badge
-                            key={ingredient}
-                            variant="secondary"
-                            className="flex gap-1 items-center"
-                          >
-                            {
-                              ingredientTypes.find(
-                                (i) => i.value === ingredient,
-                              )?.label
-                            }
-                            <X
-                              className="h-3 w-3 cursor-pointer"
-                              onClick={() => toggleIngredientFilter(ingredient)}
-                            />
-                          </Badge>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Age filter */}
-                  <div className="mb-6">
-                    <h3 className="font-medium mb-3">Age</h3>
-                    <div className="space-y-2">
-                      {ageRanges.map((age) => (
-                        <div key={age.value} className="flex items-center">
-                          <Checkbox
-                            id={`age-${age.value}`}
-                            checked={selectedAges.includes(
-                              age.value as AgeRange,
-                            )}
-                            onCheckedChange={() =>
-                              toggleAgeFilter(age.value as AgeRange)
-                            }
-                          />
-                          <label
-                            htmlFor={`age-${age.value}`}
-                            className="ml-2 text-sm text-slate-600 cursor-pointer"
-                          >
-                            {age.label}
-                          </label>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Product type filter */}
-                  <div className="mb-6">
-                    <h3 className="font-medium mb-3">Product Type</h3>
-                    <div className="space-y-2">
-                      {productTypes.map((type) => (
-                        <div key={type.value} className="flex items-center">
-                          <Checkbox
-                            id={`type-${type.value}`}
-                            checked={selectedTypes.includes(
-                              type.value as ProductType,
-                            )}
-                            onCheckedChange={() =>
-                              toggleTypeFilter(type.value as ProductType)
-                            }
-                          />
-                          <label
-                            htmlFor={`type-${type.value}`}
-                            className="ml-2 text-sm text-slate-600 cursor-pointer"
-                          >
-                            {type.label}
-                          </label>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Ingredients filter */}
-                  <div className="mb-6">
-                    <h3 className="font-medium mb-3">Ingredients</h3>
-                    <div className="space-y-2">
-                      {ingredientTypes.map((ingredient) => (
-                        <div
-                          key={ingredient.value}
-                          className="flex items-center"
-                        >
-                          <Checkbox
-                            id={`ingredient-${ingredient.value}`}
-                            checked={selectedIngredients.includes(
-                              ingredient.value as IngredientType,
-                            )}
-                            onCheckedChange={() =>
-                              toggleIngredientFilter(
-                                ingredient.value as IngredientType,
-                              )
-                            }
-                          />
-                          <label
-                            htmlFor={`ingredient-${ingredient.value}`}
-                            className="ml-2 text-sm text-slate-600 cursor-pointer"
-                          >
-                            {ingredient.label}
-                          </label>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  {isMobile && (
-                    <div className="sticky bottom-0 bg-white pt-4 pb-4 border-t mt-4">
-                      <div className="flex gap-4">
-                        <Button className="w-full bg-[#1a5de6] text-white py-2 rounded-full font-medium hover:bg-[#1a5de6]/90 transition-colors font-quicksand">
-                          Add to Cart
-                        </Button>
-                        <Button className="w-1/2" onClick={toggleFilters}>
-                          Apply Filters
-                        </Button>
-                      </div>
-                    </div>
-                  )}
-                </div>
+        <CardContent className="p-4">
+          <div className="flex items-center mb-2">
+            <span
+              className={cn(
+                "text-xs px-2 py-0.5 rounded-full mr-2",
+                product.ageRange === "0-6"
+                  ? "bg-blue-100 text-blue-800"
+                  : product.ageRange === "6-12"
+                    ? "bg-green-100 text-green-800"
+                    : product.ageRange === "12-24"
+                      ? "bg-purple-100 text-purple-800"
+                      : "bg-orange-100 text-orange-800",
               )}
-
-              {/* Product grid */}
-              <div className="flex-1">
-                {filteredProducts.length > 0 ? (
-                  <>
-                    <p className="text-sm text-slate-500 mb-6">
-                      Showing {filteredProducts.length}{" "}
-                      {filteredProducts.length === 1 ? "product" : "products"}
-                    </p>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                      {filteredProducts.map((product) => (
-                        <ProductCard key={product.id} product={product} />
-                      ))}
-                    </div>
-                  </>
-                ) : (
-                  <div className="text-center py-12">
-                    <h3 className="text-lg font-medium text-slate-800 mb-2">
-                      No products found
-                    </h3>
-                    <p className="text-slate-500 mb-6">
-                      Try adjusting your filters or search criteria
-                    </p>
-                    <Button onClick={clearAllFilters}>Clear All Filters</Button>
-                  </div>
-                )}
-              </div>
-            </div>
+            >
+              {product.ageRange === "0-6"
+                ? "0-6 months"
+                : product.ageRange === "6-12"
+                  ? "6-12 months"
+                  : product.ageRange === "12-24"
+                    ? "12-24 months"
+                    : "24+ months"}
+            </span>
+            <span
+              className={cn(
+                "text-xs px-2 py-0.5 rounded-full",
+                product.productType === "cereals"
+                  ? "bg-yellow-100 text-yellow-800"
+                  : product.productType === "purees"
+                    ? "bg-pink-100 text-pink-800"
+                    : product.productType === "finger-foods"
+                      ? "bg-indigo-100 text-indigo-800"
+                      : product.productType === "snacks"
+                        ? "bg-red-100 text-red-800"
+                        : "bg-teal-100 text-teal-800",
+              )}
+            >
+              {product.productType
+                .split("-")
+                .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+                .join(" ")}
+            </span>
           </div>
-        </main>
 
-        <Footer />
-      </div>
-    </div>
-  );
-};
+          <h3 className="font-semibold text-slate-800 text-lg mb-1">
+            {product.title}
+          </h3>
 
-interface ProductCardProps {
-  product: Product;
-}
+          <p className="text-slate-600 text-sm mb-4 line-clamp-2">
+            {product.description}
+          </p>
 
-const ProductCard = ({ product }: ProductCardProps) => {
-  const { addItem } = useCart();
-  const navigate = useNavigate();
+          <div className="flex items-baseline justify-between">
+            <div className="flex items-baseline gap-2">
+              {product.priceRange.originalPrice ? (
+                <>
+                  <span className="text-lg font-semibold text-primary">
+                    ₹{product.priceRange.minPrice.amount}
+                  </span>
+                  <span className="text-sm text-slate-500 line-through">
+                    ₹{product.priceRange.originalPrice.amount}
+                  </span>
+                </>
+              ) : (
+                <span className="text-lg font-semibold text-slate-800">
+                  ₹{product.priceRange.minPrice.amount}
+                </span>
+              )}
+            </div>
+            {product.rating && (
+              <div className="flex items-center">
+                <span className="text-yellow-500">★</span>
+                <span className="ml-1 text-sm text-slate-600">
+                  {product.rating}
+                </span>
+              </div>
+            )}
+          </div>
+        </CardContent>
 
-  const handleCardClick = () => {
-    navigate(`/product/${product.handle}`);
+        <CardFooter className="p-4 pt-0">
+          <Button
+            className="w-full bg-[#1a5de6] hover:bg-[#1a5de6]/90 text-white font-medium rounded-full"
+            onClick={handleAddToCart}
+          >
+            Add to Cart
+          </Button>
+        </CardFooter>
+      </Card>
+    );
   };
 
   return (
-    <Card
-      className="rounded-xl border-2 border-neutral-cream bg-white cursor-pointer transition-all duration-200 hover:shadow-lg hover:-translate-y-1"
-      onClick={handleCardClick}
-    >
-      <div className="relative">
-        {product.isNew && (
-          <span className="absolute top-2 left-2 bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">
-            New
-          </span>
-        )}
-        {product.isBestSeller && (
-          <span className="absolute top-2 right-2 bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">
-            Bestseller
-          </span>
-        )}
-        {/* Kid Friendly label removed */}
-        <img
-          src={product.images[0].url}
-          alt={product.title}
-          className="h-48 w-full object-cover"
-        />
-      </div>
+    <div className="min-h-screen flex flex-col bg-white">
+      <Header />
 
-      <CardContent className="p-4">
-        <div className="flex items-center mb-2">
-          <span
-            className={cn(
-              "text-xs px-2 py-0.5 rounded-full mr-2",
-              product.ageRange === "0-6"
-                ? "bg-blue-100 text-blue-800"
-                : product.ageRange === "6-12"
-                  ? "bg-green-100 text-green-800"
-                  : product.ageRange === "12-24"
-                    ? "bg-purple-100 text-purple-800"
-                    : "bg-orange-100 text-orange-800",
-            )}
-          >
-            {product.ageRange === "0-6"
-              ? "0-6 months"
-              : product.ageRange === "6-12"
-                ? "6-12 months"
-                : product.ageRange === "12-24"
-                  ? "12-24 months"
-                  : "24+ months"}
-          </span>
-          <span
-            className={cn(
-              "text-xs px-2 py-0.5 rounded-full",
-              product.productType === "cereals"
-                ? "bg-yellow-100 text-yellow-800"
-                : product.productType === "purees"
-                  ? "bg-pink-100 text-pink-800"
-                  : product.productType === "finger-foods"
-                    ? "bg-indigo-100 text-indigo-800"
-                    : product.productType === "snacks"
-                      ? "bg-red-100 text-red-800"
-                      : "bg-teal-100 text-teal-800",
-            )}
-          >
-            {product.productType
-              .split("-")
-              .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-              .join(" ")}
-          </span>
-        </div>
-
-        <h3 className="font-semibold text-slate-800 text-lg mb-1">
-          {product.title}
-        </h3>
-
-        <p className="text-slate-600 text-sm mb-4 line-clamp-2">
-          {product.description}
-        </p>
-
-        <div className="flex items-baseline justify-between">
-          <div className="flex items-baseline gap-2">
-            {product.priceRange.originalPrice ? (
-              <>
-                <span className="text-lg font-semibold text-primary">
-                  ₹{product.priceRange.minPrice.amount}
-                </span>
-                <span className="text-sm text-slate-500 line-through">
-                  ₹{product.priceRange.originalPrice.amount}
-                </span>
-              </>
-            ) : (
-              <span className="text-lg font-semibold text-slate-800">
-                ₹{product.priceRange.minPrice.amount}
-              </span>
-            )}
-          </div>
-          {product.rating && (
-            <div className="flex items-center">
-              <span className="text-yellow-500">★</span>
-              <span className="ml-1 text-sm text-slate-600">
-                {product.rating}
-              </span>
+      <main className="flex-grow">
+        <div className="max-w-7xl mx-auto px-4 pb-16">
+          {/* Search and filters */}
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4 mt-8">
+            <div className="relative w-full md:w-80">
+              <Search className="absolute left-3 top-2.5 h-4 w-4 text-slate-400" />
+              <Input
+                type="search"
+                placeholder="Search products..."
+                className="pl-10 rounded-full"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
             </div>
-          )}
-        </div>
-      </CardContent>
 
-      <CardFooter className="p-4 pt-0">
-        <Button
-          className="kid-button-primary w-full text-base font-medium"
-          onClick={(e) => {
-            e.stopPropagation(); // Prevent card click when button is clicked
-            if (product.variants.length > 0) {
-              try {
-                addItem({
-                  product,
-                  variant: product.variants[0],
-                  quantity: 1,
-                });
-                alert(`Added ${product.title} to cart!`);
-              } catch (error) {
-                console.error("Failed to add to cart:", error);
-                alert("Could not add to cart. Please try again.");
-              }
-            }
-          }}
-        >
-          Add to Cart 🧸
-        </Button>
-      </CardFooter>
-    </Card>
+            <div className="flex items-center gap-4 w-full md:w-auto">
+              {isMobile && (
+                <Button
+                  variant="outline"
+                  className="flex items-center gap-2"
+                  onClick={toggleFilters}
+                >
+                  <SlidersHorizontal className="h-4 w-4" />
+                  Filters
+                  {activeFilterCount > 0 && (
+                    <Badge className="ml-1 h-5 w-5 p-0 flex items-center justify-center">
+                      {activeFilterCount}
+                    </Badge>
+                  )}
+                </Button>
+              )}
+            </div>
+          </div>
+
+          <div className="flex flex-col md:flex-row gap-8">
+            {/* Filters sidebar */}
+            {isFilterOpen && (
+              <div
+                className={cn(
+                  "bg-white p-5 rounded-lg shadow-sm",
+                  isMobile
+                    ? "fixed inset-0 z-50 overflow-auto"
+                    : "sticky top-24 h-fit w-full md:w-[188px]",
+                )}
+              >
+                <div className="flex items-center justify-between mb-6">
+                  <h2 className="font-semibold text-lg">Filters</h2>
+                  {isMobile && (
+                    <Button variant="ghost" size="icon" onClick={toggleFilters}>
+                      <X className="h-5 w-5" />
+                    </Button>
+                  )}
+                </div>
+
+                {/* Active filters */}
+                {activeFilterCount > 0 && (
+                  <div className="mb-4">
+                    <div className="flex items-center justify-between mb-2">
+                      <h3 className="text-sm font-medium">Active Filters</h3>
+                      <Button
+                        variant="ghost"
+                        className="text-xs h-auto p-1"
+                        onClick={clearAllFilters}
+                      >
+                        Clear All
+                      </Button>
+                    </div>
+                    <div className="flex flex-wrap gap-2">
+                      {searchTerm && (
+                        <Badge
+                          variant="secondary"
+                          className="flex gap-1 items-center"
+                        >
+                          Search: {searchTerm}
+                          <X
+                            className="h-3 w-3 cursor-pointer"
+                            onClick={() => setSearchTerm("")}
+                          />
+                        </Badge>
+                      )}
+
+                      {selectedAges.map((age) => (
+                        <Badge
+                          key={age}
+                          variant="secondary"
+                          className="flex gap-1 items-center"
+                        >
+                          {ageRanges.find((a) => a.value === age)?.label}
+                          <X
+                            className="h-3 w-3 cursor-pointer"
+                            onClick={() => toggleAgeFilter(age)}
+                          />
+                        </Badge>
+                      ))}
+
+                      {selectedTypes.map((type) => (
+                        <Badge
+                          key={type}
+                          variant="secondary"
+                          className="flex gap-1 items-center"
+                        >
+                          {productTypes.find((t) => t.value === type)?.label}
+                          <X
+                            className="h-3 w-3 cursor-pointer"
+                            onClick={() => toggleTypeFilter(type)}
+                          />
+                        </Badge>
+                      ))}
+
+                      {selectedIngredients.map((ingredient) => (
+                        <Badge
+                          key={ingredient}
+                          variant="secondary"
+                          className="flex gap-1 items-center"
+                        >
+                          {
+                            ingredientTypes.find((i) => i.value === ingredient)
+                              ?.label
+                          }
+                          <X
+                            className="h-3 w-3 cursor-pointer"
+                            onClick={() => toggleIngredientFilter(ingredient)}
+                          />
+                        </Badge>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Age filter */}
+                <div className="mb-6">
+                  <h3 className="font-medium mb-3">Age</h3>
+                  <div className="space-y-2">
+                    {ageRanges.map((age) => (
+                      <div key={age.value} className="flex items-center">
+                        <Checkbox
+                          id={`age-${age.value}`}
+                          checked={selectedAges.includes(age.value as AgeRange)}
+                          onCheckedChange={() =>
+                            toggleAgeFilter(age.value as AgeRange)
+                          }
+                        />
+                        <label
+                          htmlFor={`age-${age.value}`}
+                          className="ml-2 text-sm text-slate-600 cursor-pointer"
+                        >
+                          {age.label}
+                        </label>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Product type filter */}
+                <div className="mb-6">
+                  <h3 className="font-medium mb-3">Product Type</h3>
+                  <div className="space-y-2">
+                    {productTypes.map((type) => (
+                      <div key={type.value} className="flex items-center">
+                        <Checkbox
+                          id={`type-${type.value}`}
+                          checked={selectedTypes.includes(
+                            type.value as ProductType,
+                          )}
+                          onCheckedChange={() =>
+                            toggleTypeFilter(type.value as ProductType)
+                          }
+                        />
+                        <label
+                          htmlFor={`type-${type.value}`}
+                          className="ml-2 text-sm text-slate-600 cursor-pointer"
+                        >
+                          {type.label}
+                        </label>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Ingredients filter */}
+                <div className="mb-6">
+                  <h3 className="font-medium mb-3">Ingredients</h3>
+                  <div className="space-y-2">
+                    {ingredientTypes.map((ingredient) => (
+                      <div key={ingredient.value} className="flex items-center">
+                        <Checkbox
+                          id={`ingredient-${ingredient.value}`}
+                          checked={selectedIngredients.includes(
+                            ingredient.value as IngredientType,
+                          )}
+                          onCheckedChange={() =>
+                            toggleIngredientFilter(
+                              ingredient.value as IngredientType,
+                            )
+                          }
+                        />
+                        <label
+                          htmlFor={`ingredient-${ingredient.value}`}
+                          className="ml-2 text-sm text-slate-600 cursor-pointer"
+                        >
+                          {ingredient.label}
+                        </label>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {isMobile && (
+                  <div className="sticky bottom-0 bg-white pt-4 pb-4 border-t mt-4">
+                    <div className="flex gap-4">
+                      <Button
+                        variant="outline"
+                        className="w-1/2"
+                        onClick={clearAllFilters}
+                      >
+                        Clear All
+                      </Button>
+                      <Button className="w-1/2" onClick={toggleFilters}>
+                        Apply Filters
+                      </Button>
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
+
+            {/* Product grid */}
+            <div className="flex-1">
+              {filteredProducts.length > 0 ? (
+                <>
+                  <p className="text-sm text-slate-500 mb-6">
+                    Showing {filteredProducts.length}{" "}
+                    {filteredProducts.length === 1 ? "product" : "products"}
+                  </p>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {filteredProducts.map(renderProductCard)}
+                  </div>
+                </>
+              ) : (
+                <div className="text-center py-12">
+                  <h3 className="text-lg font-medium text-slate-800 mb-2">
+                    No products found
+                  </h3>
+                  <p className="text-slate-500 mb-6">
+                    Try adjusting your filters or search criteria
+                  </p>
+                  <Button onClick={clearAllFilters}>Clear All Filters</Button>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <Footer />
+    </div>
   );
 };
 
