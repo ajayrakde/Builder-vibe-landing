@@ -44,7 +44,7 @@ const Header = () => {
               <Link
                 key={item.name}
                 to={item.href}
-                className="text-primary hover:text-primary/80 px-3 py-1 text-base font-medium rounded-full transition-all hover:bg-skyBlue-light/30"
+                className="text-neutral-black hover:text-neutral-charcoal px-3 py-1 text-base font-medium rounded-full transition-all hover:bg-skyBlue-light/30"
               >
                 {item.name}
               </Link>
@@ -149,7 +149,7 @@ const Header = () => {
                     to={item.href}
                     className={cn(
                       "block px-3 py-3 rounded-md text-base font-medium",
-                      "text-slate-600 hover:bg-slate-50 hover:text-slate-900",
+                      "text-neutral-black hover:bg-skyBlue-light/30 hover:text-neutral-charcoal",
                     )}
                     onClick={() => setIsMenuOpen(false)}
                   >
