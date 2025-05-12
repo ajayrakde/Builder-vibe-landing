@@ -27,6 +27,7 @@ import { useCart } from "@/hooks/use-cart";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import BackgroundElements from "@/components/decorative/BackgroundElements";
+import KidFriendlyElements from "@/components/decorative/KidFriendlyElements";
 
 type FilterOption = {
   value: string;
@@ -271,6 +272,7 @@ const Shop = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <BackgroundElements density="low" />
+      <KidFriendlyElements />
       <Header />
 
       <main className="flex-grow">
@@ -548,7 +550,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
 
   return (
     <Card
-      className="overflow-hidden hover:shadow-md transition-shadow border-slate-100 cursor-pointer"
+      className="kid-friendly-card border-slate-200 cursor-pointer"
       onClick={handleCardClick}
     >
       <div className="relative">
@@ -560,6 +562,11 @@ const ProductCard = ({ product }: ProductCardProps) => {
         {product.isBestSeller && (
           <span className="absolute top-2 right-2 bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">
             Bestseller
+          </span>
+        )}
+        {product.kidFriendly && (
+          <span className="absolute bottom-2 right-2 bg-pink-100 text-pink-800 text-xs px-2 py-1 rounded-full flex items-center">
+            <span className="mr-1">🧒</span> Kid Friendly
           </span>
         )}
         <img
@@ -650,7 +657,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
 
       <CardFooter className="p-4 pt-0">
         <Button
-          className="w-full rounded-full"
+          className="w-full rounded-full font-medium text-base"
           onClick={(e) => {
             e.stopPropagation(); // Prevent card click when button is clicked
             if (product.variants.length > 0) {
@@ -668,7 +675,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
             }
           }}
         >
-          Add to Cart
+          Add to Cart 🧸
         </Button>
       </CardFooter>
     </Card>

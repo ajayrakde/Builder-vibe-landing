@@ -87,6 +87,7 @@ export interface Product {
   isBestSeller?: boolean;
   isOnSale?: boolean;
   hasSubscription?: boolean;
+  kidFriendly?: boolean; // Indicates if this product is specially designed for kids
 }
 
 // Mock data function to generate sample products
@@ -135,6 +136,7 @@ export const getMockProducts = (): Product[] => {
       isNew: false,
       isBestSeller: true,
       hasSubscription: true,
+      kidFriendly: true,
     },
     {
       id: "prod-002",
@@ -178,6 +180,7 @@ export const getMockProducts = (): Product[] => {
       rating: 4.9,
       isNew: true,
       hasSubscription: false,
+      kidFriendly: true,
     },
     {
       id: "prod-003",
