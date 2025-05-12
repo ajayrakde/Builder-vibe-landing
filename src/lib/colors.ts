@@ -1,8 +1,8 @@
-// Pastel and vibrant kid-friendly colors
+// Pastel and vibrant kid-friendly colors without red
 export const colors = {
   // Base theme colors
   primary: "#5B9AD9", // Sky blue - primary brand color
-  secondary: "#FF7FAC", // Soft pink
+  secondary: "#9D8DF1", // Soft purple
   accent: "#FFD166", // Sunshine yellow
 
   // Background colors
@@ -14,25 +14,25 @@ export const colors = {
 
   // Pastel palette
   pastel: {
-    pink: "#FFB6C1", // Light Pink
     purple: "#CBC3E3", // Lavender
     yellow: "#FFECB3", // Pale Yellow
     green: "#B5EAD7", // Mint Green
     blue: "#A2D2FF", // Baby Blue
     orange: "#FFD8B1", // Peach
-    red: "#FF9AA2", // Salmon
     teal: "#9BF6FF", // Aqua
+    cyan: "#80D8FF", // Bright Cyan
+    lilac: "#D8B5FF", // Soft Lilac
   },
 
   // Vibrant accent colors for highlights
   vibrant: {
-    red: "#FF595E", // Coral Red
     orange: "#FF924C", // Tangerine
     yellow: "#FFCA3A", // Bright Yellow
     green: "#8AC926", // Lime Green
     blue: "#1982C4", // Bright Blue
     purple: "#6A4C93", // Royal Purple
-    pink: "#FF70A6", // Hot Pink
+    teal: "#20C997", // Bright Teal
+    cyan: "#3BC9DB", // Bright Cyan
   },
 
   // Neutral/UI colors

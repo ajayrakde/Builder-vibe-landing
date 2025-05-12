@@ -26,7 +26,7 @@ const config = {
         sm: "calc(var(--radius) - 0.5rem)",
       },
       fontFamily: {
-        sans: ["Nunito", "sans-serif"],
+        sans: ["Quicksand", "sans-serif"],
       },
       keyframes: {
         "accordion-down": {

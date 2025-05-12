@@ -27,7 +27,7 @@ const KidFriendlyElements = ({ className }: KidFriendlyElementsProps) => {
         >
           <path
             d="M19 20C26.1797 20 32 15.5228 32 10C32 4.47715 26.1797 0 19 0C11.8203 0 6 4.47715 6 10C6 15.5228 11.8203 20 19 20Z"
-            fill="#FF9AA2"
+            fill="#9D8DF1"
             fillOpacity="0.7"
           />
           <path

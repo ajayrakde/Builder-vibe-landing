@@ -657,7 +657,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
 
       <CardFooter className="p-4 pt-0">
         <Button
-          className="kid-button-primary w-full text-base"
+          className="kid-button-primary w-full text-base font-medium"
           onClick={(e) => {
             e.stopPropagation(); // Prevent card click when button is clicked
             if (product.variants.length > 0) {

@@ -32,7 +32,7 @@ const Header = () => {
               <span className="font-bold text-2xl tracking-tight text-primary">
                 Kanhaa
               </span>
-              <span className="ml-1 text-xs bg-pastel-pink text-secondary px-2 py-0.5 rounded-full font-bold">
+              <span className="ml-1 text-xs bg-pastel-purple text-secondary px-2 py-0.5 rounded-full font-bold">
                 Baby
               </span>
             </Link>
@@ -94,7 +94,7 @@ const Header = () => {
             >
               <ShoppingCart className="h-5 w-5" />
               {itemCount > 0 && (
-                <span className="absolute top-1 right-1 h-5 w-5 bg-secondary text-[10px] flex items-center justify-center text-white rounded-full animate-pulse">
+                <span className="absolute top-1 right-1 h-5 w-5 bg-vibrant-teal text-[10px] flex items-center justify-center text-white rounded-full animate-pulse">
                   {itemCount}
                 </span>
               )}

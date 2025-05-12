@@ -159,7 +159,7 @@ const SkyBackground = ({ className }: SkyBackgroundProps) => {
         >
           <path
             d="M290,140 C245,45 190,15 150,15 C110,15 55,45 10,140"
-            stroke="#FF595E"
+            stroke="#20C997"
             strokeWidth="12"
             strokeLinecap="round"
             fill="none"
