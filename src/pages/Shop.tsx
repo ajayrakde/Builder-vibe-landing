@@ -23,6 +23,7 @@ import {
 import { Link } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { useCart } from "@/hooks/use-cart";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import BackgroundElements from "@/components/decorative/BackgroundElements";
@@ -538,6 +539,7 @@ interface ProductCardProps {
 }
 
 const ProductCard = ({ product }: ProductCardProps) => {
+  const { addItem } = useCart();
   return (
     <Card className="overflow-hidden hover:shadow-md transition-shadow border-slate-100">
       <div className="relative">
@@ -632,7 +634,6 @@ const ProductCard = ({ product }: ProductCardProps) => {
             e.preventDefault();
             if (product.variants.length > 0) {
               try {
-                const { addItem } = useCart();
                 addItem({
                   product,
                   variant: product.variants[0],
