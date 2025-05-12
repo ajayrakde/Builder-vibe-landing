@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { ShoppingCart, Menu, X, Search, User } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { useCart } from "@/hooks/use-cart";
 
 const navigation = [
   { name: "Home", href: "/" },
@@ -18,6 +19,7 @@ const navigation = [
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const isMobile = useIsMobile();
+  const { itemCount } = useCart();
 
   return (
     <header className="bg-white border-b border-gray-100 sticky top-0 z-50">
@@ -58,9 +60,11 @@ const Header = () => {
             </Button>
             <Button variant="ghost" size="icon" aria-label="Shopping cart">
               <ShoppingCart className="h-5 w-5" />
-              <span className="absolute top-1 right-1 h-4 w-4 bg-primary text-[10px] flex items-center justify-center text-white rounded-full">
-                0
-              </span>
+              {itemCount > 0 && (
+                <span className="absolute top-1 right-1 h-4 w-4 bg-primary text-[10px] flex items-center justify-center text-white rounded-full">
+                  {itemCount}
+                </span>
+              )}
             </Button>
           </div>
 
@@ -68,9 +72,11 @@ const Header = () => {
           <div className="md:hidden flex items-center space-x-3">
             <Button variant="ghost" size="icon" aria-label="Shopping cart">
               <ShoppingCart className="h-5 w-5" />
-              <span className="absolute top-1 right-1 h-4 w-4 bg-primary text-[10px] flex items-center justify-center text-white rounded-full">
-                0
-              </span>
+              {itemCount > 0 && (
+                <span className="absolute top-1 right-1 h-4 w-4 bg-primary text-[10px] flex items-center justify-center text-white rounded-full">
+                  {itemCount}
+                </span>
+              )}
             </Button>
             <Button
               variant="ghost"

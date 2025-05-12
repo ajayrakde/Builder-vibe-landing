@@ -624,7 +624,26 @@ const ProductCard = ({ product }: ProductCardProps) => {
         </div>
       </CardContent>
 
-      <CardFooter className="p-4 pt-0">
+      <CardFooter className="p-4 pt-0 flex flex-col gap-2">
+        <Button
+          variant="outline"
+          className="w-full rounded-full"
+          onClick={(e) => {
+            e.preventDefault();
+            if (product.variants.length > 0) {
+              const { useCart } = require("@/hooks/use-cart");
+              const { addItem } = useCart();
+              addItem({
+                product,
+                variant: product.variants[0],
+                quantity: 1,
+              });
+              alert(`Added ${product.title} to cart!`);
+            }
+          }}
+        >
+          Add to Cart
+        </Button>
         <Button asChild className="w-full rounded-full">
           <Link to={`/product/${product.handle}`}>View Product</Link>
         </Button>

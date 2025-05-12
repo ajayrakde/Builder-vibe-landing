@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
+import { useCart } from "@/hooks/use-cart";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
@@ -82,16 +83,19 @@ const ProductDetail = () => {
     setIsSubscription(type === "subscription");
   };
 
+  const { addItem } = useCart();
+
   const handleAddToCart = () => {
-    // In a real app, this would add to cart
-    console.log("Added to cart:", {
+    if (!selectedVariant || !product) return;
+
+    addItem({
       product,
       variant: selectedVariant,
       quantity,
       isSubscription,
     });
 
-    // For now, just show an alert
+    // Show a toast or alert to confirm
     alert(`Added ${quantity} ${product.title} to cart!`);
   };
 
