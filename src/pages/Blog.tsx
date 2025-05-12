@@ -1,151 +1,81 @@
-import { Fragment, useState } from "react";
-import { Link } from "react-router-dom";
+import { Fragment } from "react";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import BackgroundElements from "@/components/decorative/BackgroundElements";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
-import { Search } from "lucide-react";
-
-// Mock blog post data
-interface BlogPost {
-  id: string;
-  title: string;
-  excerpt: string;
-  category: string;
-  coverImage: string;
-  author: string;
-  date: string;
-  slug: string;
-  tags: string[];
-  featured?: boolean;
-}
-
-const blogPosts: BlogPost[] = [
-  {
-    id: "1",
-    title: "The Importance of Iron in Your Baby's Diet",
-    excerpt:
-      "Learn why iron is crucial for your baby's development and the best food sources to include in their diet.",
-    category: "Nutrition",
-    coverImage: "/placeholder.svg",
-    author: "Dr. Anand Mehta",
-    date: "April 15, 2023",
-    slug: "iron-in-baby-diet",
-    tags: ["nutrition", "iron", "baby-development"],
-    featured: true,
-  },
-  {
-    id: "2",
-    title: "5 Easy Homemade Finger Foods for Toddlers",
-    excerpt:
-      "Simple, nutritious finger food recipes that your toddler will love and that support their development.",
-    category: "Recipes",
-    coverImage: "/placeholder.svg",
-    author: "Meera Patel",
-    date: "March 28, 2023",
-    slug: "finger-foods-recipes",
-    tags: ["recipes", "finger-foods", "toddlers"],
-  },
-  {
-    id: "3",
-    title: "Signs Your Baby is Ready for Solid Foods",
-    excerpt:
-      "How to recognize when your baby is developmentally ready to start exploring solid foods.",
-    category: "Parenting",
-    coverImage: "/placeholder.svg",
-    author: "Priya Sharma",
-    date: "February 12, 2023",
-    slug: "ready-for-solids",
-    tags: ["first-foods", "baby-development", "parenting-tips"],
-  },
-  {
-    id: "4",
-    title: "Understanding Baby-Led Weaning: Pros and Cons",
-    excerpt:
-      "A comprehensive guide to baby-led weaning and how to decide if it's right for your little one.",
-    category: "Nutrition",
-    coverImage: "/placeholder.svg",
-    author: "Dr. Anand Mehta",
-    date: "January 21, 2023",
-    slug: "baby-led-weaning",
-    tags: ["baby-led-weaning", "first-foods", "nutrition"],
-  },
-  {
-    id: "5",
-    title: "The Impact of Organic Foods on Your Child's Health",
-    excerpt:
-      "Research-backed insights on how organic foods can benefit your baby's health and development.",
-    category: "Nutrition",
-    coverImage: "/placeholder.svg",
-    author: "Dr. Anand Mehta",
-    date: "December 15, 2022",
-    slug: "organic-foods-impact",
-    tags: ["organic", "health", "research"],
-  },
-  {
-    id: "6",
-    title: "Seasonal Fruits and Vegetables for Baby Purees",
-    excerpt:
-      "A seasonal guide to selecting the best fruits and vegetables for nutritious baby purees.",
-    category: "Recipes",
-    coverImage: "/placeholder.svg",
-    author: "Meera Patel",
-    date: "November 9, 2022",
-    slug: "seasonal-purees",
-    tags: ["recipes", "purees", "seasonal"],
-  },
-  {
-    id: "7",
-    title: "Managing Food Allergies in Infants and Toddlers",
-    excerpt:
-      "Essential guidance for introducing potential allergens and managing food allergies in young children.",
-    category: "Health",
-    coverImage: "/placeholder.svg",
-    author: "Dr. Anand Mehta",
-    date: "October 27, 2022",
-    slug: "food-allergies",
-    tags: ["allergies", "health", "safety"],
-  },
-  {
-    id: "8",
-    title: "Creating a Positive Mealtime Environment for Your Baby",
-    excerpt:
-      "Tips for making mealtimes enjoyable, stress-free, and beneficial for your baby's relationship with food.",
-    category: "Parenting",
-    coverImage: "/placeholder.svg",
-    author: "Priya Sharma",
-    date: "September 14, 2022",
-    slug: "positive-mealtime",
-    tags: ["parenting-tips", "mealtime", "food-relationship"],
-  },
-];
-
-// Categories for filtering
-const categories = ["All", "Nutrition", "Recipes", "Parenting", "Health"];
 
 const Blog = () => {
-  const [activeCategory, setActiveCategory] = useState("All");
-  const [searchTerm, setSearchTerm] = useState("");
-
-  // Filter posts based on active category and search term
-  const filteredPosts = blogPosts.filter((post) => {
-    const matchesCategory =
-      activeCategory === "All" || post.category === activeCategory;
-    const matchesSearch =
-      post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      post.excerpt.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      post.tags.some((tag) =>
-        tag.toLowerCase().includes(searchTerm.toLowerCase()),
-      );
-
-    return matchesCategory && (searchTerm === "" || matchesSearch);
-  });
-
-  // Get featured posts
-  const featuredPosts = blogPosts.filter((post) => post.featured);
+  // Sample blog posts data
+  const blogPosts = [
+    {
+      id: 1,
+      title: "The Importance of Iron in Your Baby's Diet",
+      excerpt:
+        "Learn why iron is crucial for your baby's development and the best food sources to include in their diet.",
+      image: "/placeholder.svg",
+      category: "Nutrition",
+      date: "April 15, 2023",
+      author: "Dr. Anand Mehta",
+      slug: "iron-in-baby-diet",
+    },
+    {
+      id: 2,
+      title: "5 Easy Homemade Finger Foods for Toddlers",
+      excerpt:
+        "Simple, nutritious finger food recipes that your toddler will love and that support their development.",
+      image: "/placeholder.svg",
+      category: "Recipes",
+      date: "March 28, 2023",
+      author: "Meera Patel",
+      slug: "finger-foods-recipes",
+    },
+    {
+      id: 3,
+      title: "Signs Your Baby is Ready for Solid Foods",
+      excerpt:
+        "How to recognize when your baby is developmentally ready to start exploring solid foods.",
+      image: "/placeholder.svg",
+      category: "Parenting",
+      date: "February 12, 2023",
+      author: "Priya Sharma",
+      slug: "ready-for-solids",
+    },
+    {
+      id: 4,
+      title: "Understanding Baby-Led Weaning",
+      excerpt:
+        "A comprehensive guide to baby-led weaning and how it can benefit your child's relationship with food.",
+      image: "/placeholder.svg",
+      category: "Nutrition",
+      date: "January 30, 2023",
+      author: "Dr. Anand Mehta",
+      slug: "baby-led-weaning",
+    },
+    {
+      id: 5,
+      title: "Seasonal Fruits and Vegetables for Baby Food",
+      excerpt:
+        "Why seasonal produce makes the best baby food and how to incorporate it into your baby's diet.",
+      image: "/placeholder.svg",
+      category: "Nutrition",
+      date: "January 15, 2023",
+      author: "Meera Patel",
+      slug: "seasonal-produce-baby-food",
+    },
+    {
+      id: 6,
+      title: "Managing Picky Eating in Toddlers",
+      excerpt:
+        "Strategies and tips for parents dealing with picky eaters and how to ensure proper nutrition.",
+      image: "/placeholder.svg",
+      category: "Parenting",
+      date: "December 8, 2022",
+      author: "Priya Sharma",
+      slug: "picky-eating-toddlers",
+    },
+  ];
 
   return (
     <Fragment>
@@ -154,179 +84,154 @@ const Blog = () => {
         <Header />
 
         <main className="flex-grow">
-          {/* Hero section */}
-          <section className="bg-[#E2D9F3] py-16">
-            <div className="max-w-7xl mx-auto px-4 text-center">
-              <h1 className="text-3xl md:text-4xl font-bold text-slate-800 mb-6">
-                Kanhaa Blog
-              </h1>
-              <p className="text-slate-600 max-w-2xl mx-auto">
-                Explore nutrition tips, recipes, and parenting advice to support
-                your baby's healthy development.
-              </p>
+          <section className="py-12 px-4">
+            <div className="max-w-7xl mx-auto">
+              <div />
             </div>
           </section>
 
-          {/* Featured post */}
-          {featuredPosts.length > 0 && (
-            <section className="py-12 px-4">
-              <div className="max-w-7xl mx-auto">
-                <h2 className="text-2xl font-bold text-slate-800 mb-8">
-                  Featured Article
-                </h2>
+          <section className="bg-slate-50 py-12 px-4">
+            <div className="max-w-7xl mx-auto">
+              <div className="flex items-center gap-6 justify-between mb-10">
+                <div className="relative">
+                  <h2 className="text-2xl font-bold text-slate-800">
+                    Latest Articles
+                  </h2>
+                </div>
 
-                <div className="bg-white rounded-xl overflow-hidden shadow-sm">
-                  <div className="grid grid-cols-1 md:grid-cols-2">
-                    <div className="h-64 md:h-auto">
-                      <img
-                        src={featuredPosts[0].coverImage}
-                        alt={featuredPosts[0].title}
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                    <div className="p-8">
-                      <Badge className="mb-3 bg-[#F8D7DA] hover:bg-[#F8D7DA] text-slate-700">
-                        {featuredPosts[0].category}
-                      </Badge>
-                      <h3 className="text-2xl font-bold mb-4 text-slate-800">
-                        {featuredPosts[0].title}
+                <div className="flex gap-2">
+                  <div className="flex gap-2">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="rounded-full"
+                    >
+                      All
+                    </Button>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="rounded-full"
+                    >
+                      Nutrition
+                    </Button>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="rounded-full"
+                    >
+                      Recipes
+                    </Button>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="rounded-full"
+                    >
+                      Parenting
+                    </Button>
+                  </div>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {blogPosts.map((post) => (
+                  <div
+                    key={post.id}
+                    className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow"
+                  >
+                    <img
+                      src={post.image}
+                      alt={post.title}
+                      className="w-full h-48 object-cover"
+                    />
+                    <div className="p-6">
+                      <div className="flex gap-2 mb-3">
+                        <Badge
+                          variant="outline"
+                          className={
+                            post.category === "Nutrition"
+                              ? "bg-blue-100 text-blue-800 hover:bg-blue-100"
+                              : post.category === "Recipes"
+                                ? "bg-green-100 text-green-800 hover:bg-green-100"
+                                : "bg-purple-100 text-purple-800 hover:bg-purple-100"
+                          }
+                        >
+                          {post.category}
+                        </Badge>
+                      </div>
+                      <h3 className="font-semibold text-lg mb-2 text-slate-800">
+                        {post.title}
                       </h3>
-                      <p className="text-slate-600 mb-6">
-                        {featuredPosts[0].excerpt}
+                      <p className="text-slate-600 text-sm mb-4">
+                        {post.excerpt}
                       </p>
                       <div className="flex items-center justify-between">
-                        <span className="text-sm text-slate-500">
-                          {featuredPosts[0].date} • By {featuredPosts[0].author}
+                        <span className="text-xs text-slate-500">
+                          {post.date} • By {post.author}
                         </span>
                         <Button
-                          asChild
                           variant="outline"
-                          className="rounded-full"
+                          className="text-sm rounded-full"
+                          size="sm"
                         >
-                          <Link to={`/blog/${featuredPosts[0].slug}`}>
-                            Read More
-                          </Link>
+                          Read More
                         </Button>
                       </div>
                     </div>
                   </div>
-                </div>
-              </div>
-            </section>
-          )}
-
-          {/* Blog list section */}
-          <section className="py-12 px-4 bg-slate-50">
-            <div className="max-w-7xl mx-auto">
-              {/* Search and filter */}
-              <div className="mb-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-                <div className="relative w-full md:w-80">
-                  <Search className="absolute left-3 top-2.5 h-4 w-4 text-slate-400" />
-                  <Input
-                    type="search"
-                    placeholder="Search articles..."
-                    className="pl-10 rounded-full"
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                  />
-                </div>
-
-                <Tabs
-                  value={activeCategory}
-                  onValueChange={setActiveCategory}
-                  className="w-full md:w-auto"
-                >
-                  <TabsList className="w-full md:w-auto">
-                    {categories.map((category) => (
-                      <TabsTrigger key={category} value={category}>
-                        {category}
-                      </TabsTrigger>
-                    ))}
-                  </TabsList>
-                </Tabs>
+                ))}
               </div>
 
-              {/* Blog grid */}
-              {filteredPosts.length > 0 ? (
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                  {filteredPosts.map((post) => (
-                    <BlogCard key={post.id} post={post} />
-                  ))}
-                </div>
-              ) : (
-                <div className="text-center py-12">
-                  <h3 className="text-xl font-semibold text-slate-800 mb-4">
-                    No articles found
-                  </h3>
-                  <p className="text-slate-600 mb-6">
-                    Try adjusting your search or filter criteria
-                  </p>
-                  <Button
-                    onClick={() => {
-                      setActiveCategory("All");
-                      setSearchTerm("");
-                    }}
-                  >
-                    Reset Filters
-                  </Button>
-                </div>
-              )}
-
-              {/* Pagination */}
-              {filteredPosts.length > 0 && (
-                <div className="flex justify-center mt-12">
-                  <Button
-                    variant="outline"
-                    className="mx-2 rounded-full px-6"
-                    disabled
-                  >
+              <div className="flex justify-center mt-10">
+                <div className="flex items-center">
+                  <Button variant="outline" className="rounded-full mx-2">
                     Previous
                   </Button>
                   <Button
                     variant="outline"
-                    className="mx-2 rounded-full w-10 h-10 bg-primary text-white"
+                    className="rounded-full h-10 w-10 p-0 mx-1"
                   >
                     1
                   </Button>
                   <Button
                     variant="outline"
-                    className="mx-2 rounded-full w-10 h-10"
+                    className="rounded-full h-10 w-10 p-0 mx-1 bg-primary text-white"
                   >
                     2
                   </Button>
                   <Button
                     variant="outline"
-                    className="mx-2 rounded-full w-10 h-10"
+                    className="rounded-full h-10 w-10 p-0 mx-1"
                   >
                     3
                   </Button>
-                  <Button variant="outline" className="mx-2 rounded-full px-6">
+                  <Button variant="outline" className="rounded-full mx-2">
                     Next
                   </Button>
                 </div>
-              )}
+              </div>
             </div>
           </section>
 
-          {/* Newsletter section */}
-          <section className="py-16 px-4 bg-[#FEF6E4]">
+          <section className="py-12 px-4" />
+
+          <section className="bg-[#FEF6E4] py-16 px-4">
             <div className="max-w-3xl mx-auto text-center">
               <h2 className="text-2xl md:text-3xl font-bold text-slate-800 mb-6">
                 Subscribe to Our Newsletter
               </h2>
               <p className="text-slate-600 mb-8">
-                Get the latest articles, recipes, and parenting tips delivered
-                straight to your inbox.
+                Get expert tips, nutrition advice, and delicious recipes
+                delivered straight to your inbox. Stay updated with the latest
+                information on baby nutrition and parenting.
               </p>
-              <div className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+              <div className="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto">
                 <Input
                   type="email"
-                  placeholder="Your email address"
+                  placeholder="Enter your email"
                   className="rounded-full"
                 />
-                <Button className="rounded-full whitespace-nowrap">
-                  Subscribe
-                </Button>
+                <Button className="rounded-full">Subscribe</Button>
               </div>
             </div>
           </section>
@@ -335,44 +240,6 @@ const Blog = () => {
         <Footer />
       </div>
     </Fragment>
-  );
-};
-
-interface BlogCardProps {
-  post: BlogPost;
-}
-
-const BlogCard = ({ post }: BlogCardProps) => {
-  return (
-    <div className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
-      <div className="h-48 overflow-hidden">
-        <img
-          src={post.coverImage}
-          alt={post.title}
-          className="w-full h-full object-cover transition-transform hover:scale-105 duration-300"
-        />
-      </div>
-      <div className="p-6">
-        <Badge className="mb-3" variant="outline">
-          {post.category}
-        </Badge>
-        <h3 className="font-semibold text-lg mb-2 text-slate-800 line-clamp-2">
-          {post.title}
-        </h3>
-        <p className="text-slate-600 text-sm mb-4 line-clamp-3">
-          {post.excerpt}
-        </p>
-        <div className="flex items-center justify-between">
-          <span className="text-xs text-slate-500">{post.date}</span>
-          <Link
-            to={`/blog/${post.slug}`}
-            className="text-primary text-sm font-medium"
-          >
-            Read More
-          </Link>
-        </div>
-      </div>
-    </div>
   );
 };
 
