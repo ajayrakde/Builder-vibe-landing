@@ -1,1 +1,1 @@
-Please restart the dev server to clear any cached issues with the styling and rendering.
+Please restart the development server to apply these changes.
