@@ -39,6 +39,10 @@
 }
 
 @layer utilities {
+  .font-quicksand {
+    font-family: Quicksand, sans-serif;
+  }
+
   .animation-delay-2000 {
     animation-delay: 2s;
   }

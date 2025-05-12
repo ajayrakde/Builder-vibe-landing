@@ -29,7 +29,7 @@ const Header = () => {
           <div className="flex-shrink-0 flex items-center">
             <Link to="/" className="flex items-center gap-1">
               <CloudSun className="h-7 w-7 text-primary animate-pulse" />
-              <span className="font-bold text-2xl tracking-tight text-primary">
+              <span className="font-quicksand text-primary font-bold text-3xl">
                 Kanhaa
               </span>
               <span className="ml-1 text-xs bg-pastel-purple text-secondary px-2 py-0.5 rounded-full font-bold">

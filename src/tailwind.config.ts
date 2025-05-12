@@ -27,6 +27,7 @@ const config = {
       },
       fontFamily: {
         sans: ["Quicksand", "sans-serif"],
+        quicksand: ["Quicksand", "sans-serif"],
       },
       keyframes: {
         "accordion-down": {
