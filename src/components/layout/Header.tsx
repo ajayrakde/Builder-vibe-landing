@@ -1,0 +1,155 @@
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import { ShoppingCart, Menu, X, Search, User } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { useIsMobile } from "@/hooks/use-mobile";
+
+const navigation = [
+  { name: "Home", href: "/" },
+  { name: "Shop", href: "/shop" },
+  { name: "About", href: "/about" },
+  { name: "Blog", href: "/blog" },
+  { name: "Community", href: "/community" },
+  { name: "FAQ", href: "/faq" },
+  { name: "Contact", href: "/contact" },
+];
+
+const Header = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const isMobile = useIsMobile();
+
+  return (
+    <header className="bg-white border-b border-gray-100 sticky top-0 z-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center h-16">
+          {/* Logo */}
+          <div className="flex-shrink-0 flex items-center">
+            <Link to="/" className="flex items-center">
+              <span className="font-bold text-2xl tracking-tight text-slate-800">
+                Kanhaa
+              </span>
+              <span className="ml-1 text-xs bg-[#F8D7DA] text-[#6E6E6E] px-1.5 py-0.5 rounded-md">
+                Baby
+              </span>
+            </Link>
+          </div>
+
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex space-x-6">
+            {navigation.map((item) => (
+              <Link
+                key={item.name}
+                to={item.href}
+                className="text-slate-600 hover:text-slate-900 px-2 py-1 text-sm font-medium rounded-md transition-colors"
+              >
+                {item.name}
+              </Link>
+            ))}
+          </nav>
+
+          {/* Desktop Actions */}
+          <div className="hidden md:flex items-center space-x-3">
+            <Button variant="ghost" size="icon" aria-label="Search">
+              <Search className="h-5 w-5" />
+            </Button>
+            <Button variant="ghost" size="icon" aria-label="Account">
+              <User className="h-5 w-5" />
+            </Button>
+            <Button variant="ghost" size="icon" aria-label="Shopping cart">
+              <ShoppingCart className="h-5 w-5" />
+              <span className="absolute top-1 right-1 h-4 w-4 bg-primary text-[10px] flex items-center justify-center text-white rounded-full">
+                0
+              </span>
+            </Button>
+          </div>
+
+          {/* Mobile menu button */}
+          <div className="md:hidden flex items-center space-x-3">
+            <Button variant="ghost" size="icon" aria-label="Shopping cart">
+              <ShoppingCart className="h-5 w-5" />
+              <span className="absolute top-1 right-1 h-4 w-4 bg-primary text-[10px] flex items-center justify-center text-white rounded-full">
+                0
+              </span>
+            </Button>
+            <Button
+              variant="ghost"
+              size="icon"
+              aria-label="Open menu"
+              onClick={() => setIsMenuOpen(true)}
+            >
+              <Menu className="h-6 w-6" />
+            </Button>
+          </div>
+        </div>
+      </div>
+
+      {/* Mobile menu, show/hide based on menu state */}
+      {isMobile && isMenuOpen && (
+        <div className="fixed inset-0 flex z-50">
+          <div
+            className="fixed inset-0 bg-black/30"
+            aria-hidden="true"
+            onClick={() => setIsMenuOpen(false)}
+          />
+
+          <div className="relative flex-1 flex flex-col max-w-xs w-full bg-white shadow-xl">
+            <div className="absolute top-0 right-0 -mr-12 pt-2">
+              <Button
+                variant="ghost"
+                size="icon"
+                className="ml-1 text-white"
+                onClick={() => setIsMenuOpen(false)}
+                aria-label="Close menu"
+              >
+                <X className="h-6 w-6" />
+              </Button>
+            </div>
+
+            <div className="flex-1 h-0 pt-5 pb-4 overflow-y-auto">
+              <div className="flex-shrink-0 flex items-center px-4">
+                <span className="font-bold text-2xl tracking-tight text-slate-800">
+                  Kanhaa
+                </span>
+                <span className="ml-1 text-xs bg-[#F8D7DA] text-[#6E6E6E] px-1.5 py-0.5 rounded-md">
+                  Baby
+                </span>
+              </div>
+              <nav className="mt-5 px-2 space-y-1">
+                {navigation.map((item) => (
+                  <Link
+                    key={item.name}
+                    to={item.href}
+                    className={cn(
+                      "block px-3 py-3 rounded-md text-base font-medium",
+                      "text-slate-600 hover:bg-slate-50 hover:text-slate-900",
+                    )}
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    {item.name}
+                  </Link>
+                ))}
+              </nav>
+            </div>
+
+            <div className="flex-shrink-0 flex border-t border-gray-200 p-4">
+              <div className="flex items-center space-x-4 w-full">
+                <Button variant="ghost" size="icon" aria-label="Search">
+                  <Search className="h-5 w-5" />
+                </Button>
+                <Button variant="ghost" size="icon" aria-label="Account">
+                  <User className="h-5 w-5" />
+                </Button>
+                <Button variant="default" className="ml-auto">
+                  Sign In
+                </Button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </header>
+  );
+};
+
+export default Header;
