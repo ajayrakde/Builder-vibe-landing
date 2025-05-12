@@ -1,5 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap");
 
+/* Ensure Quicksand is loaded and used */
+:root {
+  font-family: "Quicksand", sans-serif;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -40,7 +45,13 @@
 
 @layer utilities {
   .font-quicksand {
-    font-family: Quicksand, sans-serif;
+    font-family: "Quicksand", sans-serif;
+  }
+
+  .space-x-8 > :not([hidden]) ~ :not([hidden]) {
+    --tw-space-x-reverse: 0;
+    margin-right: calc(2rem * var(--tw-space-x-reverse));
+    margin-left: calc(2rem * calc(1 - var(--tw-space-x-reverse)));
   }
 
   .animation-delay-2000 {
