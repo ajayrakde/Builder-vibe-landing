@@ -1,1 +1,1 @@
-Please restart the development server to apply these changes.
+Please restart the development server to apply these changes. The app loading issues should now be fixed.

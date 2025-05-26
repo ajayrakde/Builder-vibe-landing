@@ -1,15 +1,15 @@
-import React, { Suspense } from "react";
-import ReactDOM from "react-dom/client";
-import App from "./App.tsx";
+import React from "react";
+import { createRoot } from "react-dom/client";
+import App from "./App";
 import "./index.css";
-import "./styles/global.css";
-import "./styles/components.css";
 
-// Add suspense fallback
-ReactDOM.createRoot(document.getElementById("root")!).render(
-  <React.StrictMode>
-    <Suspense fallback={<div>Loading...</div>}>
+// Create root and render app
+const container = document.getElementById("root");
+if (container) {
+  const root = createRoot(container);
+  root.render(
+    <React.StrictMode>
       <App />
-    </Suspense>
-  </React.StrictMode>,
-);
+    </React.StrictMode>,
+  );
+}
