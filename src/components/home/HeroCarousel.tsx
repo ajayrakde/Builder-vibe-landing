@@ -137,10 +137,12 @@ const HeroCarousel = () => {
                       >
                         {typeLabels[slide.type]}
                       </span>
-                      <h2 className="text-2xl md:text-4xl font-bold mb-4 text-slate-800">
+                      <h2 className="text-2xl md:text-4xl font-bold mb-4 text-slate-800 font-quicksand">
                         {slide.title}
                       </h2>
-                      <p className="text-slate-600 mb-6">{slide.description}</p>
+                      <p className="text-slate-600 mb-6 font-quicksand">
+                        {slide.description}
+                      </p>
                       <div>
                         <Button size="lg" className="rounded-full px-8">
                           {slide.ctaText}
