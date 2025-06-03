@@ -63,8 +63,8 @@ const MyComponent: React.FC = () => {
         </div>
       </main>
 
-      <footer className="bg-slate-50 py-8 border-t border-slate-200">
-        <div className="max-w-7xl mx-auto px-4">
+      <footer className="bg-slate-50 py-8 border-t border-slate-200 relative z-20">
+        <div className="max-w-7xl mx-auto px-4 relative z-20">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="mb-6 md:mb-0">
               <span className="font-quicksand text-[#1a5de6] font-bold text-xl">
