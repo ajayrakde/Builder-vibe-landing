@@ -131,7 +131,7 @@ const HeroCarousel = () => {
                     <div className="p-6 md:p-10 flex flex-col justify-center md:w-1/2">
                       <span
                         className={cn(
-                          "inline-block px-3 py-1 rounded-full text-xs font-medium mb-4 border",
+                          "inline-block px-3 py-1 rounded-full text-xs font-medium mb-4 border font-quicksand",
                           typeColors[slide.type],
                         )}
                       >
