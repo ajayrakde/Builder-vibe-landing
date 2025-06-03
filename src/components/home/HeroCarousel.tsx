@@ -144,7 +144,10 @@ const HeroCarousel = () => {
                         {slide.description}
                       </p>
                       <div>
-                        <Button size="lg" className="rounded-full px-8">
+                        <Button
+                          size="lg"
+                          className="rounded-full px-8 font-quicksand"
+                        >
                           {slide.ctaText}
                         </Button>
                       </div>
