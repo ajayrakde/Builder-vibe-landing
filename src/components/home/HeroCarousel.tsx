@@ -106,9 +106,10 @@ const HeroCarousel = () => {
     <section className="w-full max-w-7xl mx-auto px-4 py-6 md:py-10 overflow-hidden">
       <Carousel
         className="w-full relative"
-        setApi={(api) => {
-          api?.on("select", () => {
-            setActiveIndex(api.selectedScrollSnap());
+        setApi={(carouselApi) => {
+          setApi(carouselApi);
+          carouselApi?.on("select", () => {
+            setActiveIndex(carouselApi.selectedScrollSnap());
           });
         }}
         opts={{
