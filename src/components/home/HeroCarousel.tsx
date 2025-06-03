@@ -86,20 +86,21 @@ const HeroCarousel = () => {
   const isMobile = useIsMobile();
   const [activeIndex, setActiveIndex] = useState(0);
   const [autoplay, setAutoplay] = useState(true);
+  const [api, setApi] = useState<any>();
 
   useEffect(() => {
     let intervalId: number | undefined;
 
-    if (autoplay) {
+    if (autoplay && api) {
       intervalId = window.setInterval(() => {
-        setActiveIndex((prev) => (prev + 1) % heroSlides.length);
+        api.scrollNext();
       }, 5000);
     }
 
     return () => {
       if (intervalId) clearInterval(intervalId);
     };
-  }, [autoplay]);
+  }, [autoplay, api]);
 
   return (
     <section className="w-full max-w-7xl mx-auto px-4 py-6 md:py-10 overflow-hidden">
