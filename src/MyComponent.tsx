@@ -14,31 +14,13 @@ const MyComponent: React.FC = () => {
       <Header />
 
       <main className="flex-grow relative z-20">
-        <div className="max-w-7xl mx-auto px-4 py-12 relative z-20">
-          <div className="text-center mb-16">
-            <h1 className="text-4xl md:text-5xl font-bold text-[#1a5de6] mb-6 font-quicksand">
-              Welcome to Kanhaa
-            </h1>
-            <p className="text-lg text-slate-600 max-w-3xl mx-auto mb-8 font-quicksand">
-              Discover our range of nutritious, organic baby foods crafted with
-              love for every stage of your baby's growth journey.
-            </p>
-            <div className="flex flex-wrap justify-center gap-4">
-              <a
-                href="/shop"
-                className="bg-[#1a5de6] text-white px-6 py-3 rounded-full font-medium hover:bg-[#1a5de6]/90 transition-colors font-quicksand"
-              >
-                Shop Now
-              </a>
-              <a
-                href="/about"
-                className="border border-[#1a5de6] text-[#1a5de6] px-6 py-3 rounded-full font-medium hover:bg-[#1a5de6]/10 transition-colors font-quicksand"
-              >
-                Learn More
-              </a>
-            </div>
-          </div>
+        {/* Hero Carousel Section */}
+        <div className="relative z-20 pt-6">
+          <HeroCarousel />
+        </div>
 
+        {/* Content Sections */}
+        <div className="max-w-7xl mx-auto px-4 py-12 relative z-20">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[1, 2, 3].map((item) => (
               <div
