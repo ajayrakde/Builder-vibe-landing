@@ -1,5 +1,6 @@
 import React from "react";
 import Header from "./components/layout/Header";
+import HeroCarousel from "./components/home/HeroCarousel";
 import SkyBackground from "./components/decorative/SkyBackground";
 import KidFriendlyElements from "./components/decorative/KidFriendlyElements";
 
