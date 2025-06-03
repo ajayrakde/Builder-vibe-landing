@@ -12,8 +12,8 @@ const MyComponent: React.FC = () => {
       {/* Header with cart, user icon, and search */}
       <Header />
 
-      <main className="flex-grow">
-        <div className="max-w-7xl mx-auto px-4 py-12">
+      <main className="flex-grow relative z-20">
+        <div className="max-w-7xl mx-auto px-4 py-12 relative z-20">
           <div className="text-center mb-16">
             <h1 className="text-4xl md:text-5xl font-bold text-[#1a5de6] mb-6 font-quicksand">
               Welcome to Kanhaa
