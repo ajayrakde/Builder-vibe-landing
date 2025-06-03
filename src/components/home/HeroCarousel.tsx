@@ -179,7 +179,7 @@ const HeroCarousel = () => {
                   : "bg-gray-300 hover:bg-gray-400",
               )}
               onClick={() => {
-                setActiveIndex(index);
+                api?.scrollTo(index);
               }}
               aria-label={`Go to slide ${index + 1}`}
             />
