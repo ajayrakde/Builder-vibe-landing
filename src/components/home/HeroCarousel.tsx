@@ -31,7 +31,7 @@ const heroSlides: HeroSlide[] = [
     ctaText: "Shop Bestsellers",
     ctaLink: "/shop",
     imageSrc: "/placeholder.svg",
-    backgroundColor: "bg-gradient-to-r from-[#FEF6E4] to-[#F8D7DA]",
+    backgroundColor: "bg-gradient-to-r from-blue-50 to-blue-100",
     type: "topSeller",
   },
   {
@@ -41,7 +41,7 @@ const heroSlides: HeroSlide[] = [
     ctaText: "Discover Now",
     ctaLink: "/product/ragi-banana-cookies",
     imageSrc: "/placeholder.svg",
-    backgroundColor: "bg-gradient-to-r from-[#E2D9F3] to-[#D4EDDA]",
+    backgroundColor: "bg-gradient-to-r from-slate-50 to-blue-50",
     type: "newLaunch",
   },
   {
@@ -52,7 +52,7 @@ const heroSlides: HeroSlide[] = [
     ctaText: "Get Started",
     ctaLink: "/subscriptions",
     imageSrc: "/placeholder.svg",
-    backgroundColor: "bg-gradient-to-r from-[#D4EDDA] to-[#FEF6E4]",
+    backgroundColor: "bg-gradient-to-r from-blue-100 to-slate-100",
     type: "offer",
   },
   {
@@ -63,7 +63,7 @@ const heroSlides: HeroSlide[] = [
     ctaText: "Join Now",
     ctaLink: "/community",
     imageSrc: "/placeholder.svg",
-    backgroundColor: "bg-gradient-to-r from-[#F8D7DA] to-[#E2D9F3]",
+    backgroundColor: "bg-gradient-to-r from-slate-100 to-blue-50",
     type: "promotion",
   },
 ];
@@ -86,28 +86,30 @@ const HeroCarousel = () => {
   const isMobile = useIsMobile();
   const [activeIndex, setActiveIndex] = useState(0);
   const [autoplay, setAutoplay] = useState(true);
+  const [api, setApi] = useState<any>();
 
   useEffect(() => {
     let intervalId: number | undefined;
 
-    if (autoplay) {
+    if (autoplay && api) {
       intervalId = window.setInterval(() => {
-        setActiveIndex((prev) => (prev + 1) % heroSlides.length);
+        api.scrollNext();
       }, 5000);
     }
 
     return () => {
       if (intervalId) clearInterval(intervalId);
     };
-  }, [autoplay]);
+  }, [autoplay, api]);
 
   return (
     <section className="w-full max-w-7xl mx-auto px-4 py-6 md:py-10 overflow-hidden">
       <Carousel
         className="w-full relative"
-        setApi={(api) => {
-          api?.on("select", () => {
-            setActiveIndex(api.selectedScrollSnap());
+        setApi={(carouselApi) => {
+          setApi(carouselApi);
+          carouselApi?.on("select", () => {
+            setActiveIndex(carouselApi.selectedScrollSnap());
           });
         }}
         opts={{
@@ -131,18 +133,23 @@ const HeroCarousel = () => {
                     <div className="p-6 md:p-10 flex flex-col justify-center md:w-1/2">
                       <span
                         className={cn(
-                          "inline-block px-3 py-1 rounded-full text-xs font-medium mb-4 border",
+                          "inline-block px-3 py-1 rounded-full text-xs font-medium mb-4 border font-quicksand",
                           typeColors[slide.type],
                         )}
                       >
                         {typeLabels[slide.type]}
                       </span>
-                      <h2 className="text-2xl md:text-4xl font-bold mb-4 text-slate-800">
+                      <h2 className="text-2xl md:text-4xl font-bold mb-4 text-slate-800 font-quicksand">
                         {slide.title}
                       </h2>
-                      <p className="text-slate-600 mb-6">{slide.description}</p>
+                      <p className="text-slate-600 mb-6 font-quicksand">
+                        {slide.description}
+                      </p>
                       <div>
-                        <Button size="lg" className="rounded-full px-8">
+                        <Button
+                          size="lg"
+                          className="rounded-full px-8 font-quicksand"
+                        >
                           {slide.ctaText}
                         </Button>
                       </div>
@@ -172,7 +179,7 @@ const HeroCarousel = () => {
                   : "bg-gray-300 hover:bg-gray-400",
               )}
               onClick={() => {
-                setActiveIndex(index);
+                api?.scrollTo(index);
               }}
               aria-label={`Go to slide ${index + 1}`}
             />
