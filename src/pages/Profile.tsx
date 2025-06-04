@@ -229,16 +229,34 @@ const PersonalDetails = () => {
                   Phone Number
                 </label>
                 {isEditing ? (
-                  <Input
-                    type="tel"
-                    defaultValue={userData.phone}
-                    className="font-quicksand"
-                  />
+                  <div className="flex gap-2">
+                    <Input
+                      type="tel"
+                      defaultValue={userData.phone}
+                      className="font-quicksand"
+                      disabled
+                    />
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="font-quicksand"
+                    >
+                      Verify OTP
+                    </Button>
+                  </div>
                 ) : (
-                  <p className="text-slate-900 font-quicksand">
-                    {userData.phone}
-                  </p>
+                  <div className="flex items-center gap-2">
+                    <p className="text-slate-900 font-quicksand">
+                      {userData.phone}
+                    </p>
+                    <Badge variant="outline" className="text-xs">
+                      Verified
+                    </Badge>
+                  </div>
                 )}
+                <p className="text-xs text-slate-500 mt-1 font-quicksand">
+                  Phone number requires OTP verification to edit
+                </p>
               </div>
 
               <div>
