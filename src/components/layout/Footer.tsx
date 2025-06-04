@@ -12,14 +12,12 @@ const Footer = () => {
       { name: "0-6 Months", href: "/shop?age=0-6" },
       { name: "6-12 Months", href: "/shop?age=6-12" },
       { name: "12-24 Months", href: "/shop?age=12-24" },
-      { name: "Cereals", href: "/shop?type=cereals" },
-      { name: "Finger Foods", href: "/shop?type=finger-foods" },
-      { name: "Purees", href: "/shop?type=purees" },
+      { name: "24+ Months", href: "/shop?age=24+" },
     ],
     support: [
       { name: "FAQ", href: "/faq" },
-      { name: "Shipping & Returns", href: "/faq#shipping" },
       { name: "Contact Us", href: "/contact" },
+      { name: "Shipping & Returns", href: "/faq#shipping" },
       { name: "Privacy Policy", href: "/privacy" },
       { name: "Terms & Conditions", href: "/terms" },
     ],
@@ -36,45 +34,14 @@ const Footer = () => {
   return (
     <footer className="bg-[#FEF6E4] pt-12 pb-6">
       <div className="max-w-7xl mx-auto px-8">
-        <div className="bg-[#E2D9F3] rounded-xl p-10 mb-12">
-          <div className="flex flex-col md:flex-row items-center justify-between">
-            <div className="w-full md:w-2/3 mb-6 md:mb-0">
-              <h3 className="text-2xl font-bold text-slate-800 mb-2">
-                Join the Kanhaa Family
-              </h3>
-              <p className="text-slate-600">
-                Subscribe for nutrition tips, early access to new products, and
-                exclusive offers.
-              </p>
-            </div>
-            <div className="w-full md:w-1/3">
-              <form className="flex">
-                <input
-                  type="email"
-                  placeholder="Your email"
-                  required
-                  className="w-full rounded-full border-slate-200 mr-2"
-                />
-                <button
-                  type="submit"
-                  className="bg-[#1a5de6] text-white rounded-full px-4 py-2 font-medium"
-                >
-                  Join
-                </button>
-              </form>
-            </div>
-          </div>
-        </div>
-
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-10">
           <div>
             <div className="flex items-center mb-4">
-              <span className="text-xl font-bold tracking-tight">Kanhaa</span>
-              <span className="ml-1 text-xs bg-[#F8D7DA] text-[#6E6E6E] px-1.5 py-0.5 rounded-md">
-                Baby
+              <span className="text-xl font-bold tracking-tight font-quicksand">
+                Kanhaa
               </span>
             </div>
-            <p className="text-sm text-slate-600 mb-4">
+            <p className="text-sm text-slate-600 mb-4 font-quicksand">
               Healthy, organic, zero-sugar, zero-preservative baby food and
               snacks for your growing little one.
             </p>
@@ -139,11 +106,16 @@ const Footer = () => {
           </div>
 
           <div>
-            <h4 className="text-lg font-semibold text-slate-800 mb-4">Shop</h4>
+            <h4 className="text-lg font-semibold text-slate-800 mb-4 font-quicksand">
+              Shop by Age
+            </h4>
             <ul>
               {navigation.shop.map((item) => (
                 <li key={item.name} className="text-sm text-slate-600 mb-2">
-                  <Link to={item.href} className="hover:text-[#1a5de6]">
+                  <Link
+                    to={item.href}
+                    className="hover:text-[#1a5de6] font-quicksand"
+                  >
                     {item.name}
                   </Link>
                 </li>
@@ -152,13 +124,16 @@ const Footer = () => {
           </div>
 
           <div>
-            <h4 className="text-lg font-semibold text-slate-800 mb-4">
+            <h4 className="text-lg font-semibold text-slate-800 mb-4 font-quicksand">
               Support
             </h4>
             <ul>
               {navigation.support.map((item) => (
                 <li key={item.name} className="text-sm text-slate-600 mb-2">
-                  <Link to={item.href} className="hover:text-[#1a5de6]">
+                  <Link
+                    to={item.href}
+                    className="hover:text-[#1a5de6] font-quicksand"
+                  >
                     {item.name}
                   </Link>
                 </li>
@@ -167,13 +142,16 @@ const Footer = () => {
           </div>
 
           <div>
-            <h4 className="text-lg font-semibold text-slate-800 mb-4">
+            <h4 className="text-lg font-semibold text-slate-800 mb-4 font-quicksand">
               Company
             </h4>
             <ul>
               {navigation.company.map((item) => (
                 <li key={item.name} className="text-sm text-slate-600 mb-2">
-                  <Link to={item.href} className="hover:text-[#1a5de6]">
+                  <Link
+                    to={item.href}
+                    className="hover:text-[#1a5de6] font-quicksand"
+                  >
                     {item.name}
                   </Link>
                 </li>
@@ -184,25 +162,25 @@ const Footer = () => {
 
         {/* Copyright section */}
         <div className="border-t border-slate-200 pt-6 flex flex-col md:flex-row justify-between items-center">
-          <p className="text-sm text-slate-600 mb-4 md:mb-0">
+          <p className="text-sm text-slate-600 mb-4 md:mb-0 font-quicksand">
             © {currentYear} Kanhaa Baby Foods Pvt. Ltd. All rights reserved.
           </p>
           <div className="flex space-x-4">
             <Link
               to="/privacy"
-              className="text-sm text-slate-600 hover:text-[#1a5de6]"
+              className="text-sm text-slate-600 hover:text-[#1a5de6] font-quicksand"
             >
               Privacy Policy
             </Link>
             <Link
               to="/terms"
-              className="text-sm text-slate-600 hover:text-[#1a5de6]"
+              className="text-sm text-slate-600 hover:text-[#1a5de6] font-quicksand"
             >
               Terms of Service
             </Link>
             <Link
               to="/sitemap"
-              className="text-sm text-slate-600 hover:text-[#1a5de6]"
+              className="text-sm text-slate-600 hover:text-[#1a5de6] font-quicksand"
             >
               Sitemap
             </Link>

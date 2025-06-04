@@ -1,86 +1,41 @@
 import React from "react";
-import Header from "./components/layout/Header";
+import { Layout } from "./components/layout/Layout";
 import HeroCarousel from "./components/home/HeroCarousel";
-import SkyBackground from "./components/decorative/SkyBackground";
-import KidFriendlyElements from "./components/decorative/KidFriendlyElements";
 
 const MyComponent: React.FC = () => {
   return (
-    <div className="relative min-h-screen bg-gradient-to-b from-blue-400 to-blue-100 font-quicksand">
-      <SkyBackground />
-      <KidFriendlyElements />
+    <Layout>
+      {/* Hero Carousel Section */}
+      <div className="pt-6">
+        <HeroCarousel />
+      </div>
 
-      {/* Header with cart, user icon, and search */}
-      <Header />
-
-      <main className="flex-grow relative z-20">
-        {/* Hero Carousel Section */}
-        <div className="relative z-20 pt-6">
-          <HeroCarousel />
-        </div>
-
-        {/* Content Sections */}
-        <div className="max-w-7xl mx-auto px-4 py-12 relative z-20">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {[1, 2, 3].map((item) => (
-              <div
-                key={item}
-                className="bg-white p-6 rounded-xl shadow-sm border border-slate-100"
-              >
-                <h2 className="text-xl font-semibold mb-3 text-slate-800 font-quicksand">
-                  Feature {item}
-                </h2>
-                <p className="text-slate-600 mb-4 font-quicksand">
-                  This is a simple description about feature {item} and how it
-                  can benefit your baby.
-                </p>
-                <a
-                  href="#"
-                  className="text-[#1a5de6] font-medium hover:underline font-quicksand"
-                >
-                  Learn more →
-                </a>
-              </div>
-            ))}
-          </div>
-        </div>
-      </main>
-
-      <footer className="bg-slate-50 py-8 border-t border-slate-200 relative z-20">
-        <div className="max-w-7xl mx-auto px-4 relative z-20">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <div className="mb-6 md:mb-0">
-              <span className="font-quicksand text-[#1a5de6] font-bold text-xl">
-                Kanhaa
-              </span>
-              <p className="text-slate-600 text-sm mt-2 font-quicksand">
-                © 2023 All rights reserved
+      {/* Content Sections */}
+      <div className="max-w-7xl mx-auto px-4 py-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {[1, 2, 3].map((item) => (
+            <div
+              key={item}
+              className="bg-white p-6 rounded-xl shadow-sm border border-slate-100"
+            >
+              <h2 className="text-xl font-semibold mb-3 text-slate-800 font-quicksand">
+                Feature {item}
+              </h2>
+              <p className="text-slate-600 mb-4 font-quicksand">
+                This is a simple description about feature {item} and how it can
+                benefit your baby.
               </p>
-            </div>
-            <div className="flex gap-6">
               <a
                 href="#"
-                className="text-slate-600 hover:text-[#1a5de6] transition-colors font-quicksand"
+                className="text-[#1a5de6] font-medium hover:underline font-quicksand"
               >
-                Privacy
-              </a>
-              <a
-                href="#"
-                className="text-slate-600 hover:text-[#1a5de6] transition-colors font-quicksand"
-              >
-                Terms
-              </a>
-              <a
-                href="#"
-                className="text-slate-600 hover:text-[#1a5de6] transition-colors font-quicksand"
-              >
-                Contact
+                Learn more →
               </a>
             </div>
-          </div>
+          ))}
         </div>
-      </footer>
-    </div>
+      </div>
+    </Layout>
   );
 };
 
