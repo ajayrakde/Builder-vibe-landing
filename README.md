@@ -11,12 +11,10 @@ Follow these steps to run the app locally:
    git clone <repository-url>
    cd Builder-vibe-landing
    ```
-
 2. **Install dependencies**
    ```bash
    npm install
    ```
-
 3. **Run the development server**
    ```bash
    npm run dev
@@ -52,7 +50,7 @@ Deploy the contents of the `dist/` folder to your static hosting provider of cho
 
 ## Saleor Sample Backend
 
-A minimal Django-based GraphQL API is provided in the `saleor_backend/` folder. It exposes two fields — `hello` and `products` — and can be used as a starting point for integrating a Saleor backend.
+A Django-based GraphQL API is provided in the `saleor_backend/` folder. It now includes the standard Django admin panel so you can manage products.
 
 ### Running the Backend
 
@@ -62,7 +60,8 @@ python -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
 python manage.py migrate
+python manage.py createsuperuser  # follow the prompts
 python manage.py runserver
 ```
 
-Open http://localhost:8000/graphql/ and run either the `hello` or `products` query to test the API.
+Log in at http://localhost:8000/admin/ to add products. GraphQL queries (such as `hello` or `products`) can be executed at http://localhost:8000/graphql/.
