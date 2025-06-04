@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -36,26 +36,9 @@ const navigation = [
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
-  const searchInputRef = useRef<HTMLInputElement>(null);
   const isMobile = useIsMobile();
   const { itemCount = 0 } = useCart() || {};
-
-  useEffect(() => {
-    if (isSearchOpen && searchInputRef.current) {
-      searchInputRef.current.focus();
-    }
-  }, [isSearchOpen]);
-
-  const handleSearchToggle = () => {
-    if (isSearchOpen) {
-      setIsSearchOpen(false);
-      setSearchQuery("");
-    } else {
-      setIsSearchOpen(true);
-    }
-  };
 
   const handleSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -78,16 +61,11 @@ const Header = () => {
             </Link>
           </div>
 
-          {/* Desktop Navigation with Search */}
-          <div className="hidden md:flex items-center flex-1 justify-center max-w-4xl mx-8">
-            <div className="flex items-center space-x-8">
+          {/* Desktop Navigation with Always Visible Search */}
+          <div className="hidden md:flex items-center flex-1 justify-center max-w-4xl mx-4">
+            <div className="flex items-center gap-6">
               {/* Navigation Menu */}
-              <nav
-                className={cn(
-                  "flex transition-all duration-300 ease-in-out",
-                  isSearchOpen ? "space-x-6" : "space-x-8",
-                )}
-              >
+              <nav className="flex space-x-6">
                 {navigation.map((item) => (
                   <Link
                     key={item.name}
@@ -99,52 +77,24 @@ const Header = () => {
                 ))}
               </nav>
 
-              {/* Search Input - appears after About */}
-              <div
-                className={cn(
-                  "transition-all duration-300 ease-in-out overflow-hidden",
-                  isSearchOpen ? "w-64 opacity-100" : "w-0 opacity-0",
-                )}
-              >
-                {isSearchOpen && (
-                  <form onSubmit={handleSearchSubmit}>
-                    <div className="relative">
-                      <Input
-                        ref={searchInputRef}
-                        type="text"
-                        placeholder="Search products..."
-                        value={searchQuery}
-                        onChange={(e) => setSearchQuery(e.target.value)}
-                        className="w-full pl-10 pr-4 rounded-full font-quicksand"
-                        onBlur={() => {
-                          // Small delay to allow form submission
-                          setTimeout(() => {
-                            if (!searchQuery) {
-                              setIsSearchOpen(false);
-                            }
-                          }, 150);
-                        }}
-                      />
-                      <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
-                    </div>
-                  </form>
-                )}
-              </div>
+              {/* Always Visible Search Box */}
+              <form onSubmit={handleSearchSubmit} className="flex-shrink-0">
+                <div className="relative">
+                  <Input
+                    type="text"
+                    placeholder="Search products..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="w-48 lg:w-56 pl-10 pr-4 rounded-full font-quicksand"
+                  />
+                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+                </div>
+              </form>
             </div>
           </div>
 
           {/* Desktop Actions */}
           <div className="hidden md:flex items-center space-x-3">
-            <Button
-              variant="ghost"
-              size="icon"
-              aria-label="Search"
-              className="text-primary hover:bg-skyBlue-light/30 rounded-full"
-              onClick={handleSearchToggle}
-            >
-              <Search className="h-5 w-5" />
-            </Button>
-
             {/* User Dropdown */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
