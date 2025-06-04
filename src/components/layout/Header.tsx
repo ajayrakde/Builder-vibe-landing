@@ -175,16 +175,15 @@ const Header = () => {
                 <Button
                   variant="ghost"
                   size="icon"
-                  aria-label="Search"
-                  onClick={() => setIsSearchOpen(true)}
+                  aria-label="Account"
+                  asChild
                 >
-                  <Search className="h-5 w-5" />
+                  <Link to="/auth">
+                    <User className="h-5 w-5" />
+                  </Link>
                 </Button>
-                <Button variant="ghost" size="icon" aria-label="Account">
-                  <User className="h-5 w-5" />
-                </Button>
-                <Button variant="default" className="ml-auto">
-                  Sign In
+                <Button variant="default" className="ml-auto" asChild>
+                  <Link to="/auth">Sign In</Link>
                 </Button>
               </div>
             </div>
