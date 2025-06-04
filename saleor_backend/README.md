@@ -1,7 +1,10 @@
 # Saleor Sample Backend
 
 This folder contains a minimal Django project exposing a GraphQL API similar to Saleor.
-It uses `graphene-django` to define a single `hello` query.
+It uses `graphene-django` to define a simple schema with two queries:
+
+* `hello` – returns a greeting string
+* `products` – returns a list of sample products
 
 ## Setup
 
@@ -39,6 +42,18 @@ You should receive the response:
 {
   "data": {
     "hello": "Hello from Saleor sample API!"
+  }
+}
+```
+
+You can also fetch the list of sample products:
+
+```graphql
+query {
+  products {
+    id
+    title
+    price
   }
 }
 ```

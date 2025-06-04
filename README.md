@@ -52,7 +52,7 @@ Deploy the contents of the `dist/` folder to your static hosting provider of cho
 
 ## Saleor Sample Backend
 
-A minimal Django-based GraphQL API is provided in the `saleor_backend/` folder. It exposes a single `hello` field and can be used as a starting point for integrating a Saleor backend.
+A minimal Django-based GraphQL API is provided in the `saleor_backend/` folder. It exposes two fields — `hello` and `products` — and can be used as a starting point for integrating a Saleor backend.
 
 ### Running the Backend
 
@@ -65,4 +65,4 @@ python manage.py migrate
 python manage.py runserver
 ```
 
-Open http://localhost:8000/graphql/ and run the `hello` query to test the API.
+Open http://localhost:8000/graphql/ and run either the `hello` or `products` query to test the API.
