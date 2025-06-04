@@ -1,8 +1,27 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { SearchModal } from "@/components/ui/SearchModal";
-import { ShoppingCart, Menu, X, Search, User, CloudSun } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import {
+  ShoppingCart,
+  Menu,
+  X,
+  Search,
+  User,
+  CloudSun,
+  LogIn,
+  UserCircle,
+  MapPin,
+  Package,
+  Truck,
+} from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { useCart } from "@/hooks/use-cart";
@@ -10,18 +29,40 @@ import { useCart } from "@/hooks/use-cart";
 const navigation = [
   { name: "Home", href: "/" },
   { name: "Shop", href: "/shop" },
-  { name: "About", href: "/about" },
-  { name: "Blog", href: "/blog" },
   { name: "Community", href: "/community" },
-  { name: "FAQ", href: "/faq" },
-  { name: "Contact", href: "/contact" },
+  { name: "Blog", href: "/blog" },
+  { name: "About", href: "/about" },
 ];
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const searchInputRef = useRef<HTMLInputElement>(null);
   const isMobile = useIsMobile();
-  const { itemCount = 0 } = useCart() || {}; // Use default value if context is undefined
+  const { itemCount = 0 } = useCart() || {};
+
+  useEffect(() => {
+    if (isSearchOpen && searchInputRef.current) {
+      searchInputRef.current.focus();
+    }
+  }, [isSearchOpen]);
+
+  const handleSearchToggle = () => {
+    if (isSearchOpen) {
+      setIsSearchOpen(false);
+      setSearchQuery("");
+    } else {
+      setIsSearchOpen(true);
+    }
+  };
+
+  const handleSearchSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      window.location.href = `/shop?search=${encodeURIComponent(searchQuery)}`;
+    }
+  };
 
   return (
     <header className="bg-white/80 backdrop-blur-md border-b border-primary/10 sticky top-0 z-50 shadow-sm">
@@ -37,23 +78,41 @@ const Header = () => {
             </Link>
           </div>
 
-          <nav className="hidden md:flex space-x-8">
-            {navigation.map((item) => (
-              <Link
-                key={item.name}
-                to={item.href}
-                className="font-quicksand font-medium transition rounded-full px-3 py-1"
-                style={{
-                  transitionProperty:
-                    "color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter",
-                  transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
-                  transitionDuration: "0.15s",
-                }}
-              >
-                {item.name}
-              </Link>
-            ))}
-          </nav>
+          {/* Desktop Navigation and Search */}
+          <div className="hidden md:flex items-center flex-1 justify-center max-w-2xl mx-8">
+            {!isSearchOpen ? (
+              <nav className="flex space-x-8">
+                {navigation.map((item) => (
+                  <Link
+                    key={item.name}
+                    to={item.href}
+                    className="font-quicksand font-medium transition rounded-full px-3 py-1 hover:bg-skyBlue-light/30"
+                  >
+                    {item.name}
+                  </Link>
+                ))}
+              </nav>
+            ) : (
+              <form onSubmit={handleSearchSubmit} className="flex-1 max-w-md">
+                <div className="relative">
+                  <Input
+                    ref={searchInputRef}
+                    type="text"
+                    placeholder="Search products..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="w-full pl-10 pr-4 rounded-full font-quicksand"
+                    onBlur={() => {
+                      if (!searchQuery) {
+                        setIsSearchOpen(false);
+                      }
+                    }}
+                  />
+                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+                </div>
+              </form>
+            )}
+          </div>
 
           {/* Desktop Actions */}
           <div className="hidden md:flex items-center space-x-3">
@@ -62,21 +121,70 @@ const Header = () => {
               size="icon"
               aria-label="Search"
               className="text-primary hover:bg-skyBlue-light/30 rounded-full"
-              onClick={() => setIsSearchOpen(true)}
+              onClick={handleSearchToggle}
             >
               <Search className="h-5 w-5" />
             </Button>
-            <Button
-              variant="ghost"
-              size="icon"
-              aria-label="Account"
-              className="text-primary hover:bg-skyBlue-light/30 rounded-full"
-              asChild
-            >
-              <Link to="/auth">
-                <User className="h-5 w-5" />
-              </Link>
-            </Button>
+
+            {/* User Dropdown */}
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  aria-label="Account"
+                  className="text-primary hover:bg-skyBlue-light/30 rounded-full"
+                >
+                  <User className="h-5 w-5" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-48">
+                <DropdownMenuItem asChild>
+                  <Link to="/auth" className="flex items-center font-quicksand">
+                    <LogIn className="mr-2 h-4 w-4" />
+                    Sign In / Sign Up
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem asChild>
+                  <Link
+                    to="/profile"
+                    className="flex items-center font-quicksand"
+                  >
+                    <UserCircle className="mr-2 h-4 w-4" />
+                    Profile
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link
+                    to="/profile?tab=addresses"
+                    className="flex items-center font-quicksand"
+                  >
+                    <MapPin className="mr-2 h-4 w-4" />
+                    Addresses
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link
+                    to="/profile?tab=orders"
+                    className="flex items-center font-quicksand"
+                  >
+                    <Package className="mr-2 h-4 w-4" />
+                    Order History
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link
+                    to="/track-order"
+                    className="flex items-center font-quicksand"
+                  >
+                    <Truck className="mr-2 h-4 w-4" />
+                    Track Order
+                  </Link>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+
             <Button
               variant="ghost"
               size="icon"
@@ -125,7 +233,7 @@ const Header = () => {
         </div>
       </div>
 
-      {/* Mobile menu, show/hide based on menu state */}
+      {/* Mobile menu */}
       {isMobile && isMenuOpen && (
         <div className="fixed inset-0 flex z-50">
           <div
@@ -148,18 +256,35 @@ const Header = () => {
             </div>
 
             <div className="flex-1 h-0 pt-5 pb-4 overflow-y-auto">
-              <div className="flex-shrink-0 flex items-center px-4">
+              <div className="flex-shrink-0 flex items-center px-4 mb-4">
                 <span className="font-quicksand text-[#1a5de6] font-bold text-[30px] leading-9">
                   Kanhaa
                 </span>
               </div>
-              <nav className="mt-5 px-2 space-y-1">
+
+              {/* Mobile Search */}
+              <div className="px-4 mb-4">
+                <form onSubmit={handleSearchSubmit}>
+                  <div className="relative">
+                    <Input
+                      type="text"
+                      placeholder="Search products..."
+                      value={searchQuery}
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                      className="w-full pl-10 pr-4 rounded-full font-quicksand"
+                    />
+                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+                  </div>
+                </form>
+              </div>
+
+              <nav className="px-2 space-y-1">
                 {navigation.map((item) => (
                   <Link
                     key={item.name}
                     to={item.href}
                     className={cn(
-                      "block px-3 py-3 rounded-md text-base font-medium",
+                      "block px-3 py-3 rounded-md text-base font-medium font-quicksand",
                       "text-neutral-black hover:bg-skyBlue-light/30 hover:text-neutral-charcoal",
                     )}
                     onClick={() => setIsMenuOpen(false)}
@@ -178,11 +303,15 @@ const Header = () => {
                   aria-label="Account"
                   asChild
                 >
-                  <Link to="/auth">
+                  <Link to="/profile">
                     <User className="h-5 w-5" />
                   </Link>
                 </Button>
-                <Button variant="default" className="ml-auto" asChild>
+                <Button
+                  variant="default"
+                  className="ml-auto font-quicksand"
+                  asChild
+                >
                   <Link to="/auth">Sign In</Link>
                 </Button>
               </div>
@@ -190,8 +319,6 @@ const Header = () => {
           </div>
         </div>
       )}
-
-      <SearchModal open={isSearchOpen} onOpenChange={setIsSearchOpen} />
     </header>
   );
 };
