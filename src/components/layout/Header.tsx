@@ -71,8 +71,11 @@ const Header = () => {
               size="icon"
               aria-label="Account"
               className="text-primary hover:bg-skyBlue-light/30 rounded-full"
+              asChild
             >
-              <User className="h-5 w-5" />
+              <Link to="/auth">
+                <User className="h-5 w-5" />
+              </Link>
             </Button>
             <Button
               variant="ghost"
