@@ -78,40 +78,59 @@ const Header = () => {
             </Link>
           </div>
 
-          {/* Desktop Navigation and Search */}
-          <div className="hidden md:flex items-center flex-1 justify-center max-w-2xl mx-8">
-            {!isSearchOpen ? (
-              <nav className="flex space-x-8">
+          {/* Desktop Navigation with Search */}
+          <div className="hidden md:flex items-center flex-1 justify-center max-w-4xl mx-8">
+            <div className="flex items-center space-x-8">
+              {/* Navigation Menu */}
+              <nav
+                className={cn(
+                  "flex transition-all duration-300 ease-in-out",
+                  isSearchOpen ? "space-x-6" : "space-x-8",
+                )}
+              >
                 {navigation.map((item) => (
                   <Link
                     key={item.name}
                     to={item.href}
-                    className="font-quicksand font-medium transition rounded-full px-3 py-1 hover:bg-skyBlue-light/30"
+                    className="font-quicksand font-medium transition rounded-full px-3 py-1 hover:bg-skyBlue-light/30 whitespace-nowrap"
                   >
                     {item.name}
                   </Link>
                 ))}
               </nav>
-            ) : (
-              <form onSubmit={handleSearchSubmit} className="flex-1 max-w-md">
-                <div className="relative">
-                  <Input
-                    ref={searchInputRef}
-                    type="text"
-                    placeholder="Search products..."
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    className="w-full pl-10 pr-4 rounded-full font-quicksand"
-                    onBlur={() => {
-                      if (!searchQuery) {
-                        setIsSearchOpen(false);
-                      }
-                    }}
-                  />
-                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
-                </div>
-              </form>
-            )}
+
+              {/* Search Input - appears after About */}
+              <div
+                className={cn(
+                  "transition-all duration-300 ease-in-out overflow-hidden",
+                  isSearchOpen ? "w-64 opacity-100" : "w-0 opacity-0",
+                )}
+              >
+                {isSearchOpen && (
+                  <form onSubmit={handleSearchSubmit}>
+                    <div className="relative">
+                      <Input
+                        ref={searchInputRef}
+                        type="text"
+                        placeholder="Search products..."
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                        className="w-full pl-10 pr-4 rounded-full font-quicksand"
+                        onBlur={() => {
+                          // Small delay to allow form submission
+                          setTimeout(() => {
+                            if (!searchQuery) {
+                              setIsSearchOpen(false);
+                            }
+                          }, 150);
+                        }}
+                      />
+                      <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+                    </div>
+                  </form>
+                )}
+              </div>
+            </div>
           </div>
 
           {/* Desktop Actions */}
