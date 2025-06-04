@@ -575,9 +575,12 @@ const Orders = () => {
                 <Button
                   variant="outline"
                   size="sm"
-                  className="text-xs rounded-full"
+                  className="text-xs rounded-full font-quicksand"
+                  asChild
                 >
-                  View Details
+                  <Link to={`/order/${order.id}`}>
+                    View Details
+                  </Link>
                 </Button>
               </div>
             </div>
