@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { Fragment } from "react";
+import { Link } from "react-router-dom";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import BackgroundElements from "@/components/decorative/BackgroundElements";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -52,19 +54,6 @@ const userData = {
       country: "India",
       phone: "+91 987-654-3210",
     },
-    {
-      id: 3,
-      type: "Parents",
-      isDefault: false,
-      name: "Robert & Mary Smith",
-      line1: "456 Family Road",
-      line2: "",
-      city: "Mumbai",
-      state: "Maharashtra",
-      postalCode: "400001",
-      country: "India",
-      phone: "+91 876-543-2109",
-    },
   ],
   orders: [
     {
@@ -80,13 +69,6 @@ const userData = {
           price: "₹299",
           image: "/placeholder.svg",
         },
-        {
-          id: 2,
-          name: "Apple & Banana Puree",
-          quantity: 3,
-          price: "₹149",
-          image: "/placeholder.svg",
-        },
       ],
     },
     {
@@ -98,43 +80,6 @@ const userData = {
         {
           id: 3,
           name: "Millet & Spinach Khichdi",
-          quantity: 4,
-          price: "₹199",
-          image: "/placeholder.svg",
-        },
-      ],
-    },
-    {
-      id: "ORD-12347",
-      date: "June 28, 2023",
-      total: "₹328",
-      status: "Delivered",
-      items: [
-        {
-          id: 4,
-          name: "Carrot & Oats Cookies",
-          quantity: 2,
-          price: "₹149",
-          image: "/placeholder.svg",
-        },
-      ],
-    },
-    {
-      id: "ORD-12348",
-      date: "July 10, 2023",
-      total: "₹997",
-      status: "Delivered",
-      items: [
-        {
-          id: 5,
-          name: "Rice & Apple Porridge",
-          quantity: 1,
-          price: "₹249",
-          image: "/placeholder.svg",
-        },
-        {
-          id: 6,
-          name: "Ragi & Banana Cookies",
           quantity: 4,
           price: "₹199",
           image: "/placeholder.svg",
@@ -158,7 +103,7 @@ const PersonalDetails = () => {
           variant={isEditing ? "default" : "outline"}
           size="sm"
           onClick={() => setIsEditing(!isEditing)}
-          className="rounded-full"
+          className="rounded-full font-quicksand"
         >
           {isEditing ? (
             <>
@@ -183,7 +128,11 @@ const PersonalDetails = () => {
               />
             </div>
             {isEditing && (
-              <Button variant="outline" size="sm" className="text-xs">
+              <Button
+                variant="outline"
+                size="sm"
+                className="text-xs font-quicksand"
+              >
                 Change Photo
               </Button>
             )}
@@ -192,7 +141,7 @@ const PersonalDetails = () => {
           <div className="md:w-3/4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-1">
+                <label className="block text-sm font-medium text-slate-700 mb-1 font-quicksand">
                   Full Name
                 </label>
                 {isEditing ? (
@@ -208,7 +157,7 @@ const PersonalDetails = () => {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-1">
+                <label className="block text-sm font-medium text-slate-700 mb-1 font-quicksand">
                   Email Address
                 </label>
                 {isEditing ? (
@@ -225,7 +174,7 @@ const PersonalDetails = () => {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-1">
+                <label className="block text-sm font-medium text-slate-700 mb-1 font-quicksand">
                   Phone Number
                 </label>
                 {isEditing ? (
@@ -236,7 +185,11 @@ const PersonalDetails = () => {
                       className="font-quicksand"
                       disabled
                     />
-                    <Button variant="outline" size="sm" className="font-quicksand">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="font-quicksand"
+                    >
                       Verify OTP
                     </Button>
                   </div>
@@ -256,98 +209,15 @@ const PersonalDetails = () => {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-1">
+                <label className="block text-sm font-medium text-slate-700 mb-1 font-quicksand">
                   Account Created
                 </label>
                 <p className="text-slate-900 font-quicksand">April 15, 2022</p>
               </div>
             </div>
-
-            {isEditing && (
-              <div className="mt-6 flex justify-end">
-                <Button
-                  variant="outline"
-                  className="mr-2"
-                  onClick={() => setIsEditing(false)}
-                >
-                  Cancel
-                </Button>
-                <Button onClick={() => setIsEditing(false)}>
-                  Save Changes
-                </Button>
-              </div>
-            )}
           </div>
         </div>
       </Card>
-
-      <div className="mt-8">
-        <h3 className="text-xl font-semibold text-slate-800 mb-4 font-quicksand">
-          Account Settings
-        </h3>
-
-        <Card className="p-6">
-          <div className="space-y-6">
-            <div>
-              <div className="flex justify-between items-center mb-2">
-                <h4 className="font-medium text-slate-800 font-quicksand">
-                  Password
-                </h4>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="text-xs rounded-full"
-                >
-                  Change Password
-                </Button>
-              </div>
-              <p className="text-sm text-slate-500 font-quicksand">
-                Last updated 3 months ago
-              </p>
-            </div>
-
-            <Separator />
-
-            <div>
-              <div className="flex justify-between items-center mb-2">
-                <h4 className="font-medium text-slate-800 font-quicksand">
-                  Notifications
-                </h4>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="text-xs rounded-full"
-                >
-                  Manage
-                </Button>
-              </div>
-              <p className="text-sm text-slate-500 font-quicksand">
-                You're receiving order updates and promotional emails
-              </p>
-            </div>
-
-            <Separator />
-
-            <div>
-              <div className="flex justify-between items-center mb-2">
-                <h4 className="font-medium text-slate-800 font-quicksand">
-                  Connected Accounts
-                </h4>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="text-xs rounded-full"
-                >
-                  Manage
-                </Button>
-              </div>
-              <p className="text-sm text-slate-500 font-quicksand">
-                Google account connected
-              </p>
-            </div>
-          </div>
-        </Card>
-      </div>
     </div>
   );
 };
@@ -357,10 +227,12 @@ const DeliveryAddresses = () => {
   const [addresses, setAddresses] = useState(userData.addresses);
 
   const handleSetDefault = (addressId: number) => {
-    setAddresses(addresses.map(addr => ({
-      ...addr,
-      isDefault: addr.id === addressId
-    })));
+    setAddresses(
+      addresses.map((addr) => ({
+        ...addr,
+        isDefault: addr.id === addressId,
+      })),
+    );
   };
 
   const handleAddAddress = () => {
@@ -373,31 +245,48 @@ const DeliveryAddresses = () => {
         <h2 className="text-2xl font-bold text-slate-800 font-quicksand">
           Delivery Addresses
         </h2>
-        <Button className="rounded-full font-quicksand" onClick={handleAddAddress}>
+        <Button
+          className="rounded-full font-quicksand"
+          onClick={handleAddAddress}
+        >
           <PlusCircle className="mr-2 h-4 w-4" /> Add New Address
         </Button>
       </div>
 
       {showAddForm && (
         <Card className="mb-6 border-2 border-dashed border-[#1a5de6]">
-          <CardContent className="p-6">
-            <h3 className="font-semibold mb-4 font-quicksand">Add New Address</h3>
+          <div className="p-6">
+            <h3 className="font-semibold mb-4 font-quicksand">
+              Add New Address
+            </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <Label className="font-quicksand">Full Name</Label>
-                <Input placeholder="Enter full name" className="font-quicksand" />
+                <Input
+                  placeholder="Enter full name"
+                  className="font-quicksand"
+                />
               </div>
               <div>
                 <Label className="font-quicksand">Phone Number</Label>
-                <Input placeholder="Enter phone number" className="font-quicksand" />
+                <Input
+                  placeholder="Enter phone number"
+                  className="font-quicksand"
+                />
               </div>
               <div className="md:col-span-2">
                 <Label className="font-quicksand">Address Line 1</Label>
-                <Input placeholder="House number, street name" className="font-quicksand" />
+                <Input
+                  placeholder="House number, street name"
+                  className="font-quicksand"
+                />
               </div>
               <div className="md:col-span-2">
                 <Label className="font-quicksand">Address Line 2</Label>
-                <Input placeholder="Apartment, suite, etc. (optional)" className="font-quicksand" />
+                <Input
+                  placeholder="Apartment, suite, etc. (optional)"
+                  className="font-quicksand"
+                />
               </div>
               <div>
                 <Label className="font-quicksand">City</Label>
@@ -409,20 +298,30 @@ const DeliveryAddresses = () => {
               </div>
               <div>
                 <Label className="font-quicksand">PIN Code</Label>
-                <Input placeholder="Enter PIN code" className="font-quicksand" />
+                <Input
+                  placeholder="Enter PIN code"
+                  className="font-quicksand"
+                />
               </div>
               <div>
                 <Label className="font-quicksand">Address Type</Label>
-                <Input placeholder="Home, Office, etc." className="font-quicksand" />
+                <Input
+                  placeholder="Home, Office, etc."
+                  className="font-quicksand"
+                />
               </div>
             </div>
             <div className="flex gap-2 mt-4">
               <Button className="font-quicksand">Save Address</Button>
-              <Button variant="outline" onClick={() => setShowAddForm(false)} className="font-quicksand">
+              <Button
+                variant="outline"
+                onClick={() => setShowAddForm(false)}
+                className="font-quicksand"
+              >
                 Cancel
               </Button>
             </div>
-          </CardContent>
+          </div>
         </Card>
       )}
 
@@ -436,31 +335,14 @@ const DeliveryAddresses = () => {
               key={address.id}
               className={`p-6 border-2 ${address.isDefault ? "border-primary" : "border-slate-100"}`}
             >
-
-      <div className="space-y-4">
-        {userData.addresses
-          .sort((a, b) =>
-            a.isDefault === b.isDefault ? 0 : a.isDefault ? -1 : 1,
-          )
-          .map((address) => (
-            <Card
-              key={address.id}
-              className={`p-6 border-2 ${address.isDefault ? "border-primary" : "border-slate-100"}`}
-            >
               <div className="flex justify-between items-start">
                 <div className="flex items-start gap-3">
                   <div
                     className={`p-2 rounded-full ${address.isDefault ? "bg-primary/10" : "bg-slate-100"}`}
                   >
-                    {address.type === "Home" ? (
-                      <Home
-                        className={`h-5 w-5 ${address.isDefault ? "text-primary" : "text-slate-500"}`}
-                      />
-                    ) : (
-                      <MapPin
-                        className={`h-5 w-5 ${address.isDefault ? "text-primary" : "text-slate-500"}`}
-                      />
-                    )}
+                    <Home
+                      className={`h-5 w-5 ${address.isDefault ? "text-primary" : "text-slate-500"}`}
+                    />
                   </div>
                   <div>
                     <div className="flex items-center gap-2">
@@ -490,20 +372,22 @@ const DeliveryAddresses = () => {
                     <p className="text-sm text-slate-600 font-quicksand">
                       {address.city}, {address.state} {address.postalCode}
                     </p>
-                    <p className="text-sm text-slate-600 font-quicksand">
-                      {address.country}
-                    </p>
-                    <p className="text-sm text-slate-600 font-quicksand">
-                      {address.phone}
-                    </p>
                   </div>
                 </div>
 
                 <div className="flex items-center gap-2">
-                  <Button variant="ghost" size="sm" className="text-xs font-quicksand">
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="text-xs font-quicksand"
+                  >
                     Edit
                   </Button>
-                  <Button variant="ghost" size="sm" className="text-xs font-quicksand">
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="text-xs font-quicksand"
+                  >
                     Delete
                   </Button>
                   {!address.isDefault && (
@@ -532,17 +416,6 @@ const Orders = () => {
         <h2 className="text-2xl font-bold text-slate-800 font-quicksand">
           My Orders
         </h2>
-        <div className="flex gap-2">
-          <Button variant="outline" size="sm" className="rounded-full">
-            All
-          </Button>
-          <Button variant="outline" size="sm" className="rounded-full">
-            Processing
-          </Button>
-          <Button variant="outline" size="sm" className="rounded-full">
-            Delivered
-          </Button>
-        </div>
       </div>
 
       <div className="space-y-6">
@@ -578,9 +451,7 @@ const Orders = () => {
                   className="text-xs rounded-full font-quicksand"
                   asChild
                 >
-                  <Link to={`/order/${order.id}`}>
-                    View Details
-                  </Link>
+                  <Link to={`/order/${order.id}`}>View Details</Link>
                 </Button>
               </div>
             </div>
@@ -679,7 +550,7 @@ const Profile = () => {
                       variant={
                         activeTab === "personal-details" ? "default" : "ghost"
                       }
-                      className={`w-full justify-start ${activeTab === "personal-details" ? "" : "hover:bg-slate-100"}`}
+                      className={`w-full justify-start font-quicksand ${activeTab === "personal-details" ? "" : "hover:bg-slate-100"}`}
                       onClick={() => setActiveTab("personal-details")}
                     >
                       <User className="mr-2 h-5 w-5" />
@@ -690,7 +561,7 @@ const Profile = () => {
                       variant={
                         activeTab === "delivery-addresses" ? "default" : "ghost"
                       }
-                      className={`w-full justify-start ${activeTab === "delivery-addresses" ? "" : "hover:bg-slate-100"}`}
+                      className={`w-full justify-start font-quicksand ${activeTab === "delivery-addresses" ? "" : "hover:bg-slate-100"}`}
                       onClick={() => setActiveTab("delivery-addresses")}
                     >
                       <Home className="mr-2 h-5 w-5" />
@@ -699,7 +570,7 @@ const Profile = () => {
 
                     <Button
                       variant={activeTab === "orders" ? "default" : "ghost"}
-                      className={`w-full justify-start ${activeTab === "orders" ? "" : "hover:bg-slate-100"}`}
+                      className={`w-full justify-start font-quicksand ${activeTab === "orders" ? "" : "hover:bg-slate-100"}`}
                       onClick={() => setActiveTab("orders")}
                     >
                       <Package className="mr-2 h-5 w-5" />
