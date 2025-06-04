@@ -500,14 +500,19 @@ const DeliveryAddresses = () => {
                 </div>
 
                 <div className="flex items-center gap-2">
-                  <Button variant="ghost" size="sm" className="text-xs">
+                  <Button variant="ghost" size="sm" className="text-xs font-quicksand">
                     Edit
                   </Button>
-                  <Button variant="ghost" size="sm" className="text-xs">
+                  <Button variant="ghost" size="sm" className="text-xs font-quicksand">
                     Delete
                   </Button>
                   {!address.isDefault && (
-                    <Button variant="outline" size="sm" className="text-xs">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="text-xs font-quicksand"
+                      onClick={() => handleSetDefault(address.id)}
+                    >
                       Set as Default
                     </Button>
                   )}
