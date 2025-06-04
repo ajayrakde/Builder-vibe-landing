@@ -5,7 +5,6 @@ import { ShoppingCart, Menu, X, Search, User, CloudSun } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { useCart } from "@/hooks/use-cart";
-import UserButton from "@/components/ui/UserButton";
 
 const navigation = [
   { name: "Home", href: "/" },
@@ -64,19 +63,29 @@ const Header = () => {
             >
               <Search className="h-5 w-5" />
             </Button>
-            <UserButton />
+            <Button
+              variant="ghost"
+              size="icon"
+              aria-label="Account"
+              className="text-primary hover:bg-skyBlue-light/30 rounded-full"
+            >
+              <User className="h-5 w-5" />
+            </Button>
             <Button
               variant="ghost"
               size="icon"
               aria-label="Shopping cart"
               className="text-primary hover:bg-skyBlue-light/30 rounded-full"
+              asChild
             >
-              <ShoppingCart className="h-5 w-5" />
-              {itemCount > 0 && (
-                <span className="absolute top-1 right-1 h-4 w-4 bg-primary text-[10px] flex items-center justify-center text-white rounded-full">
-                  {itemCount}
-                </span>
-              )}
+              <Link to="/cart" className="relative">
+                <ShoppingCart className="h-5 w-5" />
+                {itemCount > 0 && (
+                  <span className="absolute top-1 right-1 h-4 w-4 bg-primary text-[10px] flex items-center justify-center text-white rounded-full">
+                    {itemCount}
+                  </span>
+                )}
+              </Link>
             </Button>
           </div>
 
@@ -157,7 +166,9 @@ const Header = () => {
                 <Button variant="ghost" size="icon" aria-label="Search">
                   <Search className="h-5 w-5" />
                 </Button>
-                <UserButton />
+                <Button variant="ghost" size="icon" aria-label="Account">
+                  <User className="h-5 w-5" />
+                </Button>
                 <Button variant="default" className="ml-auto">
                   Sign In
                 </Button>
