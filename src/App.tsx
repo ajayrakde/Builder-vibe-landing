@@ -8,6 +8,7 @@ import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
 import Community from "./pages/Community";
 import ProductDetail from "./pages/ProductDetail";
+import Cart from "./pages/Cart";
 import FAQ from "./pages/FAQ";
 import Contact from "./pages/Contact";
 import Welcome from "./pages/Welcome";
