@@ -27,6 +27,7 @@ const App = () => (
         <Route path="/blog/:postSlug" element={<BlogPost />} />
         <Route path="/community" element={<Community />} />
         <Route path="/product/:productHandle" element={<ProductDetail />} />
+        <Route path="/cart" element={<Cart />} />
         <Route path="/faq" element={<FAQ />} />
         <Route path="/contact" element={<Contact />} />
         {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
