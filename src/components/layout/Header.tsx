@@ -188,6 +188,8 @@ const Header = () => {
           </div>
         </div>
       )}
+
+      <SearchModal open={isSearchOpen} onOpenChange={setIsSearchOpen} />
     </header>
   );
 };
