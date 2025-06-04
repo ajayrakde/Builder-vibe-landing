@@ -49,3 +49,20 @@ npm run lint
 
 Deploy the contents of the `dist/` folder to your static hosting provider of choice.
 
+
+## Saleor Sample Backend
+
+A minimal Django-based GraphQL API is provided in the `saleor_backend/` folder. It exposes a single `hello` field and can be used as a starting point for integrating a Saleor backend.
+
+### Running the Backend
+
+```bash
+cd saleor_backend
+python -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+python manage.py migrate
+python manage.py runserver
+```
+
+Open http://localhost:8000/graphql/ and run the `hello` query to test the API.
