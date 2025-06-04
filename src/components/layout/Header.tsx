@@ -19,6 +19,7 @@ const navigation = [
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
   const isMobile = useIsMobile();
   const { itemCount = 0 } = useCart() || {}; // Use default value if context is undefined
 
