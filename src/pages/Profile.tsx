@@ -236,11 +236,7 @@ const PersonalDetails = () => {
                       className="font-quicksand"
                       disabled
                     />
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      className="font-quicksand"
-                    >
+                    <Button variant="outline" size="sm" className="font-quicksand">
                       Verify OTP
                     </Button>
                   </div>
@@ -357,16 +353,89 @@ const PersonalDetails = () => {
 };
 
 const DeliveryAddresses = () => {
+  const [showAddForm, setShowAddForm] = useState(false);
+  const [addresses, setAddresses] = useState(userData.addresses);
+
+  const handleSetDefault = (addressId: number) => {
+    setAddresses(addresses.map(addr => ({
+      ...addr,
+      isDefault: addr.id === addressId
+    })));
+  };
+
+  const handleAddAddress = () => {
+    setShowAddForm(true);
+  };
+
   return (
     <div>
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-2xl font-bold text-slate-800 font-quicksand">
           Delivery Addresses
         </h2>
-        <Button className="rounded-full">
+        <Button className="rounded-full font-quicksand" onClick={handleAddAddress}>
           <PlusCircle className="mr-2 h-4 w-4" /> Add New Address
         </Button>
       </div>
+
+      {showAddForm && (
+        <Card className="mb-6 border-2 border-dashed border-[#1a5de6]">
+          <CardContent className="p-6">
+            <h3 className="font-semibold mb-4 font-quicksand">Add New Address</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <Label className="font-quicksand">Full Name</Label>
+                <Input placeholder="Enter full name" className="font-quicksand" />
+              </div>
+              <div>
+                <Label className="font-quicksand">Phone Number</Label>
+                <Input placeholder="Enter phone number" className="font-quicksand" />
+              </div>
+              <div className="md:col-span-2">
+                <Label className="font-quicksand">Address Line 1</Label>
+                <Input placeholder="House number, street name" className="font-quicksand" />
+              </div>
+              <div className="md:col-span-2">
+                <Label className="font-quicksand">Address Line 2</Label>
+                <Input placeholder="Apartment, suite, etc. (optional)" className="font-quicksand" />
+              </div>
+              <div>
+                <Label className="font-quicksand">City</Label>
+                <Input placeholder="Enter city" className="font-quicksand" />
+              </div>
+              <div>
+                <Label className="font-quicksand">State</Label>
+                <Input placeholder="Enter state" className="font-quicksand" />
+              </div>
+              <div>
+                <Label className="font-quicksand">PIN Code</Label>
+                <Input placeholder="Enter PIN code" className="font-quicksand" />
+              </div>
+              <div>
+                <Label className="font-quicksand">Address Type</Label>
+                <Input placeholder="Home, Office, etc." className="font-quicksand" />
+              </div>
+            </div>
+            <div className="flex gap-2 mt-4">
+              <Button className="font-quicksand">Save Address</Button>
+              <Button variant="outline" onClick={() => setShowAddForm(false)} className="font-quicksand">
+                Cancel
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+      )}
+
+      <div className="space-y-4">
+        {addresses
+          .sort((a, b) =>
+            a.isDefault === b.isDefault ? 0 : a.isDefault ? -1 : 1,
+          )
+          .map((address) => (
+            <Card
+              key={address.id}
+              className={`p-6 border-2 ${address.isDefault ? "border-primary" : "border-slate-100"}`}
+            >
 
       <div className="space-y-4">
         {userData.addresses
