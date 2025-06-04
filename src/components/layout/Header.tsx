@@ -96,13 +96,16 @@ const Header = () => {
               size="icon"
               aria-label="Shopping cart"
               className="text-primary hover:bg-skyBlue-light/30 rounded-full"
+              asChild
             >
-              <ShoppingCart className="h-5 w-5" />
-              {itemCount > 0 && (
-                <span className="absolute top-1 right-1 h-5 w-5 bg-vibrant-teal text-[10px] flex items-center justify-center text-white rounded-full animate-pulse">
-                  {itemCount}
-                </span>
-              )}
+              <Link to="/cart" className="relative">
+                <ShoppingCart className="h-5 w-5" />
+                {itemCount > 0 && (
+                  <span className="absolute top-1 right-1 h-5 w-5 bg-vibrant-teal text-[10px] flex items-center justify-center text-white rounded-full animate-pulse">
+                    {itemCount}
+                  </span>
+                )}
+              </Link>
             </Button>
             <Button
               variant="ghost"
