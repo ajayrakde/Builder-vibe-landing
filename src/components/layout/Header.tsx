@@ -169,7 +169,12 @@ const Header = () => {
 
             <div className="flex-shrink-0 flex border-t border-gray-200 p-4">
               <div className="flex items-center space-x-4 w-full">
-                <Button variant="ghost" size="icon" aria-label="Search">
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  aria-label="Search"
+                  onClick={() => setIsSearchOpen(true)}
+                >
                   <Search className="h-5 w-5" />
                 </Button>
                 <Button variant="ghost" size="icon" aria-label="Account">
