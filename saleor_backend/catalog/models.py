@@ -53,6 +53,25 @@ class ShiprocketConfig(models.Model):
         return self.email
 
 
+class BlogConfig(models.Model):
+    """Stores connection details for the Strapi community backend."""
+
+    api_url = models.CharField(max_length=255)
+    api_token = models.CharField(max_length=255, blank=True, null=True)
+
+    def __str__(self) -> str:  # pragma: no cover - simple string repr
+        return self.api_url
+
+
+class GoogleMapConfig(models.Model):
+    """Holds the Google Maps API key used for order tracking."""
+
+    api_key = models.CharField(max_length=255)
+
+    def __str__(self) -> str:  # pragma: no cover - simple string repr
+        return self.api_key[:6] + "..."
+
+
 class Favorite(models.Model):
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,

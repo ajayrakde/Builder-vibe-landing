@@ -39,7 +39,9 @@ export function toProduct(item: SaleorProduct): Product {
   } as Product;
 }
 
-const API_URL = import.meta.env.VITE_SALEOR_API_URL || 'https://demo.saleor.io/graphql/';
+import { SALEOR_API_URL } from './features';
+
+const API_URL = SALEOR_API_URL;
 
 async function graphqlRequest<T>(query: string, variables: Record<string, unknown> = {}): Promise<T> {
   const response = await fetch(API_URL, {
@@ -100,4 +102,35 @@ export async function fetchProductBySlug(slug: string) {
   type Resp = { product: SaleorProduct | null };
   const data = await graphqlRequest<Resp>(query, { slug });
   return data.product ? toProduct(data.product) : null;
+}
+
+export async function createOrder(paymentGatewayId?: string) {
+  const mutation = `
+    mutation CreateOrder($pg: ID) {
+      createOrder(paymentGatewayId: $pg) {
+        order {
+          id
+          totalPrice
+        }
+      }
+    }
+  `;
+  type Resp = { createOrder: { order: { id: string; totalPrice: number } } };
+  const data = await graphqlRequest<Resp>(mutation, { pg: paymentGatewayId });
+  return data.createOrder.order;
+}
+
+export async function trackOrder(orderId: string) {
+  const query = `
+    query Track($id: ID!) {
+      trackOrder(orderId: $id) {
+        status
+        eta
+        location
+      }
+    }
+  `;
+  type Resp = { trackOrder: { status: string; eta: string; location: string } | null };
+  const data = await graphqlRequest<Resp>(query, { id: orderId });
+  return data.trackOrder;
 }

@@ -1,14 +1,15 @@
-import { Fragment } from "react";
+import { Fragment, useEffect, useState } from "react";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import BackgroundElements from "@/components/decorative/BackgroundElements";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
+import { ENABLE_MOCKS, STRAPI_URL } from "@/lib/features";
 
 const Blog = () => {
   // Sample blog posts data
-  const blogPosts = [
+  const defaultPosts = [
     {
       id: 1,
       title: "The Importance of Iron in Your Baby's Diet",
@@ -76,6 +77,31 @@ const Blog = () => {
       slug: "picky-eating-toddlers",
     },
   ];
+
+  const [blogPosts, setBlogPosts] = useState(defaultPosts);
+
+  useEffect(() => {
+    if (!ENABLE_MOCKS && STRAPI_URL) {
+      fetch(`${STRAPI_URL}/posts`)
+        .then((res) => res.json())
+        .then((json) => {
+          if (Array.isArray(json.data)) {
+            const posts = json.data.map((item: any) => ({
+              id: item.id,
+              title: item.attributes.title,
+              excerpt: item.attributes.excerpt,
+              image: item.attributes.image?.url || "/placeholder.svg",
+              category: item.attributes.category || "",
+              date: item.attributes.publishedAt || "",
+              author: item.attributes.author || "",
+              slug: item.attributes.slug,
+            }));
+            setBlogPosts(posts);
+          }
+        })
+        .catch((err) => console.error("Failed to load posts from Strapi", err));
+    }
+  }, []);
 
   return (
     <Fragment>

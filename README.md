@@ -71,3 +71,7 @@ The React app will fetch products and product details from this API. Saleor expo
 ### Community Backend
 
 Community features like posts and comments rely on a Strapi instance. See `strapi_backend/README.md` for setup instructions. Set `VITE_STRAPI_URL` to point to the running Strapi API.
+
+### Feature Flags
+
+Use `VITE_ENABLE_MOCKS=true` in your `.env` file to disable network calls and use the built-in mock data. When set to `false` or omitted, the frontend will query the Saleor and Strapi backends for real data.

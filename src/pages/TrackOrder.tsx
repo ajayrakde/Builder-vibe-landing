@@ -1,4 +1,6 @@
 import { Fragment, useState } from "react";
+import { ENABLE_MOCKS } from "@/lib/features";
+import { trackOrder as trackOrderApi } from "@/lib/saleor";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -12,21 +14,37 @@ const TrackOrder = () => {
   const [orderNumber, setOrderNumber] = useState("");
   const [trackingData, setTrackingData] = useState(null);
 
-  const handleTrack = (e: React.FormEvent) => {
+  const handleTrack = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (orderNumber) {
-      // Mock tracking data
-      setTrackingData({
-        orderNumber: orderNumber,
-        status: "In Transit",
-        estimatedDelivery: "Dec 28, 2023",
-        currentLocation: "Delhi Distribution Center",
-        timeline: [
-          {
-            status: "Order Confirmed",
-            date: "Dec 20, 2023 - 2:30 PM",
-            completed: true,
-          },
+    if (!orderNumber) return;
+
+    if (!ENABLE_MOCKS) {
+      const data = await trackOrderApi(orderNumber);
+      if (data) {
+        setTrackingData({
+          orderNumber,
+          status: data.status,
+          estimatedDelivery: data.eta,
+          currentLocation: data.location,
+          timeline: [],
+        });
+        return;
+      }
+
+    }
+
+    // Mock tracking data
+    setTrackingData({
+      orderNumber: orderNumber,
+      status: "In Transit",
+      estimatedDelivery: "Dec 28, 2023",
+      currentLocation: "Delhi Distribution Center",
+      timeline: [
+        {
+          status: "Order Confirmed",
+          date: "Dec 20, 2023 - 2:30 PM",
+          completed: true,
+        },
           {
             status: "Processing",
             date: "Dec 21, 2023 - 10:15 AM",
@@ -54,7 +72,6 @@ const TrackOrder = () => {
           },
         ],
       });
-    }
   };
 
   return (

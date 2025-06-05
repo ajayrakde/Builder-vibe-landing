@@ -1,4 +1,6 @@
 import { Fragment, useState } from "react";
+import { ENABLE_MOCKS } from "@/lib/features";
+import { createOrder } from "@/lib/saleor";
 import { useNavigate } from "react-router-dom";
 import { useCart } from "@/hooks/use-cart";
 import Header from "@/components/layout/Header";
@@ -55,9 +57,16 @@ const Checkout = () => {
   const tax = subtotal * 0.18; // 18% GST
   const total = subtotal + shipping + tax;
 
-  const handlePlaceOrder = () => {
-    // Handle order placement
-    console.log("Order placed");
+  const handlePlaceOrder = async () => {
+    if (!ENABLE_MOCKS) {
+      try {
+        await createOrder();
+      } catch (err) {
+        console.error("Order creation failed", err);
+      }
+    } else {
+      console.log("Order placed (mock)");
+    }
     clearCart();
     navigate("/order-confirmation");
   };
