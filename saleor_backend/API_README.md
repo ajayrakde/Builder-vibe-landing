@@ -28,11 +28,34 @@ Fetches all product categories.
 Retrieves existing orders.
 *Used in:* order history pages like `OrderDetails.tsx` or `TrackOrder.tsx`.
 
+### `favorites`
+Returns the currently authenticated user's favourite products.
+*Used in:* the favourites view and ProductDetail heart icon.
+
+### `cart`
+Fetches the active cart for the logged-in user.
+*Used in:* cart drawer and checkout pages.
+
+### `paymentGateways`
+Lists configured payment providers. Admin chooses one via the admin panel.
+
 ## Mutations
 
-### `createOrder(productIds: [ID!]!)`
-Creates an order using the provided list of product IDs. Returns the created order with its total price.
+### `createOrder(paymentGatewayId: ID)`
+Creates an order from the user's cart and records the selected payment gateway.
 *Used in:* the checkout flow (`src/pages/Checkout.tsx`) when completing a purchase.
+
+### `addToCart(productId, quantity)`
+Adds an item to the cart or increases its quantity.
+
+### `updateCartItem(itemId, quantity)`
+Changes the quantity of an existing cart item.
+
+### `removeCartItem(itemId)`
+Removes an item from the cart.
+
+### `favoriteProduct(productId)` / `unfavoriteProduct(productId)`
+Mark or unmark a product as a favourite.
 
 ### `registerUser(username, email, password)`
 Creates a new user account and returns the username. *Used in:* sign-up forms.
@@ -64,10 +87,26 @@ Example mutation to create an order:
 
 ```graphql
 mutation {
-  createOrder(productIds: [1, 2]) {
+  createOrder(paymentGatewayId: 1) {
     order {
       id
       totalPrice
+    }
+  }
+}
+```
+
+Example mutation to add an item to the cart:
+
+```graphql
+mutation {
+  addToCart(productId: 2, quantity: 3) {
+    cart {
+      id
+      items {
+        product { title }
+        quantity
+      }
     }
   }
 }

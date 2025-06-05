@@ -9,7 +9,12 @@ It uses `graphene-django` and `django-graphql-jwt` to expose a few queries and m
 * `categories` – list all categories
 * `orders` – list existing orders
 * `productFilters` – list all available product types, age groups and ingredients
-* `createOrder` – create a new order given product IDs
+* `favorites` – current user's favourite products
+* `cart` – current user's active cart
+* `paymentGateways` – configured payment providers
+* `createOrder` – create a new order from the user's cart
+* `addToCart`, `updateCartItem`, `removeCartItem` – manage cart contents
+* `favoriteProduct`, `unfavoriteProduct` – mark or unmark a product as favourite
 * `registerUser` – create a new user account
 * `tokenAuth` – obtain a JWT token for login
 * `verifyToken` – validate a JWT token
@@ -36,7 +41,12 @@ It uses `graphene-django` and `django-graphql-jwt` to expose a few queries and m
    python manage.py runserver
    ```
 
-Visit `http://localhost:8000/admin/` to log in and manage `Product` entries.
+Visit `http://localhost:8000/admin/` to log in and manage the catalogue,
+payment gateways and shipping settings. Under **Payment Gateways** you can
+create entries for Stripe, Razorpay, PhonePe, Paytm or Cashfree and mark one as
+active. The **Shiprocket Config** section lets you store the email/token used
+to communicate with Shiprocket's API.
+
 GraphQL queries can be executed at `http://localhost:8000/graphql/`.
 
 ## Community Backend (Strapi)
