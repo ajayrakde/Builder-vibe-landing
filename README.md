@@ -50,7 +50,7 @@ Deploy the contents of the `dist/` folder to your static hosting provider of cho
 
 ## Saleor Sample Backend
 
-A Django-based GraphQL API is provided in the `saleor_backend/` folder. It now includes the standard Django admin panel so you can manage products.
+A Django-based GraphQL API is provided in the `saleor_backend/` folder. It now includes the standard Django admin panel so you can manage products, categories and orders.
 
 ### Running the Backend
 
@@ -65,3 +65,4 @@ python manage.py runserver
 ```
 
 Log in at http://localhost:8000/admin/ to add products. GraphQL queries (such as `hello` or `products`) can be executed at http://localhost:8000/graphql/.
+See `saleor_backend/API_README.md` for a list of available queries and mutations and how they map to the frontend.

@@ -1,10 +1,13 @@
 # Saleor Sample Backend
 
 This folder contains a minimal Django project exposing a GraphQL API and admin interface.
-It uses `graphene-django` to define a simple schema with two queries:
+It uses `graphene-django` to expose a few queries and a mutation:
 
 * `hello` – returns a greeting string
-* `products` – returns all `Product` records stored in the database
+* `products` – list all products
+* `categories` – list all categories
+* `orders` – list existing orders
+* `createOrder` – create a new order given product IDs
 
 ## Setup
 
