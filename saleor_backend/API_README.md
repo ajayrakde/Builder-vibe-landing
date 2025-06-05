@@ -8,9 +8,17 @@ This document outlines the GraphQL API endpoints provided by the `saleor_backend
 Returns a simple greeting string.
 *Used in:* none – can be used to test connectivity.
 
-### `products`
-Fetches all products with their ID, title, price and category.
-*Used in:* `Shop` page (`src/pages/Shop.tsx`) and product detail view (`src/pages/ProductDetail.tsx`).
+### `products(type, age, search)`
+Fetches products filtered by optional `type` or `age` arguments. A `search`
+string performs a case-insensitive match on the title. Returned fields include
+`id`, `title`, `price`, `category`, `productType`, `ageGroup` and
+`ingredients`.
+*Used in:* `Shop` page (`src/pages/Shop.tsx`) and product detail view
+(`src/pages/ProductDetail.tsx`).
+
+### `productFilters`
+Returns lists of all available product types, age groups and ingredients. This
+is useful for building filter UIs on the shop page.
 
 ### `categories`
 Fetches all product categories.

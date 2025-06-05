@@ -4,9 +4,10 @@ This folder contains a minimal Django project exposing a GraphQL API and admin i
 It uses `graphene-django` to expose a few queries and a mutation:
 
 * `hello` – returns a greeting string
-* `products` – list all products
+* `products` – list products with optional filtering by type, age or search term
 * `categories` – list all categories
 * `orders` – list existing orders
+* `productFilters` – list all available product types, age groups and ingredients
 * `createOrder` – create a new order given product IDs
 
 ## Setup

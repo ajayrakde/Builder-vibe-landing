@@ -11,6 +11,9 @@ class Category(models.Model):
 class Product(models.Model):
     title = models.CharField(max_length=255)
     price = models.FloatField()
+    product_type = models.CharField(max_length=100, blank=True, null=True)
+    age_group = models.CharField(max_length=100, blank=True, null=True)
+    ingredients = models.TextField(blank=True, null=True)
     category = models.ForeignKey(
         Category,
         related_name="products",
