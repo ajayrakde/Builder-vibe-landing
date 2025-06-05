@@ -48,21 +48,22 @@ npm run lint
 Deploy the contents of the `dist/` folder to your static hosting provider of choice.
 
 
-## Saleor Sample Backend
+## Using Saleor
 
-A Django-based GraphQL API is provided in the `saleor_backend/` folder. It now includes the standard Django admin panel so you can manage products, categories and orders.
-
-### Running the Backend
+The frontend expects a Saleor GraphQL API. You can run Saleor locally using Docker:
 
 ```bash
-cd saleor_backend
-python -m venv venv
-source venv/bin/activate
-pip install -r requirements.txt
-python manage.py migrate
-python manage.py createsuperuser  # follow the prompts
-python manage.py runserver
+git clone https://github.com/saleor/saleor.git
+cd saleor
+docker compose up
 ```
 
-Log in at http://localhost:8000/admin/ to add products. GraphQL queries (such as `hello` or `products`) can be executed at http://localhost:8000/graphql/.
-See `saleor_backend/API_README.md` for a list of available queries and mutations and how they map to the frontend.
+Once the containers are running, the GraphQL endpoint will be available at
+`http://localhost:8000/graphql/`. Set this URL in a `.env` file at the project
+root so Vite can access it:
+
+```bash
+VITE_SALEOR_API_URL=http://localhost:8000/graphql/
+```
+
+The React app will fetch products and product details from this API.

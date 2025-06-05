@@ -19,7 +19,8 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Heart, ShoppingBag, ChevronLeft, Star, StarHalf } from "lucide-react";
-import { Product, getMockProducts, ProductVariant } from "@/types/product";
+import { Product, ProductVariant } from "@/types/product";
+import { fetchProductBySlug } from "@/lib/saleor";
 import { cn } from "@/lib/utils";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
@@ -34,19 +35,21 @@ const ProductDetail = () => {
   );
   const [quantity, setQuantity] = useState(1);
   const [isSubscription, setIsSubscription] = useState(false);
+  const { addItem } = useCart();
 
   // Fetch product data
   useEffect(() => {
-    const mockProducts = getMockProducts();
-    const foundProduct = mockProducts.find((p) => p.handle === productHandle);
-
-    if (foundProduct) {
-      setProduct(foundProduct);
-      // Set first variant as default
-      if (foundProduct.variants.length > 0) {
-        setSelectedVariant(foundProduct.variants[0]);
-      }
-    }
+    if (!productHandle) return;
+    fetchProductBySlug(productHandle)
+      .then((data) => {
+        if (data) {
+          setProduct(data);
+          if (data.variants.length > 0) {
+            setSelectedVariant(data.variants[0]);
+          }
+        }
+      })
+      .catch((err) => console.error('Failed to load product', err));
   }, [productHandle]);
 
   if (!product) {
@@ -83,7 +86,6 @@ const ProductDetail = () => {
     setIsSubscription(type === "subscription");
   };
 
-  const { addItem } = useCart();
 
   const handleAddToCart = () => {
     if (!selectedVariant || !product) return;

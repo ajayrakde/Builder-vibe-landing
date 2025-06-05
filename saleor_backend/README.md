@@ -1,6 +1,7 @@
-# Saleor Sample Backend
+# Sample GraphQL Backend
 
 This folder contains a minimal Django project exposing a GraphQL API and admin interface.
+It mimics a few Saleor endpoints for local testing. For full functionality, use a real Saleor instance instead.
 It uses `graphene-django` to expose a few queries and a mutation:
 
 * `hello` – returns a greeting string

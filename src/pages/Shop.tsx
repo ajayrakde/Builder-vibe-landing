@@ -7,12 +7,12 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Badge } from "@/components/ui/badge";
 import { Search, SlidersHorizontal, X } from "lucide-react";
 import {
-  getMockProducts,
   Product,
   AgeRange,
   ProductType,
   IngredientType,
 } from "@/types/product";
+import { fetchProducts } from "@/lib/saleor";
 import { cn } from "@/lib/utils";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { useCart } from "@/hooks/use-cart";
@@ -74,7 +74,9 @@ const Shop = () => {
 
   // Initialize products
   useEffect(() => {
-    setProducts(getMockProducts());
+    fetchProducts()
+      .then((data) => setProducts(data))
+      .catch((err) => console.error('Failed to load products from Saleor', err));
   }, []);
 
   // Parse URL query parameters
