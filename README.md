@@ -66,4 +66,8 @@ root so Vite can access it:
 VITE_SALEOR_API_URL=http://localhost:8000/graphql/
 ```
 
-The React app will fetch products and product details from this API.
+The React app will fetch products and product details from this API. Saleor exposes GraphQL mutations for authentication such as `tokenAuth` and `accountRegister`, so you can manage accounts without additional services.
+
+### Community Backend
+
+Community features like posts and comments rely on a Strapi instance. See `strapi_backend/README.md` for setup instructions. Set `VITE_STRAPI_URL` to point to the running Strapi API.

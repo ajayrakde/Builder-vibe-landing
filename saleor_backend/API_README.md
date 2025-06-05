@@ -34,6 +34,15 @@ Retrieves existing orders.
 Creates an order using the provided list of product IDs. Returns the created order with its total price.
 *Used in:* the checkout flow (`src/pages/Checkout.tsx`) when completing a purchase.
 
+### `registerUser(username, email, password)`
+Creates a new user account and returns the username. *Used in:* sign-up forms.
+
+### `tokenAuth(username, password)`
+Returns a JWT token for the authenticated user. *Used in:* login forms via a custom hook.
+
+### `verifyToken(token)` and `refreshToken(token)`
+Verify or refresh an existing JWT token. *Used in:* persisting logged-in sessions.
+
 ## Usage Examples
 
 Example query to list products:
@@ -60,6 +69,26 @@ mutation {
       id
       totalPrice
     }
+  }
+}
+```
+
+Example mutation to register a user:
+
+```graphql
+mutation {
+  registerUser(username: "demo", email: "demo@example.com", password: "pass") {
+    user
+  }
+}
+```
+
+Example mutation to obtain a token:
+
+```graphql
+mutation {
+  tokenAuth(username: "demo", password: "pass") {
+    token
   }
 }
 ```

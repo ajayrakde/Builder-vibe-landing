@@ -16,6 +16,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "graphene_django",
     "catalog",
+    "graphql_jwt.refresh_token",
 ]
 
 MIDDLEWARE = [
@@ -56,6 +57,20 @@ DATABASES = {
 }
 
 GRAPHENE = {"SCHEMA": "saleor_backend.schema.schema"}
+
+AUTHENTICATION_BACKENDS = [
+    "graphql_jwt.backends.JSONWebTokenBackend",
+    "django.contrib.auth.backends.ModelBackend",
+]
+
+GRAPHQL_JWT = {
+    "JWT_VERIFY_EXPIRATION": True,
+    "JWT_LONG_RUNNING_REFRESH_TOKEN": True,
+}
+
+GRAPHENE["MIDDLEWARE"] = [
+    "graphql_jwt.middleware.JSONWebTokenMiddleware",
+]
 
 STATIC_URL = "static/"
 

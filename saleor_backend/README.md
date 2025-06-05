@@ -2,7 +2,7 @@
 
 This folder contains a minimal Django project exposing a GraphQL API and admin interface.
 It mimics a few Saleor endpoints for local testing. For full functionality, use a real Saleor instance instead.
-It uses `graphene-django` to expose a few queries and a mutation:
+It uses `graphene-django` and `django-graphql-jwt` to expose a few queries and mutations:
 
 * `hello` – returns a greeting string
 * `products` – list products with optional filtering by type, age or search term
@@ -10,6 +10,10 @@ It uses `graphene-django` to expose a few queries and a mutation:
 * `orders` – list existing orders
 * `productFilters` – list all available product types, age groups and ingredients
 * `createOrder` – create a new order given product IDs
+* `registerUser` – create a new user account
+* `tokenAuth` – obtain a JWT token for login
+* `verifyToken` – validate a JWT token
+* `refreshToken` – refresh an existing token
 
 ## Setup
 
@@ -34,3 +38,13 @@ It uses `graphene-django` to expose a few queries and a mutation:
 
 Visit `http://localhost:8000/admin/` to log in and manage `Product` entries.
 GraphQL queries can be executed at `http://localhost:8000/graphql/`.
+
+## Community Backend (Strapi)
+
+This repository also expects a Strapi instance to power community features such as posts and comments. You can quickly start a local Strapi server with Docker:
+
+```bash
+docker run -p 1337:1337 strapi/strapi
+```
+
+The admin panel will be available at `http://localhost:1337/admin/` on first run. Configure the frontend to call this API via an environment variable, e.g. `VITE_STRAPI_URL`.

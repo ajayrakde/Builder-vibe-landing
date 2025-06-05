@@ -1,6 +1,9 @@
 import graphene
 from graphene_django import DjangoObjectType
 from catalog.models import Category, Order, Product
+import graphql_jwt
+from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 
 
 class ProductType(DjangoObjectType):
@@ -91,8 +94,30 @@ class CreateOrder(graphene.Mutation):
         return CreateOrder(order=order)
 
 
+class RegisterUser(graphene.Mutation):
+    user = graphene.Field(lambda: graphene.String)
+
+    class Arguments:
+        username = graphene.String(required=True)
+        email = graphene.String(required=True)
+        password = graphene.String(required=True)
+
+    def mutate(root, info, username, email, password):
+        user_model = get_user_model()
+        if user_model.objects.filter(username=username).exists():
+            raise Exception("Username already exists")
+        user = user_model.objects.create_user(
+            username=username, email=email, password=password
+        )
+        return RegisterUser(user=user.username)
+
+
 class Mutation(graphene.ObjectType):
     create_order = CreateOrder.Field()
+    register_user = RegisterUser.Field()
+    token_auth = graphql_jwt.ObtainJSONWebToken.Field()
+    verify_token = graphql_jwt.Verify.Field()
+    refresh_token = graphql_jwt.Refresh.Field()
 
 
 schema = graphene.Schema(query=Query, mutation=Mutation)
