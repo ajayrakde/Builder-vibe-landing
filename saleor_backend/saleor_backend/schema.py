@@ -8,6 +8,9 @@ from catalog.models import (
     Cart,
     CartItem,
     PaymentGateway,
+    ShiprocketConfig,
+    BlogConfig,
+    GoogleMapConfig,
 )
 from django.db import models
 import graphql_jwt
@@ -55,6 +58,30 @@ class PaymentGatewayType(DjangoObjectType):
         fields = ("id", "provider", "active")
 
 
+class TrackingInfo(graphene.ObjectType):
+    status = graphene.String()
+    eta = graphene.String()
+    location = graphene.String()
+
+
+class ShiprocketConfigType(DjangoObjectType):
+    class Meta:
+        model = ShiprocketConfig
+        fields = ("id", "email", "token")
+
+
+class BlogConfigType(DjangoObjectType):
+    class Meta:
+        model = BlogConfig
+        fields = ("id", "api_url", "api_token")
+
+
+class GoogleMapConfigType(DjangoObjectType):
+    class Meta:
+        model = GoogleMapConfig
+        fields = ("id", "api_key")
+
+
 class CartItemType(DjangoObjectType):
     class Meta:
         model = CartItem
@@ -94,6 +121,10 @@ class Query(graphene.ObjectType):
     categories = graphene.List(CategoryType, description="List of categories")
     orders = graphene.List(OrderType, description="List of orders")
     payment_gateways = graphene.List(PaymentGatewayType, description="Payment gateways")
+    shiprocket_config = graphene.Field(ShiprocketConfigType, description="Shiprocket settings")
+    blog_config = graphene.Field(BlogConfigType, description="Strapi settings")
+    google_map_config = graphene.Field(GoogleMapConfigType, description="Google Map settings")
+    track_order = graphene.Field(TrackingInfo, order_id=graphene.ID(required=True), description="Track order status")
     favorites = graphene.List(FavoriteType, description="User favorite products")
     cart = graphene.Field(CartType, description="Current cart")
     most_bought_products = graphene.List(ProductType, description="Most purchased products for user")
@@ -126,6 +157,28 @@ class Query(graphene.ObjectType):
 
     def resolve_payment_gateways(root, info):
         return PaymentGateway.objects.all()
+
+    def resolve_shiprocket_config(root, info):
+        return ShiprocketConfig.objects.first()
+
+    def resolve_blog_config(root, info):
+        return BlogConfig.objects.first()
+
+    def resolve_google_map_config(root, info):
+        return GoogleMapConfig.objects.first()
+
+    def resolve_track_order(root, info, order_id):
+        try:
+            order = Order.objects.get(id=order_id)
+        except Order.DoesNotExist:
+            return None
+        # In a real implementation, call Shiprocket API using order.shiprocket_shipment_id
+        # and credentials stored in ShiprocketConfig. This sample returns placeholder data.
+        return {
+            "status": "Processing",
+            "eta": "N/A",
+            "location": "Warehouse",
+        }
 
     def resolve_favorites(root, info):
         user = info.context.user
