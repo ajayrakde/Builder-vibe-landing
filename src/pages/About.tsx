@@ -100,10 +100,10 @@ const About = () => {
                       <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
                     </svg>
                   </div>
-                  <h3 className="text-xl font-semibold mb-4 text-slate-800">
+                  <h3 className="text-xl font-semibold mb-4 text-slate-800 font-quicksand">
                     Quality Without Compromise
                   </h3>
-                  <p className="text-slate-600">
+                  <p className="text-slate-600 font-quicksand">
                     We source only the finest organic ingredients and maintain
                     strict quality standards throughout our production process.
                     If we wouldn't feed it to our own children, we won't make it
@@ -124,10 +124,10 @@ const About = () => {
                       <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
                     </svg>
                   </div>
-                  <h3 className="text-xl font-semibold mb-4 text-slate-800">
+                  <h3 className="text-xl font-semibold mb-4 text-slate-800 font-quicksand">
                     Parent Partnership
                   </h3>
-                  <p className="text-slate-600">
+                  <p className="text-slate-600 font-quicksand">
                     We see ourselves as partners in your parenting journey. Our
                     community of Kanhaa parents helps guide our product
                     development, and we're committed to providing resources
