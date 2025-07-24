@@ -168,23 +168,23 @@ const HeroCarousel = () => {
           ))}
         </CarouselContent>
 
-        <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-2 z-10">
-          {heroSlides.map((_, index) => (
-            <button
-              key={index}
-              className={cn(
-                "w-2 h-2 rounded-full transition-all",
-                activeIndex === index
-                  ? "bg-primary w-8"
-                  : "bg-gray-300 hover:bg-gray-400",
-              )}
-              onClick={() => {
-                api?.scrollTo(index);
-              }}
-              aria-label={`Go to slide ${index + 1}`}
-            />
-          ))}
-        </div>
+            <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-3 z-10">
+              {heroSlides.map((_, index) => (
+                <button
+                  key={index}
+                  className={cn(
+                    "rounded-full transition-all duration-300 border-2 shadow-lg",
+                    activeIndex === index
+                      ? "bg-white w-12 h-3 border-white shadow-xl scale-110 animate-pulse"
+                      : "w-3 h-3 bg-white/60 border-white/80 hover:bg-white/80 hover:scale-105",
+                  )}
+                  onClick={() => {
+                    api?.scrollTo(index);
+                  }}
+                  aria-label={`Go to slide ${index + 1}`}
+                />
+              ))}
+            </div>
 
         <CarouselPrevious
           className={cn(
