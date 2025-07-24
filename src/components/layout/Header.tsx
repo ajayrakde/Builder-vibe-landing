@@ -50,40 +50,24 @@ const Header = () => {
             </Link>
           </div>
 
-          {/* Desktop Navigation with Always Visible Search */}
+          {/* Desktop Navigation */}
           <div className="hidden md:flex items-center flex-1 justify-center max-w-4xl mx-4">
-            <div className="flex items-center gap-6">
-              {/* Navigation Menu */}
-              <nav className="flex space-x-6">
-                {navigation.map((item) => (
-                  <Link
-                    key={item.name}
-                    to={item.href}
-                    className={`font-quicksand font-medium transition rounded-full px-3 py-1 whitespace-nowrap ${
-                      isActivePage(item.href)
-                        ? "bg-[#1a5de6] text-white"
-                        : "hover:bg-skyBlue-light/30"
-                    }`}
-                  >
-                    {item.name}
-                  </Link>
-                ))}
-              </nav>
-
-              {/* Always Visible Search Box */}
-              <form onSubmit={handleSearchSubmit} className="flex-shrink-0">
-                <div className="relative">
-                  <Input
-                    type="text"
-                    placeholder="Search products..."
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    className="w-48 lg:w-56 pl-10 pr-4 rounded-full font-quicksand"
-                  />
-                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
-                </div>
-              </form>
-            </div>
+            {/* Navigation Menu */}
+            <nav className="flex space-x-6">
+              {navigation.map((item) => (
+                <Link
+                  key={item.name}
+                  to={item.href}
+                  className={`font-quicksand font-medium transition rounded-full px-3 py-1 whitespace-nowrap ${
+                    isActivePage(item.href)
+                      ? "bg-[#1a5de6] text-white"
+                      : "hover:bg-skyBlue-light/30"
+                  }`}
+                >
+                  {item.name}
+                </Link>
+              ))}
+            </nav>
           </div>
 
           {/* Desktop Actions */}
