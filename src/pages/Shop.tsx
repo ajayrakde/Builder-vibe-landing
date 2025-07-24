@@ -561,9 +561,40 @@ const Shop = () => {
 
             {/* Product grid */}
             <div className="flex-1">
+              {/* Search and filters aligned with main content */}
+              <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
+                <div className="relative w-full md:w-80">
+                  <Search className="absolute left-3 top-2.5 h-4 w-4 text-slate-400" />
+                  <Input
+                    type="search"
+                    placeholder="Search products..."
+                    className="pl-10 rounded-full font-quicksand"
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                  />
+                </div>
+                {!isMobile && (
+                  <div className="flex items-center gap-4">
+                    <Button
+                      variant="outline"
+                      className="flex items-center gap-2"
+                      onClick={toggleFilters}
+                    >
+                      <SlidersHorizontal className="h-4 w-4" />
+                      Filters
+                      {activeFilterCount > 0 && (
+                        <Badge className="ml-1 h-5 w-5 p-0 flex items-center justify-center">
+                          {activeFilterCount}
+                        </Badge>
+                      )}
+                    </Button>
+                  </div>
+                )}
+              </div>
+
               {filteredProducts.length > 0 ? (
                 <>
-                  <p className="text-sm text-slate-500 mb-6">
+                  <p className="text-sm text-slate-500 mb-6 font-quicksand">
                     Showing {filteredProducts.length}{" "}
                     {filteredProducts.length === 1 ? "product" : "products"}
                   </p>
