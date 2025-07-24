@@ -1,27 +1,9 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import {
-  ShoppingCart,
-  Menu,
-  X,
-  Search,
-  User,
-  CloudSun,
-  LogIn,
-  UserCircle,
-  MapPin,
-  Package,
-  Truck,
-} from "lucide-react";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { ShoppingCart, Menu, X, Search, User, CloudSun, LogIn, UserCircle, MapPin, Package, Truck } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { useCart } from "@/hooks/use-cart";
@@ -98,12 +80,7 @@ const Header = () => {
             {/* User Dropdown */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  aria-label="Account"
-                  className="text-primary hover:bg-skyBlue-light/30 rounded-full"
-                >
+                <Button variant="ghost" size="icon" aria-label="Account" className="text-primary hover:bg-skyBlue-light/30 rounded-full">
                   <User className="h-5 w-5" />
                 </Button>
               </DropdownMenuTrigger>
@@ -116,37 +93,25 @@ const Header = () => {
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem asChild>
-                  <Link
-                    to="/profile"
-                    className="flex items-center font-quicksand"
-                  >
+                  <Link to="/profile" className="flex items-center font-quicksand">
                     <UserCircle className="mr-2 h-4 w-4" />
                     Profile
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
-                  <Link
-                    to="/profile?tab=addresses"
-                    className="flex items-center font-quicksand"
-                  >
+                  <Link to="/profile?tab=addresses" className="flex items-center font-quicksand">
                     <MapPin className="mr-2 h-4 w-4" />
                     Addresses
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
-                  <Link
-                    to="/profile?tab=orders"
-                    className="flex items-center font-quicksand"
-                  >
+                  <Link to="/profile?tab=orders" className="flex items-center font-quicksand">
                     <Package className="mr-2 h-4 w-4" />
                     Order History
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
-                  <Link
-                    to="/track-order"
-                    className="flex items-center font-quicksand"
-                  >
+                  <Link to="/track-order" className="flex items-center font-quicksand">
                     <Truck className="mr-2 h-4 w-4" />
                     Track Order
                   </Link>
@@ -154,13 +119,7 @@ const Header = () => {
               </DropdownMenuContent>
             </DropdownMenu>
 
-            <Button
-              variant="ghost"
-              size="icon"
-              aria-label="Shopping cart"
-              className="text-primary hover:bg-skyBlue-light/30 rounded-full"
-              asChild
-            >
+            <Button variant="ghost" size="icon" aria-label="Shopping cart" className="text-primary hover:bg-skyBlue-light/30 rounded-full" asChild>
               <Link to="/cart" className="relative">
                 <ShoppingCart className="h-5 w-5" />
                 {itemCount > 0 && (
@@ -174,13 +133,7 @@ const Header = () => {
 
           {/* Mobile menu button */}
           <div className="md:hidden flex items-center space-x-3">
-            <Button
-              variant="ghost"
-              size="icon"
-              aria-label="Shopping cart"
-              className="text-primary hover:bg-skyBlue-light/30 rounded-full"
-              asChild
-            >
+            <Button variant="ghost" size="icon" aria-label="Shopping cart" className="text-primary hover:bg-skyBlue-light/30 rounded-full" asChild>
               <Link to="/cart" className="relative">
                 <ShoppingCart className="h-5 w-5" />
                 {itemCount > 0 && (
@@ -276,11 +229,7 @@ const Header = () => {
                     <User className="h-5 w-5" />
                   </Link>
                 </Button>
-                <Button
-                  variant="default"
-                  className="ml-auto font-quicksand"
-                  asChild
-                >
+                <Button variant="default" className="ml-auto font-quicksand" asChild>
                   <Link to="/auth">Sign In</Link>
                 </Button>
               </div>
