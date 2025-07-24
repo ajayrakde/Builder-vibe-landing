@@ -130,7 +130,7 @@ const HeroCarousel = () => {
               >
                 <CardContent className="p-0">
                   <div className="flex flex-col md:flex-row h-full">
-                    <div className="p-6 md:p-10 flex flex-col justify-center md:w-1/2">
+                    <div className="p-6 md:p-10 flex flex-col justify-center md:w-1/2 bg-white/90 backdrop-blur-sm">
                       <span
                         className={cn(
                           "inline-block px-3 py-1 rounded-full text-xs font-medium mb-4 border font-quicksand",
