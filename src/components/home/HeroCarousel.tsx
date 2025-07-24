@@ -31,7 +31,7 @@ const heroSlides: HeroSlide[] = [
     ctaText: "Shop Bestsellers",
     ctaLink: "/shop",
     imageSrc: "/placeholder.svg",
-    backgroundColor: "bg-gradient-to-r from-blue-50 to-blue-100",
+    backgroundColor: "bg-gradient-to-br from-blue-400 via-blue-300 to-cyan-300",
     type: "topSeller",
   },
   {
@@ -41,7 +41,7 @@ const heroSlides: HeroSlide[] = [
     ctaText: "Discover Now",
     ctaLink: "/product/ragi-banana-cookies",
     imageSrc: "/placeholder.svg",
-    backgroundColor: "bg-gradient-to-r from-slate-50 to-blue-50",
+    backgroundColor: "bg-gradient-to-br from-emerald-400 via-green-300 to-teal-300",
     type: "newLaunch",
   },
   {
@@ -52,7 +52,7 @@ const heroSlides: HeroSlide[] = [
     ctaText: "Get Started",
     ctaLink: "/subscriptions",
     imageSrc: "/placeholder.svg",
-    backgroundColor: "bg-gradient-to-r from-blue-100 to-slate-100",
+    backgroundColor: "bg-gradient-to-br from-orange-400 via-amber-300 to-yellow-300",
     type: "offer",
   },
   {
@@ -63,7 +63,7 @@ const heroSlides: HeroSlide[] = [
     ctaText: "Join Now",
     ctaLink: "/community",
     imageSrc: "/placeholder.svg",
-    backgroundColor: "bg-gradient-to-r from-slate-100 to-blue-50",
+    backgroundColor: "bg-gradient-to-br from-purple-400 via-pink-300 to-rose-300",
     type: "promotion",
   },
 ];
