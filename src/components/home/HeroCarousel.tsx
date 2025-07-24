@@ -124,7 +124,7 @@ const HeroCarousel = () => {
             <CarouselItem key={slide.id}>
               <Card
                 className={cn(
-                  "border-0 overflow-hidden rounded-xl shadow-sm",
+                  "border-0 overflow-hidden rounded-2xl shadow-2xl backdrop-blur-sm",
                   slide.backgroundColor,
                 )}
               >
