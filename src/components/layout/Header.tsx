@@ -218,7 +218,9 @@ const Header = () => {
                     to={item.href}
                     className={cn(
                       "block px-3 py-3 rounded-md text-base font-medium font-quicksand",
-                      "text-neutral-black hover:bg-skyBlue-light/30 hover:text-neutral-charcoal",
+                      isActivePage(item.href)
+                        ? "bg-[#1a5de6] text-white"
+                        : "text-neutral-black hover:bg-skyBlue-light/30 hover:text-neutral-charcoal"
                     )}
                     onClick={() => setIsMenuOpen(false)}
                   >
