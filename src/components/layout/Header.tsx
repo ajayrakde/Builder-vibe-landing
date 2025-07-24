@@ -23,6 +23,7 @@ const Header = () => {
   const location = useLocation();
   const isMobile = useIsMobile();
   const { itemCount = 0 } = useCart() || {};
+  const { toggleCart } = useCartUI();
 
   const isActivePage = (href: string) => {
     if (href === "/" && location.pathname === "/") return true;
