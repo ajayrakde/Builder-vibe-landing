@@ -230,6 +230,10 @@ const Shop = () => {
       navigate(`/product/${product.handle}`);
     };
 
+    // Check if product is already in cart
+    const cartItem = items.find(item => item.product.id === product.id);
+    const isInCart = !!cartItem;
+
     const handleAddToCart = (e: React.MouseEvent) => {
       e.stopPropagation();
       if (product.variants.length > 0) {
@@ -239,11 +243,34 @@ const Shop = () => {
             variant: product.variants[0],
             quantity: 1,
           });
-          alert(`Added ${product.title} to cart!`);
         } catch (error) {
           console.error("Failed to add to cart:", error);
-          alert("Could not add to cart. Please try again.");
         }
+      }
+    };
+
+    const handleIncreaseQuantity = (e: React.MouseEvent) => {
+      e.stopPropagation();
+      if (cartItem) {
+        updateQuantity(cartItem.id, cartItem.quantity + 1);
+      }
+    };
+
+    const handleDecreaseQuantity = (e: React.MouseEvent) => {
+      e.stopPropagation();
+      if (cartItem) {
+        if (cartItem.quantity > 1) {
+          updateQuantity(cartItem.id, cartItem.quantity - 1);
+        } else {
+          removeItem(cartItem.id);
+        }
+      }
+    };
+
+    const handleRemoveFromCart = (e: React.MouseEvent) => {
+      e.stopPropagation();
+      if (cartItem) {
+        removeItem(cartItem.id);
       }
     };
 
