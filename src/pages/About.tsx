@@ -18,10 +18,10 @@ const About = () => {
             <div className="max-w-7xl mx-auto">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
                 <div>
-                  <h2 className="text-2xl md:text-3xl font-bold text-slate-800 mb-6">
+                  <h2 className="text-2xl md:text-3xl font-bold text-slate-800 mb-6 font-quicksand">
                     Our Story
                   </h2>
-                  <p className="text-slate-600 mb-4">
+                  <p className="text-slate-600 mb-4 font-quicksand">
                     Kanhaa was born out of a mother's struggle to find truly
                     healthy options for her baby. After reading countless
                     ingredient labels and being disappointed by the hidden
@@ -29,13 +29,13 @@ const About = () => {
                     store-bought baby foods, our founder Priya decided to create
                     what was missing.
                   </p>
-                  <p className="text-slate-600 mb-4">
+                  <p className="text-slate-600 mb-4 font-quicksand">
                     Starting in her kitchen with organic ingredients sourced
                     from local farms, she developed recipes that her baby not
                     only loved but that provided real nutrition for critical
                     developmental stages.
                   </p>
-                  <p className="text-slate-600">
+                  <p className="text-slate-600 font-quicksand">
                     What began as a personal mission soon grew into Kanhaa, as
                     other parents discovered and fell in love with our honest
                     approach to baby nutrition. Today, we continue that
