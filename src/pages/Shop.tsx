@@ -624,12 +624,12 @@ const Shop = () => {
             <div className="flex-1">
               {/* Search and filters aligned with main content */}
               <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
-                <div className="relative w-full md:w-80">
+                <div className="relative flex-1">
                   <Search className="absolute left-3 top-2.5 h-4 w-4 text-slate-400" />
                   <Input
                     type="search"
                     placeholder="Search products..."
-                    className="pl-10 rounded-full font-quicksand"
+                    className="pl-10 rounded-full font-quicksand w-full"
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
                   />
