@@ -141,58 +141,58 @@ const About = () => {
           {/* Our Process section */}
           <section className="py-16 px-4">
             <div className="max-w-7xl mx-auto">
-              <h2 className="text-2xl md:text-3xl font-bold text-slate-800 mb-12 text-center">
+              <h2 className="text-2xl md:text-3xl font-bold text-slate-800 mb-12 text-center font-quicksand">
                 Our Process
               </h2>
 
               <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
                 <div className="text-center">
-                  <div className="w-16 h-16 mx-auto mb-4 bg-[#D4EDDA] rounded-full flex items-center justify-center text-lg font-bold">
+                  <div className="w-16 h-16 mx-auto mb-4 bg-[#D4EDDA] rounded-full flex items-center justify-center text-lg font-bold font-quicksand">
                     1
                   </div>
-                  <h3 className="text-lg font-semibold mb-2 text-slate-800">
+                  <h3 className="text-lg font-semibold mb-2 text-slate-800 font-quicksand">
                     Sourcing
                   </h3>
-                  <p className="text-slate-600 text-sm">
+                  <p className="text-slate-600 text-sm font-quicksand">
                     We partner with certified organic farms to source the
                     freshest, most nutritious ingredients.
                   </p>
                 </div>
 
                 <div className="text-center">
-                  <div className="w-16 h-16 mx-auto mb-4 bg-[#F8D7DA] rounded-full flex items-center justify-center text-lg font-bold">
+                  <div className="w-16 h-16 mx-auto mb-4 bg-[#F8D7DA] rounded-full flex items-center justify-center text-lg font-bold font-quicksand">
                     2
                   </div>
-                  <h3 className="text-lg font-semibold mb-2 text-slate-800">
+                  <h3 className="text-lg font-semibold mb-2 text-slate-800 font-quicksand">
                     Recipe Development
                   </h3>
-                  <p className="text-slate-600 text-sm">
+                  <p className="text-slate-600 text-sm font-quicksand">
                     Our team of nutritionists and food scientists create
                     age-appropriate recipes optimized for baby development.
                   </p>
                 </div>
 
                 <div className="text-center">
-                  <div className="w-16 h-16 mx-auto mb-4 bg-[#E2D9F3] rounded-full flex items-center justify-center text-lg font-bold">
+                  <div className="w-16 h-16 mx-auto mb-4 bg-[#E2D9F3] rounded-full flex items-center justify-center text-lg font-bold font-quicksand">
                     3
                   </div>
-                  <h3 className="text-lg font-semibold mb-2 text-slate-800">
+                  <h3 className="text-lg font-semibold mb-2 text-slate-800 font-quicksand">
                     Quality Production
                   </h3>
-                  <p className="text-slate-600 text-sm">
+                  <p className="text-slate-600 text-sm font-quicksand">
                     Our small-batch production preserves nutrients and ensures
                     the highest quality standards.
                   </p>
                 </div>
 
                 <div className="text-center">
-                  <div className="w-16 h-16 mx-auto mb-4 bg-[#FEF6E4] rounded-full flex items-center justify-center text-lg font-bold">
+                  <div className="w-16 h-16 mx-auto mb-4 bg-[#FEF6E4] rounded-full flex items-center justify-center text-lg font-bold font-quicksand">
                     4
                   </div>
-                  <h3 className="text-lg font-semibold mb-2 text-slate-800">
+                  <h3 className="text-lg font-semibold mb-2 text-slate-800 font-quicksand">
                     Testing & Safety
                   </h3>
-                  <p className="text-slate-600 text-sm">
+                  <p className="text-slate-600 text-sm font-quicksand">
                     Every batch undergoes rigorous testing for quality, safety,
                     and nutritional content before reaching your home.
                   </p>
