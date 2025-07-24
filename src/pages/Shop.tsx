@@ -57,7 +57,7 @@ const Shop = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const isMobile = useIsMobile();
-  const { addItem } = useCart();
+  const { items, addItem, removeItem, updateQuantity } = useCart();
 
   const [products, setProducts] = useState<Product[]>([]);
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
