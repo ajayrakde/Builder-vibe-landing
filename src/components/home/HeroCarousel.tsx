@@ -76,10 +76,10 @@ const typeLabels = {
 };
 
 const typeColors = {
-  offer: "bg-orange-100 text-orange-800 border-orange-200",
-  topSeller: "bg-blue-100 text-blue-800 border-blue-200",
-  newLaunch: "bg-green-100 text-green-800 border-green-200",
-  promotion: "bg-purple-100 text-purple-800 border-purple-200",
+  offer: "bg-gradient-to-r from-orange-500 to-red-500 text-white border-0 shadow-lg",
+  topSeller: "bg-gradient-to-r from-blue-500 to-indigo-600 text-white border-0 shadow-lg",
+  newLaunch: "bg-gradient-to-r from-emerald-500 to-green-600 text-white border-0 shadow-lg",
+  promotion: "bg-gradient-to-r from-purple-500 to-pink-600 text-white border-0 shadow-lg",
 };
 
 const HeroCarousel = () => {
