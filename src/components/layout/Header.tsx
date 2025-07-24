@@ -19,8 +19,15 @@ const navigation = [
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const location = useLocation();
   const isMobile = useIsMobile();
   const { itemCount = 0 } = useCart() || {};
+
+  const isActivePage = (href: string) => {
+    if (href === "/" && location.pathname === "/") return true;
+    if (href !== "/" && location.pathname.startsWith(href)) return true;
+    return false;
+  };
 
   const handleSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault();
