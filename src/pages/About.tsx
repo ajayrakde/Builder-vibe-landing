@@ -77,10 +77,10 @@ const About = () => {
                       <path d="M7.5 12L10.5 15L16.5 9" />
                     </svg>
                   </div>
-                  <h3 className="text-xl font-semibold mb-4 text-slate-800">
+                  <h3 className="text-xl font-semibold mb-4 text-slate-800 font-quicksand">
                     Honesty & Transparency
                   </h3>
-                  <p className="text-slate-600">
+                  <p className="text-slate-600 font-quicksand">
                     We believe parents deserve complete transparency about what
                     goes into their baby's food. Our labels are clear and
                     truthful, with no hidden ingredients or misleading claims.
