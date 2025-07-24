@@ -634,23 +634,21 @@ const Shop = () => {
                     onChange={(e) => setSearchTerm(e.target.value)}
                   />
                 </div>
-                {!isMobile && (
-                  <div className="flex items-center gap-4">
-                    <Button
-                      variant="outline"
-                      className="flex items-center gap-2"
-                      onClick={toggleFilters}
-                    >
-                      <SlidersHorizontal className="h-4 w-4" />
-                      Filters
-                      {activeFilterCount > 0 && (
-                        <Badge className="ml-1 h-5 w-5 p-0 flex items-center justify-center">
-                          {activeFilterCount}
-                        </Badge>
-                      )}
-                    </Button>
-                  </div>
-                )}
+                <div className="flex items-center gap-4">
+                  <Button
+                    variant="outline"
+                    className="flex items-center gap-2 font-quicksand"
+                    onClick={toggleFilters}
+                  >
+                    <SlidersHorizontal className="h-4 w-4" />
+                    Filters
+                    {activeFilterCount > 0 && (
+                      <Badge className="ml-1 h-5 w-5 p-0 flex items-center justify-center">
+                        {activeFilterCount}
+                      </Badge>
+                    )}
+                  </Button>
+                </div>
               </div>
 
               {filteredProducts.length > 0 ? (
