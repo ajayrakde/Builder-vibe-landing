@@ -367,39 +367,7 @@ const Shop = () => {
 
       <main className="flex-grow">
         <div className="max-w-7xl mx-auto px-4 pb-16">
-          {/* Search and filters */}
-          <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4 mt-8">
-            <div className="relative w-full md:w-80">
-              <Search className="absolute left-3 top-2.5 h-4 w-4 text-slate-400" />
-              <Input
-                type="search"
-                placeholder="Search products..."
-                className="pl-10 rounded-full"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-              />
-            </div>
-
-            <div className="flex items-center gap-4 w-full md:w-auto">
-              {isMobile && (
-                <Button
-                  variant="outline"
-                  className="flex items-center gap-2"
-                  onClick={toggleFilters}
-                >
-                  <SlidersHorizontal className="h-4 w-4" />
-                  Filters
-                  {activeFilterCount > 0 && (
-                    <Badge className="ml-1 h-5 w-5 p-0 flex items-center justify-center">
-                      {activeFilterCount}
-                    </Badge>
-                  )}
-                </Button>
-              )}
-            </div>
-          </div>
-
-          <div className="flex flex-col md:flex-row gap-8">
+          <div className="flex flex-col md:flex-row gap-8 mt-8">
             {/* Filters sidebar */}
             {isFilterOpen && (
               <div
