@@ -204,7 +204,7 @@ const About = () => {
           {/* Meet the Team section */}
           <section className="py-16 px-4 bg-white">
             <div className="max-w-7xl mx-auto">
-              <h2 className="text-2xl md:text-3xl font-bold text-slate-800 mb-12 text-center">
+              <h2 className="text-2xl md:text-3xl font-bold text-slate-800 mb-12 text-center font-quicksand">
                 Meet Our Team
               </h2>
 
@@ -217,11 +217,11 @@ const About = () => {
                       className="w-full h-full object-cover"
                     />
                   </div>
-                  <h3 className="text-lg font-semibold mb-1 text-slate-800">
+                  <h3 className="text-lg font-semibold mb-1 text-slate-800 font-quicksand">
                     Priya Sharma
                   </h3>
-                  <p className="text-primary font-medium mb-2">Founder & CEO</p>
-                  <p className="text-slate-600 text-sm">
+                  <p className="text-primary font-medium mb-2 font-quicksand">Founder & CEO</p>
+                  <p className="text-slate-600 text-sm font-quicksand">
                     Mother of two, passionate about nutrition and providing the
                     best start for babies.
                   </p>
@@ -235,13 +235,13 @@ const About = () => {
                       className="w-full h-full object-cover"
                     />
                   </div>
-                  <h3 className="text-lg font-semibold mb-1 text-slate-800">
+                  <h3 className="text-lg font-semibold mb-1 text-slate-800 font-quicksand">
                     Dr. Anand Mehta
                   </h3>
-                  <p className="text-primary font-medium mb-2">
+                  <p className="text-primary font-medium mb-2 font-quicksand">
                     Nutrition Director
                   </p>
-                  <p className="text-slate-600 text-sm">
+                  <p className="text-slate-600 text-sm font-quicksand">
                     Pediatric nutritionist with 15 years of experience in child
                     development and nutrition.
                   </p>
@@ -255,13 +255,13 @@ const About = () => {
                       className="w-full h-full object-cover"
                     />
                   </div>
-                  <h3 className="text-lg font-semibold mb-1 text-slate-800">
+                  <h3 className="text-lg font-semibold mb-1 text-slate-800 font-quicksand">
                     Meera Patel
                   </h3>
-                  <p className="text-primary font-medium mb-2">
+                  <p className="text-primary font-medium mb-2 font-quicksand">
                     Head of Product
                   </p>
-                  <p className="text-slate-600 text-sm">
+                  <p className="text-slate-600 text-sm font-quicksand">
                     Food scientist specialized in developing nutritious,
                     delicious baby food formulations.
                   </p>
@@ -269,7 +269,7 @@ const About = () => {
               </div>
 
               <div className="text-center mt-12">
-                <Button asChild className="rounded-full px-8">
+                <Button asChild className="rounded-full px-8 font-quicksand">
                   <Link to="/careers">Join Our Team</Link>
                 </Button>
               </div>
