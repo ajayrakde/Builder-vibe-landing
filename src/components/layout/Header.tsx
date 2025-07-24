@@ -7,6 +7,7 @@ import { ShoppingCart, Menu, X, Search, User, CloudSun, LogIn, UserCircle, MapPi
 import { cn } from "@/lib/utils";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { useCart } from "@/hooks/use-cart";
+import { useCartUI } from "@/hooks/use-cart-ui";
 
 const navigation = [
   { name: "Home", href: "/" },
