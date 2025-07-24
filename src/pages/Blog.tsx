@@ -207,8 +207,6 @@ const Blog = () => {
             </div>
           </section>
 
-          <section className="py-12 px-4" />
-
           <section className="bg-[#FEF6E4] py-16 px-4">
             <div className="max-w-3xl mx-auto text-center">
               <h2 className="text-2xl md:text-3xl font-bold text-slate-800 mb-6">
