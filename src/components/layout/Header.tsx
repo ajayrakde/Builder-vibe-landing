@@ -116,15 +116,19 @@ const Header = () => {
               </DropdownMenuContent>
             </DropdownMenu>
 
-            <Button variant="ghost" size="icon" aria-label="Shopping cart" className="text-primary hover:bg-skyBlue-light/30 rounded-full" asChild>
-              <Link to="/cart" className="relative">
-                <ShoppingCart className="h-5 w-5" />
-                {itemCount > 0 && (
-                  <span className="absolute top-1 right-1 h-4 w-4 bg-primary text-[10px] flex items-center justify-center text-white rounded-full">
-                    {itemCount}
-                  </span>
-                )}
-              </Link>
+            <Button
+              variant="ghost"
+              size="icon"
+              aria-label="Shopping cart"
+              className="text-primary hover:bg-skyBlue-light/30 rounded-full relative"
+              onClick={toggleCart}
+            >
+              <ShoppingCart className="h-5 w-5" />
+              {itemCount > 0 && (
+                <span className="absolute top-1 right-1 h-4 w-4 bg-primary text-[10px] flex items-center justify-center text-white rounded-full">
+                  {itemCount}
+                </span>
+              )}
             </Button>
           </div>
 
