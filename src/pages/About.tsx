@@ -279,14 +279,14 @@ const About = () => {
           {/* Contact CTA */}
           <section className="py-16 px-4 bg-[#E2D9F3]">
             <div className="max-w-3xl mx-auto text-center">
-              <h2 className="text-2xl md:text-3xl font-bold text-slate-800 mb-6">
+              <h2 className="text-2xl md:text-3xl font-bold text-slate-800 mb-6 font-quicksand">
                 Have Questions?
               </h2>
-              <p className="text-slate-600 mb-8">
+              <p className="text-slate-600 mb-8 font-quicksand">
                 We're always happy to hear from parents and answer any questions
                 about our products, ingredients, or philosophy.
               </p>
-              <Button asChild size="lg" className="rounded-full px-8">
+              <Button asChild size="lg" className="rounded-full px-8 font-quicksand">
                 <Link to="/contact">Contact Us</Link>
               </Button>
             </div>
