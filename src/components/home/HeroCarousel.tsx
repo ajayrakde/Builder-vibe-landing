@@ -148,7 +148,7 @@ const HeroCarousel = () => {
                       <div>
                         <Button
                           size="lg"
-                          className="rounded-full px-8 font-quicksand"
+                          className="rounded-full px-8 font-quicksand bg-gradient-to-r from-[#1a5de6] to-[#2662d9] hover:from-[#1548c4] hover:to-[#1e56c7] shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
                         >
                           {slide.ctaText}
                         </Button>
