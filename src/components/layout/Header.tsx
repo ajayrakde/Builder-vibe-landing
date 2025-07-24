@@ -59,7 +59,11 @@ const Header = () => {
                   <Link
                     key={item.name}
                     to={item.href}
-                    className="font-quicksand font-medium transition rounded-full px-3 py-1 hover:bg-skyBlue-light/30 whitespace-nowrap"
+                    className={`font-quicksand font-medium transition rounded-full px-3 py-1 whitespace-nowrap ${
+                      isActivePage(item.href)
+                        ? "bg-[#1a5de6] text-white"
+                        : "hover:bg-skyBlue-light/30"
+                    }`}
                   >
                     {item.name}
                   </Link>
