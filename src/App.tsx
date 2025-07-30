@@ -1,6 +1,8 @@
-import React from "react";
+import React from 'react';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { CartProvider } from "./hooks/use-cart";
+import { CartUIProvider, useCartUI } from "./hooks/use-cart-ui";
+import SlidingCart from "./components/cart/SlidingCart";
 import Index from "./pages/Index";
 import Shop from "./pages/Shop";
 import About from "./pages/About";
@@ -25,9 +27,11 @@ import Welcome from "./pages/Welcome";
 import NotFound from "./pages/NotFound";
 import MyComponent from "./MyComponent";
 
-const App = () => (
-  <BrowserRouter>
-    <CartProvider>
+const AppContent = () => {
+  const { isCartOpen, closeCart } = useCartUI();
+
+  return (
+    <>
       <Routes>
         <Route path="/" element={<MyComponent />} />
         <Route path="/welcome" element={<Welcome />} />
@@ -53,6 +57,18 @@ const App = () => (
         {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
         <Route path="*" element={<NotFound />} />
       </Routes>
+
+      <SlidingCart isOpen={isCartOpen} onClose={closeCart} />
+    </>
+  );
+};
+
+const App = () => (
+  <BrowserRouter>
+    <CartProvider>
+      <CartUIProvider>
+        <AppContent />
+      </CartUIProvider>
     </CartProvider>
   </BrowserRouter>
 );

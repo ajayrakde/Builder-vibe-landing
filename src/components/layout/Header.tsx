@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -25,6 +25,7 @@ import {
 import { cn } from "@/lib/utils";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { useCart } from "@/hooks/use-cart";
+import { useCartUI } from "@/hooks/use-cart-ui";
 
 const navigation = [
   { name: "Home", href: "/" },
@@ -37,8 +38,16 @@ const navigation = [
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const location = useLocation();
   const isMobile = useIsMobile();
   const { itemCount = 0 } = useCart() || {};
+  const { toggleCart } = useCartUI();
+
+  const isActivePage = (href: string) => {
+    if (href === "/" && location.pathname === "/") return true;
+    if (href !== "/" && location.pathname.startsWith(href)) return true;
+    return false;
+  };
 
   const handleSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -61,36 +70,24 @@ const Header = () => {
             </Link>
           </div>
 
-          {/* Desktop Navigation with Always Visible Search */}
+          {/* Desktop Navigation */}
           <div className="hidden md:flex items-center flex-1 justify-center max-w-4xl mx-4">
-            <div className="flex items-center gap-6">
-              {/* Navigation Menu */}
-              <nav className="flex space-x-6">
-                {navigation.map((item) => (
-                  <Link
-                    key={item.name}
-                    to={item.href}
-                    className="font-quicksand font-medium transition rounded-full px-3 py-1 hover:bg-skyBlue-light/30 whitespace-nowrap"
-                  >
-                    {item.name}
-                  </Link>
-                ))}
-              </nav>
-
-              {/* Always Visible Search Box */}
-              <form onSubmit={handleSearchSubmit} className="flex-shrink-0">
-                <div className="relative">
-                  <Input
-                    type="text"
-                    placeholder="Search products..."
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    className="w-48 lg:w-56 pl-10 pr-4 rounded-full font-quicksand"
-                  />
-                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
-                </div>
-              </form>
-            </div>
+            {/* Navigation Menu */}
+            <nav className="flex space-x-6">
+              {navigation.map((item) => (
+                <Link
+                  key={item.name}
+                  to={item.href}
+                  className={`font-quicksand font-medium transition rounded-full px-3 py-1 whitespace-nowrap ${
+                    isActivePage(item.href)
+                      ? "bg-[#1a5de6] text-white"
+                      : "hover:bg-skyBlue-light/30"
+                  }`}
+                >
+                  {item.name}
+                </Link>
+              ))}
+            </nav>
           </div>
 
           {/* Desktop Actions */}
@@ -158,17 +155,15 @@ const Header = () => {
               variant="ghost"
               size="icon"
               aria-label="Shopping cart"
-              className="text-primary hover:bg-skyBlue-light/30 rounded-full"
-              asChild
+              className="text-primary hover:bg-skyBlue-light/30 rounded-full relative"
+              onClick={toggleCart}
             >
-              <Link to="/cart" className="relative">
-                <ShoppingCart className="h-5 w-5" />
-                {itemCount > 0 && (
-                  <span className="absolute top-1 right-1 h-4 w-4 bg-primary text-[10px] flex items-center justify-center text-white rounded-full">
-                    {itemCount}
-                  </span>
-                )}
-              </Link>
+              <ShoppingCart className="h-5 w-5" />
+              {itemCount > 0 && (
+                <span className="absolute top-1 right-1 h-4 w-4 bg-primary text-[10px] flex items-center justify-center text-white rounded-full">
+                  {itemCount}
+                </span>
+              )}
             </Button>
           </div>
 
@@ -178,17 +173,15 @@ const Header = () => {
               variant="ghost"
               size="icon"
               aria-label="Shopping cart"
-              className="text-primary hover:bg-skyBlue-light/30 rounded-full"
-              asChild
+              className="text-primary hover:bg-skyBlue-light/30 rounded-full relative"
+              onClick={toggleCart}
             >
-              <Link to="/cart" className="relative">
-                <ShoppingCart className="h-5 w-5" />
-                {itemCount > 0 && (
-                  <span className="absolute top-1 right-1 h-5 w-5 bg-vibrant-teal text-[10px] flex items-center justify-center text-white rounded-full animate-pulse">
-                    {itemCount}
-                  </span>
-                )}
-              </Link>
+              <ShoppingCart className="h-5 w-5" />
+              {itemCount > 0 && (
+                <span className="absolute top-1 right-1 h-5 w-5 bg-vibrant-teal text-[10px] flex items-center justify-center text-white rounded-full animate-pulse">
+                  {itemCount}
+                </span>
+              )}
             </Button>
             <Button
               variant="ghost"
@@ -231,22 +224,6 @@ const Header = () => {
                 </span>
               </div>
 
-              {/* Mobile Search */}
-              <div className="px-4 mb-4">
-                <form onSubmit={handleSearchSubmit}>
-                  <div className="relative">
-                    <Input
-                      type="text"
-                      placeholder="Search products..."
-                      value={searchQuery}
-                      onChange={(e) => setSearchQuery(e.target.value)}
-                      className="w-full pl-10 pr-4 rounded-full font-quicksand"
-                    />
-                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
-                  </div>
-                </form>
-              </div>
-
               <nav className="px-2 space-y-1">
                 {navigation.map((item) => (
                   <Link
@@ -254,7 +231,9 @@ const Header = () => {
                     to={item.href}
                     className={cn(
                       "block px-3 py-3 rounded-md text-base font-medium font-quicksand",
-                      "text-neutral-black hover:bg-skyBlue-light/30 hover:text-neutral-charcoal",
+                      isActivePage(item.href)
+                        ? "bg-[#1a5de6] text-white"
+                        : "text-neutral-black hover:bg-skyBlue-light/30 hover:text-neutral-charcoal"
                     )}
                     onClick={() => setIsMenuOpen(false)}
                   >

@@ -31,7 +31,7 @@ const heroSlides: HeroSlide[] = [
     ctaText: "Shop Bestsellers",
     ctaLink: "/shop",
     imageSrc: "/placeholder.svg",
-    backgroundColor: "bg-gradient-to-r from-blue-50 to-blue-100",
+    backgroundColor: "bg-gradient-to-br from-white via-orange-50 to-orange-100",
     type: "topSeller",
   },
   {
@@ -41,7 +41,7 @@ const heroSlides: HeroSlide[] = [
     ctaText: "Discover Now",
     ctaLink: "/product/ragi-banana-cookies",
     imageSrc: "/placeholder.svg",
-    backgroundColor: "bg-gradient-to-r from-slate-50 to-blue-50",
+    backgroundColor: "bg-gradient-to-br from-white via-green-50 to-emerald-100",
     type: "newLaunch",
   },
   {
@@ -52,7 +52,7 @@ const heroSlides: HeroSlide[] = [
     ctaText: "Get Started",
     ctaLink: "/subscriptions",
     imageSrc: "/placeholder.svg",
-    backgroundColor: "bg-gradient-to-r from-blue-100 to-slate-100",
+    backgroundColor: "bg-gradient-to-br from-white via-yellow-50 to-amber-100",
     type: "offer",
   },
   {
@@ -63,7 +63,7 @@ const heroSlides: HeroSlide[] = [
     ctaText: "Join Now",
     ctaLink: "/community",
     imageSrc: "/placeholder.svg",
-    backgroundColor: "bg-gradient-to-r from-slate-100 to-blue-50",
+    backgroundColor: "bg-gradient-to-br from-white via-purple-50 to-purple-100",
     type: "promotion",
   },
 ];
@@ -76,10 +76,10 @@ const typeLabels = {
 };
 
 const typeColors = {
-  offer: "bg-orange-100 text-orange-800 border-orange-200",
-  topSeller: "bg-blue-100 text-blue-800 border-blue-200",
-  newLaunch: "bg-green-100 text-green-800 border-green-200",
-  promotion: "bg-purple-100 text-purple-800 border-purple-200",
+  offer: "bg-gradient-to-r from-orange-500 to-red-500 text-white border-0 shadow-lg",
+  topSeller: "bg-gradient-to-r from-blue-500 to-indigo-600 text-white border-0 shadow-lg",
+  newLaunch: "bg-gradient-to-r from-emerald-500 to-green-600 text-white border-0 shadow-lg",
+  promotion: "bg-gradient-to-r from-purple-500 to-pink-600 text-white border-0 shadow-lg",
 };
 
 const HeroCarousel = () => {
@@ -124,7 +124,7 @@ const HeroCarousel = () => {
             <CarouselItem key={slide.id}>
               <Card
                 className={cn(
-                  "border-0 overflow-hidden rounded-xl shadow-sm",
+                  "border-0 overflow-hidden rounded-2xl shadow-2xl backdrop-blur-sm",
                   slide.backgroundColor,
                 )}
               >
@@ -133,7 +133,7 @@ const HeroCarousel = () => {
                     <div className="p-6 md:p-10 flex flex-col justify-center md:w-1/2">
                       <span
                         className={cn(
-                          "inline-block px-3 py-1 rounded-full text-xs font-medium mb-4 border font-quicksand",
+                          "inline-block px-4 py-4 rounded-full text-base font-medium mb-4 border font-quicksand w-auto self-start",
                           typeColors[slide.type],
                         )}
                       >
@@ -148,7 +148,7 @@ const HeroCarousel = () => {
                       <div>
                         <Button
                           size="lg"
-                          className="rounded-full px-8 font-quicksand"
+                          className="rounded-full px-8 font-quicksand bg-gradient-to-r from-[#1a5de6] to-[#2662d9] hover:from-[#1548c4] hover:to-[#1e56c7] shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
                         >
                           {slide.ctaText}
                         </Button>
@@ -168,23 +168,23 @@ const HeroCarousel = () => {
           ))}
         </CarouselContent>
 
-        <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-2 z-10">
-          {heroSlides.map((_, index) => (
-            <button
-              key={index}
-              className={cn(
-                "w-2 h-2 rounded-full transition-all",
-                activeIndex === index
-                  ? "bg-primary w-8"
-                  : "bg-gray-300 hover:bg-gray-400",
-              )}
-              onClick={() => {
-                api?.scrollTo(index);
-              }}
-              aria-label={`Go to slide ${index + 1}`}
-            />
-          ))}
-        </div>
+            <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-3 z-10">
+              {heroSlides.map((_, index) => (
+                <button
+                  key={index}
+                  className={cn(
+                    "rounded-full transition-all duration-300 border-2 shadow-lg",
+                    activeIndex === index
+                      ? "bg-white w-12 h-3 border-white shadow-xl scale-110 animate-pulse"
+                      : "w-3 h-3 bg-white/60 border-white/80 hover:bg-white/80 hover:scale-105",
+                  )}
+                  onClick={() => {
+                    api?.scrollTo(index);
+                  }}
+                  aria-label={`Go to slide ${index + 1}`}
+                />
+              ))}
+            </div>
 
         <CarouselPrevious
           className={cn(

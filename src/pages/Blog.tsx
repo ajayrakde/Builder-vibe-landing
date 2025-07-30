@@ -84,12 +84,6 @@ const Blog = () => {
         <Header />
 
         <main className="flex-grow">
-          <section className="py-12 px-4">
-            <div className="max-w-7xl mx-auto">
-              <div />
-            </div>
-          </section>
-
           <section className="bg-slate-50 py-12 px-4">
             <div className="max-w-7xl mx-auto">
               <div className="flex items-center gap-6 justify-between mb-10">
@@ -212,8 +206,6 @@ const Blog = () => {
               </div>
             </div>
           </section>
-
-          <section className="py-12 px-4" />
 
           <section className="bg-[#FEF6E4] py-16 px-4">
             <div className="max-w-3xl mx-auto text-center">

@@ -57,7 +57,7 @@ const Shop = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const isMobile = useIsMobile();
-  const { addItem } = useCart();
+  const { items, addItem, removeItem, updateQuantity } = useCart();
 
   const [products, setProducts] = useState<Product[]>([]);
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
@@ -230,6 +230,10 @@ const Shop = () => {
       navigate(`/product/${product.handle}`);
     };
 
+    // Check if product is already in cart
+    const cartItem = items.find(item => item.product.id === product.id);
+    const isInCart = !!cartItem;
+
     const handleAddToCart = (e: React.MouseEvent) => {
       e.stopPropagation();
       if (product.variants.length > 0) {
@@ -239,11 +243,34 @@ const Shop = () => {
             variant: product.variants[0],
             quantity: 1,
           });
-          alert(`Added ${product.title} to cart!`);
         } catch (error) {
           console.error("Failed to add to cart:", error);
-          alert("Could not add to cart. Please try again.");
         }
+      }
+    };
+
+    const handleIncreaseQuantity = (e: React.MouseEvent) => {
+      e.stopPropagation();
+      if (cartItem) {
+        updateQuantity(cartItem.id, cartItem.quantity + 1);
+      }
+    };
+
+    const handleDecreaseQuantity = (e: React.MouseEvent) => {
+      e.stopPropagation();
+      if (cartItem) {
+        if (cartItem.quantity > 1) {
+          updateQuantity(cartItem.id, cartItem.quantity - 1);
+        } else {
+          removeItem(cartItem.id);
+        }
+      }
+    };
+
+    const handleRemoveFromCart = (e: React.MouseEvent) => {
+      e.stopPropagation();
+      if (cartItem) {
+        removeItem(cartItem.id);
       }
     };
 
@@ -349,12 +376,46 @@ const Shop = () => {
                 </span>
               )}
             </div>
-            <Button
-              className="bg-[#1a5de6] hover:bg-[#1a5de6]/90 text-white font-medium rounded-full px-4 py-1 h-8"
-              onClick={handleAddToCart}
-            >
-              Add
-            </Button>
+            {!isInCart ? (
+              <Button
+                className="bg-[#1a5de6] hover:bg-[#1a5de6]/90 text-white font-medium rounded-full px-4 py-1 h-8 font-quicksand"
+                onClick={handleAddToCart}
+              >
+                Add
+              </Button>
+            ) : (
+              <div className="flex items-center gap-2">
+                <Button
+                  variant="outline"
+                  size="icon"
+                  className="h-7 w-7 rounded-full"
+                  onClick={handleDecreaseQuantity}
+                >
+                  <span className="text-sm">−</span>
+                </Button>
+                <span className="text-sm font-medium font-quicksand min-w-[20px] text-center">
+                  {cartItem?.quantity}
+                </span>
+                <Button
+                  variant="outline"
+                  size="icon"
+                  className="h-7 w-7 rounded-full"
+                  onClick={handleIncreaseQuantity}
+                >
+                  <span className="text-sm">+</span>
+                </Button>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="h-7 w-7 rounded-full text-red-500 hover:text-red-700 hover:bg-red-50"
+                  onClick={handleRemoveFromCart}
+                >
+                  <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                  </svg>
+                </Button>
+              </div>
+            )}
           </div>
         </CardContent>
       </Card>
@@ -367,39 +428,7 @@ const Shop = () => {
 
       <main className="flex-grow">
         <div className="max-w-7xl mx-auto px-4 pb-16">
-          {/* Search and filters */}
-          <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4 mt-8">
-            <div className="relative w-full md:w-80">
-              <Search className="absolute left-3 top-2.5 h-4 w-4 text-slate-400" />
-              <Input
-                type="search"
-                placeholder="Search products..."
-                className="pl-10 rounded-full"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-              />
-            </div>
-
-            <div className="flex items-center gap-4 w-full md:w-auto">
-              {isMobile && (
-                <Button
-                  variant="outline"
-                  className="flex items-center gap-2"
-                  onClick={toggleFilters}
-                >
-                  <SlidersHorizontal className="h-4 w-4" />
-                  Filters
-                  {activeFilterCount > 0 && (
-                    <Badge className="ml-1 h-5 w-5 p-0 flex items-center justify-center">
-                      {activeFilterCount}
-                    </Badge>
-                  )}
-                </Button>
-              )}
-            </div>
-          </div>
-
-          <div className="flex flex-col md:flex-row gap-8">
+          <div className="flex flex-col md:flex-row gap-8 mt-8">
             {/* Filters sidebar */}
             {isFilterOpen && (
               <div
@@ -593,9 +622,38 @@ const Shop = () => {
 
             {/* Product grid */}
             <div className="flex-1">
+              {/* Search and filters aligned with main content */}
+              <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
+                <div className="relative flex-1">
+                  <Search className="absolute left-3 top-2.5 h-4 w-4 text-slate-400" />
+                  <Input
+                    type="search"
+                    placeholder="Search products..."
+                    className="pl-10 rounded-full font-quicksand w-full"
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                  />
+                </div>
+                <div className="flex items-center gap-4">
+                  <Button
+                    variant="outline"
+                    className="flex items-center gap-2 font-quicksand"
+                    onClick={toggleFilters}
+                  >
+                    <SlidersHorizontal className="h-4 w-4" />
+                    Filters
+                    {activeFilterCount > 0 && (
+                      <Badge className="ml-1 h-5 w-5 p-0 flex items-center justify-center">
+                        {activeFilterCount}
+                      </Badge>
+                    )}
+                  </Button>
+                </div>
+              </div>
+
               {filteredProducts.length > 0 ? (
                 <>
-                  <p className="text-sm text-slate-500 mb-6">
+                  <p className="text-sm text-slate-500 mb-6 font-quicksand">
                     Showing {filteredProducts.length}{" "}
                     {filteredProducts.length === 1 ? "product" : "products"}
                   </p>
