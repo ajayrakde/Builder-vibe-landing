@@ -12,7 +12,7 @@ const About = () => {
         <main className="flex-grow">
           {/* Our Story section */}
           <section className="py-16">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
                 <div>
                   <h2 className="text-2xl md:text-3xl font-bold text-slate-800 mb-6 font-quicksand">
                     Our Story
