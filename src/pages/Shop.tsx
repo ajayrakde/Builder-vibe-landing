@@ -423,7 +423,7 @@ const Shop = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-white">
+    <div className="min-h-screen flex flex-col bg-gradient-to-b from-blue-50 to-white">
       <Header />
 
       <main className="flex-grow">
