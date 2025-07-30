@@ -427,16 +427,15 @@ const Shop = () => {
       <Header />
 
       <main className="flex-grow">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
-          <div className="flex flex-col md:flex-row gap-8 mt-8">
+        <div className="flex flex-col md:flex-row gap-8 mt-8 pb-16">
             {/* Filters sidebar */}
             {isFilterOpen && (
               <div
                 className={cn(
-                  "bg-white p-5 rounded-lg shadow-sm",
+                  "bg-gray-100 p-5 shadow-lg border-r border-gray-200",
                   isMobile
-                    ? "fixed inset-0 z-50 overflow-auto"
-                    : "sticky top-24 h-fit w-full md:w-[188px]",
+                    ? "fixed inset-0 z-50 overflow-auto bg-white"
+                    : "sticky top-24 h-fit w-full md:w-[250px]",
                 )}
               >
                 <div className="flex items-center justify-between mb-6">
@@ -621,7 +620,7 @@ const Shop = () => {
             )}
 
             {/* Product grid */}
-            <div className="flex-1">
+            <div className="flex-1 max-w-screen-lg mx-auto bg-white shadow-lg px-4 sm:px-6 lg:px-8">
               {/* Search and filters aligned with main content */}
               <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
                 <div className="relative flex-1">
