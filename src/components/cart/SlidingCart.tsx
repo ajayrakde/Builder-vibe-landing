@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
 import { Trash2, Minus, Plus, ShoppingBag, X } from "lucide-react";
 import { useCart } from "@/hooks/use-cart";
@@ -152,7 +152,7 @@ const SlidingCart = ({ isOpen, onClose }: SlidingCartProps) => {
                               <Plus className="h-3 w-3" />
                             </Button>
                           </div>
-                          
+
                           <Button
                             variant="ghost"
                             size="icon"
