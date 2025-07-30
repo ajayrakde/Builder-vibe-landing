@@ -379,9 +379,10 @@ const Shop = () => {
 
       <main className="flex-grow">
         <div className="max-w-screen-lg mx-auto bg-white shadow-lg px-4 sm:px-6 lg:px-8 py-8">
-          {/* Search and Filter Button in Single Row */}
-          <div className="mb-8 mt-8 flex flex-col md:flex-row gap-4 items-center">
-            <div className="relative flex-1 max-w-md">
+          {/* Search Bar and All Controls in Single Row */}
+          <div className="mb-8 mt-8 flex flex-col lg:flex-row gap-4 items-center">
+            {/* Search Bar - Extended Length */}
+            <div className="relative flex-1">
               <Search className="absolute left-3 top-2.5 h-4 w-4 text-slate-400" />
               <Input
                 type="search"
@@ -391,106 +392,14 @@ const Shop = () => {
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
             </div>
-            <Button
-              variant="outline"
-              className="flex items-center gap-2 font-quicksand whitespace-nowrap"
-              onClick={toggleFilters}
-            >
-              <SlidersHorizontal className="h-4 w-4" />
-              {isFilterOpen ? 'Hide Filters' : 'Show Filters'}
-              {activeFilterCount > 0 && (
-                <Badge className="ml-1 h-5 w-5 p-0 flex items-center justify-center">
-                  {activeFilterCount}
-                </Badge>
-              )}
-            </Button>
-          </div>
 
-          {/* Multi-select Dropdown Filters in Single Row */}
-          {isFilterOpen && (
-            <div className="mb-8 p-4 bg-gray-50 rounded-lg border border-gray-200">
-              <div className="flex items-center justify-between mb-4">
-                <h2 className="font-semibold text-lg">Filters</h2>
-                <Button
-                  variant="ghost"
-                  className="text-xs h-auto p-1"
-                  onClick={clearAllFilters}
-                >
-                  Clear All
-                </Button>
-              </div>
-
-              {/* Active filters */}
-              {activeFilterCount > 0 && (
-                <div className="mb-4">
-                  <div className="flex flex-wrap gap-2">
-                    {searchTerm && (
-                      <Badge
-                        variant="secondary"
-                        className="flex gap-1 items-center"
-                      >
-                        Search: {searchTerm}
-                        <X
-                          className="h-3 w-3 cursor-pointer"
-                          onClick={() => setSearchTerm("")}
-                        />
-                      </Badge>
-                    )}
-
-                    {selectedAges.map((age) => (
-                      <Badge
-                        key={age}
-                        variant="secondary"
-                        className="flex gap-1 items-center"
-                      >
-                        {ageRanges.find((a) => a.value === age)?.label}
-                        <X
-                          className="h-3 w-3 cursor-pointer"
-                          onClick={() => toggleAgeFilter(age)}
-                        />
-                      </Badge>
-                    ))}
-
-                    {selectedTypes.map((type) => (
-                      <Badge
-                        key={type}
-                        variant="secondary"
-                        className="flex gap-1 items-center"
-                      >
-                        {productTypes.find((t) => t.value === type)?.label}
-                        <X
-                          className="h-3 w-3 cursor-pointer"
-                          onClick={() => toggleTypeFilter(type)}
-                        />
-                      </Badge>
-                    ))}
-
-                    {selectedIngredients.map((ingredient) => (
-                      <Badge
-                        key={ingredient}
-                        variant="secondary"
-                        className="flex gap-1 items-center"
-                      >
-                        {
-                          ingredientTypes.find((i) => i.value === ingredient)
-                            ?.label
-                        }
-                        <X
-                          className="h-3 w-3 cursor-pointer"
-                          onClick={() => toggleIngredientFilter(ingredient)}
-                        />
-                      </Badge>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {/* Multi-select Dropdowns in Single Row */}
-              <div className="flex flex-col md:flex-row gap-4">
+            {/* Filter Dropdowns - Only shown when filters are open */}
+            {isFilterOpen && (
+              <>
                 {/* Age Range Dropdown */}
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
-                    <Button variant="outline" className="flex items-center gap-2 font-quicksand">
+                    <Button variant="outline" className="flex items-center gap-2 font-quicksand whitespace-nowrap">
                       Age Range {selectedAges.length > 0 && `(${selectedAges.length})`}
                       <ChevronDown className="h-4 w-4" />
                     </Button>
@@ -511,7 +420,7 @@ const Shop = () => {
                 {/* Product Type Dropdown */}
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
-                    <Button variant="outline" className="flex items-center gap-2 font-quicksand">
+                    <Button variant="outline" className="flex items-center gap-2 font-quicksand whitespace-nowrap">
                       Product Type {selectedTypes.length > 0 && `(${selectedTypes.length})`}
                       <ChevronDown className="h-4 w-4" />
                     </Button>
@@ -532,7 +441,7 @@ const Shop = () => {
                 {/* Ingredients Dropdown */}
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
-                    <Button variant="outline" className="flex items-center gap-2 font-quicksand">
+                    <Button variant="outline" className="flex items-center gap-2 font-quicksand whitespace-nowrap">
                       Ingredients {selectedIngredients.length > 0 && `(${selectedIngredients.length})`}
                       <ChevronDown className="h-4 w-4" />
                     </Button>
@@ -549,6 +458,95 @@ const Shop = () => {
                     ))}
                   </DropdownMenuContent>
                 </DropdownMenu>
+
+                {/* Clear All Button */}
+                <Button
+                  variant="ghost"
+                  className="text-sm font-quicksand whitespace-nowrap"
+                  onClick={clearAllFilters}
+                >
+                  Clear All
+                </Button>
+              </>
+            )}
+
+            {/* Filter Toggle Button - Always at the right end */}
+            <Button
+              variant="outline"
+              className="flex items-center gap-2 font-quicksand whitespace-nowrap"
+              onClick={toggleFilters}
+            >
+              <SlidersHorizontal className="h-4 w-4" />
+              {isFilterOpen ? 'Hide Filters' : 'Show Filters'}
+              {activeFilterCount > 0 && (
+                <Badge className="ml-1 h-5 w-5 p-0 flex items-center justify-center">
+                  {activeFilterCount}
+                </Badge>
+              )}
+            </Button>
+          </div>
+
+          {/* Active Filters Display */}
+          {isFilterOpen && activeFilterCount > 0 && (
+            <div className="mb-6">
+              <div className="flex flex-wrap gap-2">
+                {searchTerm && (
+                  <Badge
+                    variant="secondary"
+                    className="flex gap-1 items-center"
+                  >
+                    Search: {searchTerm}
+                    <X
+                      className="h-3 w-3 cursor-pointer"
+                      onClick={() => setSearchTerm("")}
+                    />
+                  </Badge>
+                )}
+
+                {selectedAges.map((age) => (
+                  <Badge
+                    key={age}
+                    variant="secondary"
+                    className="flex gap-1 items-center"
+                  >
+                    {ageRanges.find((a) => a.value === age)?.label}
+                    <X
+                      className="h-3 w-3 cursor-pointer"
+                      onClick={() => toggleAgeFilter(age)}
+                    />
+                  </Badge>
+                ))}
+
+                {selectedTypes.map((type) => (
+                  <Badge
+                    key={type}
+                    variant="secondary"
+                    className="flex gap-1 items-center"
+                  >
+                    {productTypes.find((t) => t.value === type)?.label}
+                    <X
+                      className="h-3 w-3 cursor-pointer"
+                      onClick={() => toggleTypeFilter(type)}
+                    />
+                  </Badge>
+                ))}
+
+                {selectedIngredients.map((ingredient) => (
+                  <Badge
+                    key={ingredient}
+                    variant="secondary"
+                    className="flex gap-1 items-center"
+                  >
+                    {
+                      ingredientTypes.find((i) => i.value === ingredient)
+                        ?.label
+                    }
+                    <X
+                      className="h-3 w-3 cursor-pointer"
+                      onClick={() => toggleIngredientFilter(ingredient)}
+                    />
+                  </Badge>
+                ))}
               </div>
             </div>
           )}
