@@ -279,7 +279,7 @@ const Community = () => {
           </section>
 
           {/* Main content with tabs */}
-          <section className="py-12 px-4">
+          <section className="py-12 px-4 sm:px-6 lg:px-8">
             <div className="max-w-7xl mx-auto">
               <Tabs
                 value={activeTab}
@@ -882,7 +882,7 @@ const Community = () => {
           </section>
 
           {/* Community partners */}
-          <section className="py-12 px-4 bg-slate-50">
+          <section className="py-12 px-4 sm:px-6 lg:px-8 bg-slate-50">
             <div className="max-w-7xl mx-auto text-center">
               <h2 className="text-2xl font-bold text-slate-800 mb-8">
                 Our Community Partners
