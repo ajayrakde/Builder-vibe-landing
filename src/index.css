@@ -125,4 +125,35 @@
   .kid-button-accent {
     @apply kid-button from-accent via-accent to-yellow-300 text-black;
   }
+
+  /* Mobile-first responsive utilities */
+  .container-responsive {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .container-responsive-narrow {
+    @apply max-w-4xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .text-responsive-h1 {
+    @apply text-2xl sm:text-3xl md:text-4xl lg:text-5xl;
+  }
+
+  .text-responsive-h2 {
+    @apply text-xl sm:text-2xl md:text-3xl;
+  }
+
+  .text-responsive-h3 {
+    @apply text-lg sm:text-xl md:text-2xl;
+  }
+
+  /* Ensure images and content don't overflow on mobile */
+  .mobile-safe {
+    @apply max-w-full overflow-hidden;
+  }
+
+  /* Touch-friendly button sizes for mobile */
+  .touch-target {
+    @apply min-h-[44px] min-w-[44px];
+  }
 }
