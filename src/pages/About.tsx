@@ -1,15 +1,13 @@
 import { Fragment } from "react";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
-import BackgroundElements from "@/components/decorative/BackgroundElements";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 
 const About = () => {
   return (
     <Fragment>
-      <BackgroundElements density="low" />
-      <div className="min-h-screen flex flex-col">
+      <div className="min-h-screen flex flex-col bg-gradient-to-b from-blue-50 to-white">
         <Header />
 
         <main className="flex-grow">

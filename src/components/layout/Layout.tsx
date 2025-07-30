@@ -11,7 +11,7 @@ interface LayoutProps {
 
 export const Layout = ({ children, showBackground = true }: LayoutProps) => {
   return (
-    <div className="relative min-h-screen bg-gradient-to-b from-blue-400 to-blue-100 font-quicksand">
+    <div className="relative min-h-screen bg-gradient-to-b from-blue-50 to-white font-quicksand">
       {showBackground && (
         <>
           <SkyBackground />

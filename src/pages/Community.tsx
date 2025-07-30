@@ -242,8 +242,7 @@ const Community = () => {
 
   return (
     <Fragment>
-      <BackgroundElements density="medium" />
-      <div className="min-h-screen flex flex-col">
+      <div className="min-h-screen flex flex-col bg-gradient-to-b from-blue-50 to-white">
         <Header />
 
         <main className="flex-grow">
