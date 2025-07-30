@@ -27,7 +27,7 @@ const Index = () => {
           <ValueProposition />
 
           {/* Community Section */}
-          <section className="py-16 px-4 bg-[#E2D9F3]">
+          <section className="py-16 px-4 sm:px-6 lg:px-8 bg-[#E2D9F3]">
             <div className="max-w-7xl mx-auto text-center">
               <h2 className="text-3xl font-bold text-slate-800 mb-6">
                 Join the Kanhaa Moms Community
@@ -46,7 +46,7 @@ const Index = () => {
           <TestimonialsSection />
 
           {/* Blog Preview Section */}
-          <section className="py-16 px-4">
+          <section className="py-16 px-4 sm:px-6 lg:px-8">
             <div className="max-w-7xl mx-auto">
               <div className="text-center mb-12">
                 <h2 className="text-3xl font-bold text-slate-800 mb-4">
