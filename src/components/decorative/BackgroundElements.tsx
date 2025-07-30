@@ -259,15 +259,19 @@ const BackgroundElements: React.FC<BackgroundElementsProps> = ({
         animationClasses[Math.floor(Math.random() * animationClasses.length)];
 
       items.push(
-        <Component
+        <div
           key={i}
-          size={size as "sm" | "md" | "lg"}
-          className={cn(
-            animation,
-            "duration-[10000ms]"
-          )}
           style={{ top, left, transform: rotation }}
-        />,
+          className="absolute"
+        >
+          <Component
+            size={size as "sm" | "md" | "lg"}
+            className={cn(
+              animation,
+              "duration-[10000ms]"
+            )}
+          />
+        </div>,
       );
     }
 

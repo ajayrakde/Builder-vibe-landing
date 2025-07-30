@@ -115,13 +115,15 @@ const HeroCarousel = () => {
         opts={{
           align: "start",
           loop: true,
+          skipSnaps: false,
+          dragFree: false,
         }}
         onMouseEnter={() => setAutoplay(false)}
         onMouseLeave={() => setAutoplay(true)}
       >
-        <CarouselContent>
+        <CarouselContent className="-ml-4">
           {heroSlides.map((slide) => (
-            <CarouselItem key={slide.id}>
+            <CarouselItem key={slide.id} className="pl-4">
               <Card
                 className={cn(
                   "border-0 overflow-hidden rounded-2xl shadow-2xl backdrop-blur-sm",
@@ -129,7 +131,7 @@ const HeroCarousel = () => {
                 )}
               >
                 <CardContent className="p-0">
-                  <div className="flex flex-col md:flex-row h-full">
+                  <div className="flex flex-col md:flex-row w-full aspect-video">
                     <div className="p-6 md:p-10 flex flex-col justify-center md:w-1/2">
                       <span
                         className={cn(
@@ -154,11 +156,11 @@ const HeroCarousel = () => {
                         </Button>
                       </div>
                     </div>
-                    <div className="md:w-1/2 h-48 md:h-auto flex items-center justify-center">
+                    <div className="md:w-1/2 flex items-center justify-center p-4">
                       <img
                         src={slide.imageSrc}
                         alt={slide.title}
-                        className="h-full md:h-80 w-auto object-contain"
+                        className="max-h-full max-w-full object-contain"
                       />
                     </div>
                   </div>
