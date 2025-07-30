@@ -5,7 +5,14 @@ import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Badge } from "@/components/ui/badge";
-import { Search, SlidersHorizontal, X } from "lucide-react";
+import { Search, SlidersHorizontal, X, ChevronDown } from "lucide-react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+  DropdownMenuCheckboxItem,
+} from "@/components/ui/dropdown-menu";
 import {
   getMockProducts,
   Product,
@@ -372,9 +379,9 @@ const Shop = () => {
 
       <main className="flex-grow">
         <div className="max-w-screen-lg mx-auto bg-white shadow-lg px-4 sm:px-6 lg:px-8 py-8">
-          {/* Search Section - moved down from corners */}
-          <div className="mb-8 mt-8">
-            <div className="relative max-w-md mx-auto">
+          {/* Search and Filter Button in Single Row */}
+          <div className="mb-8 mt-8 flex flex-col md:flex-row gap-4 items-center">
+            <div className="relative flex-1 max-w-md">
               <Search className="absolute left-3 top-2.5 h-4 w-4 text-slate-400" />
               <Input
                 type="search"
@@ -384,13 +391,9 @@ const Shop = () => {
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
             </div>
-          </div>
-
-          {/* Filter Button */}
-          <div className="mb-6 flex justify-center">
             <Button
               variant="outline"
-              className="flex items-center gap-2 font-quicksand"
+              className="flex items-center gap-2 font-quicksand whitespace-nowrap"
               onClick={toggleFilters}
             >
               <SlidersHorizontal className="h-4 w-4" />
@@ -403,10 +406,10 @@ const Shop = () => {
             </Button>
           </div>
 
-          {/* Filters Dropdown Section - appears below search */}
+          {/* Multi-select Dropdown Filters in Single Row */}
           {isFilterOpen && (
-            <div className="mb-8 p-6 bg-gray-50 rounded-lg border border-gray-200">
-              <div className="flex items-center justify-between mb-6">
+            <div className="mb-8 p-4 bg-gray-50 rounded-lg border border-gray-200">
+              <div className="flex items-center justify-between mb-4">
                 <h2 className="font-semibold text-lg">Filters</h2>
                 <Button
                   variant="ghost"
@@ -419,7 +422,7 @@ const Shop = () => {
 
               {/* Active filters */}
               {activeFilterCount > 0 && (
-                <div className="mb-6">
+                <div className="mb-4">
                   <div className="flex flex-wrap gap-2">
                     {searchTerm && (
                       <Badge
@@ -482,85 +485,70 @@ const Shop = () => {
                 </div>
               )}
 
-              {/* Filters Grid Layout */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {/* Age filter */}
-                <div>
-                  <h3 className="font-medium mb-3">Age Range</h3>
-                  <div className="space-y-2">
+              {/* Multi-select Dropdowns in Single Row */}
+              <div className="flex flex-col md:flex-row gap-4">
+                {/* Age Range Dropdown */}
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button variant="outline" className="flex items-center gap-2 font-quicksand">
+                      Age Range {selectedAges.length > 0 && `(${selectedAges.length})`}
+                      <ChevronDown className="h-4 w-4" />
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent className="w-56">
                     {ageRanges.map((age) => (
-                      <div key={age.value} className="flex items-center">
-                        <Checkbox
-                          id={`age-${age.value}`}
-                          checked={selectedAges.includes(age.value as AgeRange)}
-                          onCheckedChange={() =>
-                            toggleAgeFilter(age.value as AgeRange)
-                          }
-                        />
-                        <label
-                          htmlFor={`age-${age.value}`}
-                          className="ml-2 text-sm text-slate-600 cursor-pointer"
-                        >
-                          {age.label}
-                        </label>
-                      </div>
+                      <DropdownMenuCheckboxItem
+                        key={age.value}
+                        checked={selectedAges.includes(age.value as AgeRange)}
+                        onCheckedChange={() => toggleAgeFilter(age.value as AgeRange)}
+                      >
+                        {age.label}
+                      </DropdownMenuCheckboxItem>
                     ))}
-                  </div>
-                </div>
+                  </DropdownMenuContent>
+                </DropdownMenu>
 
-                {/* Product type filter */}
-                <div>
-                  <h3 className="font-medium mb-3">Product Type</h3>
-                  <div className="space-y-2">
+                {/* Product Type Dropdown */}
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button variant="outline" className="flex items-center gap-2 font-quicksand">
+                      Product Type {selectedTypes.length > 0 && `(${selectedTypes.length})`}
+                      <ChevronDown className="h-4 w-4" />
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent className="w-56">
                     {productTypes.map((type) => (
-                      <div key={type.value} className="flex items-center">
-                        <Checkbox
-                          id={`type-${type.value}`}
-                          checked={selectedTypes.includes(
-                            type.value as ProductType,
-                          )}
-                          onCheckedChange={() =>
-                            toggleTypeFilter(type.value as ProductType)
-                          }
-                        />
-                        <label
-                          htmlFor={`type-${type.value}`}
-                          className="ml-2 text-sm text-slate-600 cursor-pointer"
-                        >
-                          {type.label}
-                        </label>
-                      </div>
+                      <DropdownMenuCheckboxItem
+                        key={type.value}
+                        checked={selectedTypes.includes(type.value as ProductType)}
+                        onCheckedChange={() => toggleTypeFilter(type.value as ProductType)}
+                      >
+                        {type.label}
+                      </DropdownMenuCheckboxItem>
                     ))}
-                  </div>
-                </div>
+                  </DropdownMenuContent>
+                </DropdownMenu>
 
-                {/* Ingredients filter */}
-                <div>
-                  <h3 className="font-medium mb-3">Ingredients</h3>
-                  <div className="space-y-2">
+                {/* Ingredients Dropdown */}
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button variant="outline" className="flex items-center gap-2 font-quicksand">
+                      Ingredients {selectedIngredients.length > 0 && `(${selectedIngredients.length})`}
+                      <ChevronDown className="h-4 w-4" />
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent className="w-56">
                     {ingredientTypes.map((ingredient) => (
-                      <div key={ingredient.value} className="flex items-center">
-                        <Checkbox
-                          id={`ingredient-${ingredient.value}`}
-                          checked={selectedIngredients.includes(
-                            ingredient.value as IngredientType,
-                          )}
-                          onCheckedChange={() =>
-                            toggleIngredientFilter(
-                              ingredient.value as IngredientType,
-                            )
-                          }
-                        />
-                        <label
-                          htmlFor={`ingredient-${ingredient.value}`}
-                          className="ml-2 text-sm text-slate-600 cursor-pointer"
-                        >
-                          {ingredient.label}
-                        </label>
-                      </div>
+                      <DropdownMenuCheckboxItem
+                        key={ingredient.value}
+                        checked={selectedIngredients.includes(ingredient.value as IngredientType)}
+                        onCheckedChange={() => toggleIngredientFilter(ingredient.value as IngredientType)}
+                      >
+                        {ingredient.label}
+                      </DropdownMenuCheckboxItem>
                     ))}
-                  </div>
-                </div>
+                  </DropdownMenuContent>
+                </DropdownMenu>
               </div>
             </div>
           )}
