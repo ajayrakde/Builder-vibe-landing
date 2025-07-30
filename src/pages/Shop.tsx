@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate, Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -391,7 +391,7 @@ const Shop = () => {
                   className="h-7 w-7 rounded-full"
                   onClick={handleDecreaseQuantity}
                 >
-                  <span className="text-sm">−</span>
+                  <span className="text-sm">���</span>
                 </Button>
                 <span className="text-sm font-medium font-quicksand min-w-[20px] text-center">
                   {cartItem?.quantity}
