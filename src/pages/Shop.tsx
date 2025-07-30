@@ -16,8 +16,7 @@ import {
 import { cn } from "@/lib/utils";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { useCart } from "@/hooks/use-cart";
-import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
+import { Layout } from "@/components/layout/Layout";
 
 // Type definition for filter options
 type FilterOption = {
@@ -423,12 +422,9 @@ const Shop = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-white">
-      <Header />
-
-      <main className="flex-grow">
-        <div className="max-w-7xl mx-auto px-4 pb-16">
-          <div className="flex flex-col md:flex-row gap-8 mt-8">
+    <Layout showBackground={false}>
+      <div className="pb-16">
+        <div className="flex flex-col md:flex-row gap-8 mt-8">
             {/* Filters sidebar */}
             {isFilterOpen && (
               <div
@@ -675,10 +671,8 @@ const Shop = () => {
             </div>
           </div>
         </div>
-      </main>
-
-      <Footer />
-    </div>
+      </div>
+    </Layout>
   );
 };
 
