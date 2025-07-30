@@ -26,7 +26,7 @@ const Sitemap = () => {
       { name: "Privacy Policy", href: "/privacy" },
       { name: "Terms & Conditions", href: "/terms" },
       { name: "Careers", href: "/careers" },
-    ],
+    ]
   };
 
   return (
@@ -35,7 +35,7 @@ const Sitemap = () => {
         <Header />
 
         <main className="flex-grow py-8">
-          <div className="max-w-4xl mx-auto px-4">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-8">
               <h1 className="text-3xl font-bold text-slate-800 mb-4 font-quicksand">
                 Sitemap
@@ -68,9 +68,7 @@ const Sitemap = () => {
 
               <Card>
                 <CardHeader>
-                  <CardTitle className="font-quicksand">
-                    Account & Orders
-                  </CardTitle>
+                  <CardTitle className="font-quicksand">Account & Orders</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <ul className="space-y-2">
@@ -90,9 +88,7 @@ const Sitemap = () => {
 
               <Card>
                 <CardHeader>
-                  <CardTitle className="font-quicksand">
-                    Support & Legal
-                  </CardTitle>
+                  <CardTitle className="font-quicksand">Support & Legal</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <ul className="space-y-2">
