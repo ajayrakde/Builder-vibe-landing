@@ -12,7 +12,7 @@ const FeaturedProducts = () => {
   );
 
   return (
-    <section className="py-12 px-4 max-w-7xl mx-auto">
+    <section className="py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
       <div className="mb-10 text-center">
         <h2 className="text-3xl font-bold text-slate-800 mb-4">
           Loved by Little Ones
