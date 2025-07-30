@@ -379,9 +379,9 @@ const Shop = () => {
 
       <main className="flex-grow">
         <div className="max-w-screen-lg mx-auto bg-white shadow-lg px-4 sm:px-6 lg:px-8 py-8">
-          {/* Search Bar and All Controls in Single Row */}
-          <div className="mb-8 mt-8 flex flex-col lg:flex-row gap-4 items-center">
-            {/* Search Bar - Extended Length */}
+          {/* First Row: Search Bar and Show/Hide Filter Button - End to End Width */}
+          <div className="mb-4 mt-8 flex gap-4 items-center">
+            {/* Search Bar - Extended to full width */}
             <div className="relative flex-1">
               <Search className="absolute left-3 top-2.5 h-4 w-4 text-slate-400" />
               <Input
@@ -393,9 +393,92 @@ const Shop = () => {
               />
             </div>
 
-            {/* Filter Dropdowns - Only shown when filters are open */}
-            {isFilterOpen && (
-              <>
+            {/* Filter Toggle Button - At the right end */}
+            <Button
+              variant="outline"
+              className="flex items-center gap-2 font-quicksand whitespace-nowrap"
+              onClick={toggleFilters}
+            >
+              <SlidersHorizontal className="h-4 w-4" />
+              {isFilterOpen ? 'Hide Filters' : 'Show Filters'}
+              {activeFilterCount > 0 && (
+                <Badge className="ml-1 h-5 w-5 p-0 flex items-center justify-center">
+                  {activeFilterCount}
+                </Badge>
+              )}
+            </Button>
+          </div>
+
+          {/* Second Row: Applied Filters (shown when filters are applied) */}
+          {activeFilterCount > 0 && (
+            <div className="mb-4">
+              <div className="flex flex-wrap gap-2">
+                {searchTerm && (
+                  <Badge
+                    variant="secondary"
+                    className="flex gap-1 items-center"
+                  >
+                    Search: {searchTerm}
+                    <X
+                      className="h-3 w-3 cursor-pointer"
+                      onClick={() => setSearchTerm("")}
+                    />
+                  </Badge>
+                )}
+
+                {selectedAges.map((age) => (
+                  <Badge
+                    key={age}
+                    variant="secondary"
+                    className="flex gap-1 items-center"
+                  >
+                    {ageRanges.find((a) => a.value === age)?.label}
+                    <X
+                      className="h-3 w-3 cursor-pointer"
+                      onClick={() => toggleAgeFilter(age)}
+                    />
+                  </Badge>
+                ))}
+
+                {selectedTypes.map((type) => (
+                  <Badge
+                    key={type}
+                    variant="secondary"
+                    className="flex gap-1 items-center"
+                  >
+                    {productTypes.find((t) => t.value === type)?.label}
+                    <X
+                      className="h-3 w-3 cursor-pointer"
+                      onClick={() => toggleTypeFilter(type)}
+                    />
+                  </Badge>
+                ))}
+
+                {selectedIngredients.map((ingredient) => (
+                  <Badge
+                    key={ingredient}
+                    variant="secondary"
+                    className="flex gap-1 items-center"
+                  >
+                    {
+                      ingredientTypes.find((i) => i.value === ingredient)
+                        ?.label
+                    }
+                    <X
+                      className="h-3 w-3 cursor-pointer"
+                      onClick={() => toggleIngredientFilter(ingredient)}
+                    />
+                  </Badge>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Third Row: Filter Dropdowns (Age Range, Product Type, Ingredients) */}
+          {isFilterOpen && (
+            <div className="mb-8 flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
+              {/* Filter Dropdowns */}
+              <div className="flex flex-col sm:flex-row gap-4">
                 {/* Age Range Dropdown */}
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
@@ -458,96 +541,16 @@ const Shop = () => {
                     ))}
                   </DropdownMenuContent>
                 </DropdownMenu>
-
-                {/* Clear All Button */}
-                <Button
-                  variant="ghost"
-                  className="text-sm font-quicksand whitespace-nowrap"
-                  onClick={clearAllFilters}
-                >
-                  Clear All
-                </Button>
-              </>
-            )}
-
-            {/* Filter Toggle Button - Always at the right end */}
-            <Button
-              variant="outline"
-              className="flex items-center gap-2 font-quicksand whitespace-nowrap"
-              onClick={toggleFilters}
-            >
-              <SlidersHorizontal className="h-4 w-4" />
-              {isFilterOpen ? 'Hide Filters' : 'Show Filters'}
-              {activeFilterCount > 0 && (
-                <Badge className="ml-1 h-5 w-5 p-0 flex items-center justify-center">
-                  {activeFilterCount}
-                </Badge>
-              )}
-            </Button>
-          </div>
-
-          {/* Active Filters Display */}
-          {isFilterOpen && activeFilterCount > 0 && (
-            <div className="mb-6">
-              <div className="flex flex-wrap gap-2">
-                {searchTerm && (
-                  <Badge
-                    variant="secondary"
-                    className="flex gap-1 items-center"
-                  >
-                    Search: {searchTerm}
-                    <X
-                      className="h-3 w-3 cursor-pointer"
-                      onClick={() => setSearchTerm("")}
-                    />
-                  </Badge>
-                )}
-
-                {selectedAges.map((age) => (
-                  <Badge
-                    key={age}
-                    variant="secondary"
-                    className="flex gap-1 items-center"
-                  >
-                    {ageRanges.find((a) => a.value === age)?.label}
-                    <X
-                      className="h-3 w-3 cursor-pointer"
-                      onClick={() => toggleAgeFilter(age)}
-                    />
-                  </Badge>
-                ))}
-
-                {selectedTypes.map((type) => (
-                  <Badge
-                    key={type}
-                    variant="secondary"
-                    className="flex gap-1 items-center"
-                  >
-                    {productTypes.find((t) => t.value === type)?.label}
-                    <X
-                      className="h-3 w-3 cursor-pointer"
-                      onClick={() => toggleTypeFilter(type)}
-                    />
-                  </Badge>
-                ))}
-
-                {selectedIngredients.map((ingredient) => (
-                  <Badge
-                    key={ingredient}
-                    variant="secondary"
-                    className="flex gap-1 items-center"
-                  >
-                    {
-                      ingredientTypes.find((i) => i.value === ingredient)
-                        ?.label
-                    }
-                    <X
-                      className="h-3 w-3 cursor-pointer"
-                      onClick={() => toggleIngredientFilter(ingredient)}
-                    />
-                  </Badge>
-                ))}
               </div>
+
+              {/* Clear All Button */}
+              <Button
+                variant="ghost"
+                className="text-sm font-quicksand whitespace-nowrap"
+                onClick={clearAllFilters}
+              >
+                Clear All
+              </Button>
             </div>
           )}
 
