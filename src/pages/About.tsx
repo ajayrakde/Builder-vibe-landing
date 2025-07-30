@@ -57,7 +57,7 @@ const About = () => {
           </section>
 
           {/* Our Values section */}
-          <section className="py-16 px-4 bg-[#FEF6E4]">
+          <section className="py-16 px-4 sm:px-6 lg:px-8 bg-[#FEF6E4]">
             <div className="max-w-7xl mx-auto">
               <h2 className="text-2xl md:text-3xl font-bold text-slate-800 mb-12 text-center font-quicksand">
                 Our Values
@@ -202,7 +202,7 @@ const About = () => {
           </section>
 
           {/* Meet the Team section */}
-          <section className="py-16 px-4 bg-white">
+          <section className="py-16 px-4 sm:px-6 lg:px-8 bg-white">
             <div className="max-w-7xl mx-auto">
               <h2 className="text-2xl md:text-3xl font-bold text-slate-800 mb-12 text-center font-quicksand">
                 Meet Our Team
@@ -277,7 +277,7 @@ const About = () => {
           </section>
 
           {/* Contact CTA */}
-          <section className="py-16 px-4 bg-[#E2D9F3]">
+          <section className="py-16 px-4 sm:px-6 lg:px-8 bg-[#E2D9F3]">
             <div className="max-w-3xl mx-auto text-center">
               <h2 className="text-2xl md:text-3xl font-bold text-slate-800 mb-6 font-quicksand">
                 Have Questions?
