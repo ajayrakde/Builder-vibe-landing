@@ -131,7 +131,7 @@ const HeroCarousel = () => {
                 )}
               >
                 <CardContent className="p-0">
-                  <div className="flex flex-col md:flex-row w-full aspect-video">
+                  <div className="flex flex-col md:flex-row h-96">
                     <div className="p-6 md:p-10 flex flex-col justify-center md:w-1/2">
                       <span
                         className={cn(
@@ -156,11 +156,11 @@ const HeroCarousel = () => {
                         </Button>
                       </div>
                     </div>
-                    <div className="md:w-1/2 flex items-center justify-center p-4">
+                    <div className="md:w-1/2 h-48 md:h-auto flex items-center justify-center">
                       <img
                         src={slide.imageSrc}
                         alt={slide.title}
-                        className="max-h-full max-w-full object-contain"
+                        className="h-full md:h-80 w-auto object-contain"
                       />
                     </div>
                   </div>
