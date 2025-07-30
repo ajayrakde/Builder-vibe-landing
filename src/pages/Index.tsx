@@ -14,40 +14,24 @@ const Index = () => {
   return (
     <Fragment>
       <BackgroundElements density="medium" />
-      <div className="min-h-screen flex flex-col">
+      <div className="min-h-screen flex flex-col bg-gradient-to-b from-blue-50 to-white">
         <Header />
 
         <main className="flex-grow">
-          <HeroCarousel />
+          <div className="max-w-screen-lg mx-auto bg-white shadow-lg min-h-screen">
+            <HeroCarousel />
 
-          <AgeBasedSection />
+            <AgeBasedSection />
 
-          <FeaturedProducts />
+            <FeaturedProducts />
 
-          <ValueProposition />
+            <ValueProposition />
 
-          {/* Community Section */}
-          <section className="py-16 px-4 sm:px-6 lg:px-8 bg-[#E2D9F3]">
-            <div className="max-w-7xl mx-auto text-center">
-              <h2 className="text-3xl font-bold text-slate-800 mb-6">
-                Join the Kanhaa Moms Community
-              </h2>
-              <p className="text-slate-600 max-w-2xl mx-auto mb-8">
-                Connect with other parents, share your experiences, get early
-                access to new products, and receive exclusive recipes and
-                nutrition tips.
-              </p>
-              <Button size="lg" className="rounded-full px-8">
-                <Link to="/community">Join Now</Link>
-              </Button>
-            </div>
-          </section>
+            <TestimonialsSection />
 
-          <TestimonialsSection />
-
-          {/* Blog Preview Section */}
-          <section className="py-16 px-4 sm:px-6 lg:px-8">
-            <div className="max-w-7xl mx-auto">
+            {/* Blog Preview Section */}
+            <section className="py-16 px-4 sm:px-6 lg:px-8">
+              <div className="max-w-7xl mx-auto">
               <div className="text-center mb-12">
                 <h2 className="text-3xl font-bold text-slate-800 mb-4">
                   Latest from Our Blog
