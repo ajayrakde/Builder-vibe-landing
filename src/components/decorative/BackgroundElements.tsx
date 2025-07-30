@@ -268,7 +268,7 @@ const BackgroundElements: React.FC<BackgroundElementsProps> = ({
             size={size as "sm" | "md" | "lg"}
             className={cn(
               animation,
-              "duration-[10000ms]"
+              "duration-[10s]"
             )}
           />
         </div>,
