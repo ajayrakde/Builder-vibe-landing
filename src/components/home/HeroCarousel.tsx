@@ -103,7 +103,7 @@ const HeroCarousel = () => {
   }, [autoplay, api]);
 
   return (
-    <section className="w-full max-w-7xl mx-auto px-4 py-6 md:py-10 overflow-hidden">
+    <section className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-10 overflow-hidden">
       <Carousel
         className="w-full relative"
         setApi={(carouselApi) => {
