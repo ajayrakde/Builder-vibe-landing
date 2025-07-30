@@ -21,7 +21,11 @@ export const Layout = ({ children, showBackground = true }: LayoutProps) => {
 
       <Header />
 
-      <main className="flex-grow relative z-20">{children}</main>
+      <main className="flex-grow relative z-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {children}
+        </div>
+      </main>
 
       <Footer />
     </div>
