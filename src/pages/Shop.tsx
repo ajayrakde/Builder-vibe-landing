@@ -371,39 +371,56 @@ const Shop = () => {
       <Header />
 
       <main className="flex-grow">
-        <div className="flex flex-col md:flex-row gap-8 mt-8 pb-16">
-          {/* Filters sidebar */}
-          {isFilterOpen && (
-            <div
-              className={cn(
-                "bg-gray-100 p-5 shadow-lg border-r border-gray-200",
-                isMobile
-                  ? "fixed inset-0 z-50 overflow-auto bg-white"
-                  : "sticky top-24 h-fit w-full md:w-[250px]",
+        <div className="max-w-screen-lg mx-auto bg-white shadow-lg px-4 sm:px-6 lg:px-8 py-8">
+          {/* Search Section */}
+          <div className="mb-8">
+            <div className="relative max-w-md mx-auto">
+              <Search className="absolute left-3 top-2.5 h-4 w-4 text-slate-400" />
+              <Input
+                type="search"
+                placeholder="Search products..."
+                className="pl-10 rounded-full font-quicksand w-full"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
+            </div>
+          </div>
+
+          {/* Filter Button */}
+          <div className="mb-6 flex justify-center">
+            <Button
+              variant="outline"
+              className="flex items-center gap-2 font-quicksand"
+              onClick={toggleFilters}
+            >
+              <SlidersHorizontal className="h-4 w-4" />
+              {isFilterOpen ? 'Hide Filters' : 'Show Filters'}
+              {activeFilterCount > 0 && (
+                <Badge className="ml-1 h-5 w-5 p-0 flex items-center justify-center">
+                  {activeFilterCount}
+                </Badge>
               )}
+            </Button>
+          </div>
+
+          {/* Filters Dropdown Section */}
+          {isFilterOpen && (
+            <div className="mb-8 p-6 bg-gray-50 rounded-lg border border-gray-200"
             >
               <div className="flex items-center justify-between mb-6">
                 <h2 className="font-semibold text-lg">Filters</h2>
-                {isMobile && (
-                  <Button variant="ghost" size="icon" onClick={toggleFilters}>
-                    <X className="h-5 w-5" />
-                  </Button>
-                )}
+                <Button
+                  variant="ghost"
+                  className="text-xs h-auto p-1"
+                  onClick={clearAllFilters}
+                >
+                  Clear All
+                </Button>
               </div>
 
               {/* Active filters */}
               {activeFilterCount > 0 && (
-                <div className="mb-4">
-                  <div className="flex items-center justify-between mb-2">
-                    <h3 className="text-sm font-medium">Active Filters</h3>
-                    <Button
-                      variant="ghost"
-                      className="text-xs h-auto p-1"
-                      onClick={clearAllFilters}
-                    >
-                      Clear All
-                    </Button>
-                  </div>
+                <div className="mb-6">
                   <div className="flex flex-wrap gap-2">
                     {searchTerm && (
                       <Badge
@@ -466,156 +483,114 @@ const Shop = () => {
                 </div>
               )}
 
-              {/* Age filter */}
-              <div className="mb-6">
-                <h3 className="font-medium mb-3">Age</h3>
-                <div className="space-y-2">
-                  {ageRanges.map((age) => (
-                    <div key={age.value} className="flex items-center">
-                      <Checkbox
-                        id={`age-${age.value}`}
-                        checked={selectedAges.includes(age.value as AgeRange)}
-                        onCheckedChange={() =>
-                          toggleAgeFilter(age.value as AgeRange)
-                        }
-                      />
-                      <label
-                        htmlFor={`age-${age.value}`}
-                        className="ml-2 text-sm text-slate-600 cursor-pointer"
-                      >
-                        {age.label}
-                      </label>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Product type filter */}
-              <div className="mb-6">
-                <h3 className="font-medium mb-3">Product Type</h3>
-                <div className="space-y-2">
-                  {productTypes.map((type) => (
-                    <div key={type.value} className="flex items-center">
-                      <Checkbox
-                        id={`type-${type.value}`}
-                        checked={selectedTypes.includes(
-                          type.value as ProductType,
-                        )}
-                        onCheckedChange={() =>
-                          toggleTypeFilter(type.value as ProductType)
-                        }
-                      />
-                      <label
-                        htmlFor={`type-${type.value}`}
-                        className="ml-2 text-sm text-slate-600 cursor-pointer"
-                      >
-                        {type.label}
-                      </label>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Ingredients filter */}
-              <div className="mb-6">
-                <h3 className="font-medium mb-3">Ingredients</h3>
-                <div className="space-y-2">
-                  {ingredientTypes.map((ingredient) => (
-                    <div key={ingredient.value} className="flex items-center">
-                      <Checkbox
-                        id={`ingredient-${ingredient.value}`}
-                        checked={selectedIngredients.includes(
-                          ingredient.value as IngredientType,
-                        )}
-                        onCheckedChange={() =>
-                          toggleIngredientFilter(
-                            ingredient.value as IngredientType,
-                          )
-                        }
-                      />
-                      <label
-                        htmlFor={`ingredient-${ingredient.value}`}
-                        className="ml-2 text-sm text-slate-600 cursor-pointer"
-                      >
-                        {ingredient.label}
-                      </label>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {isMobile && (
-                <div className="sticky bottom-0 bg-white pt-4 pb-4 border-t mt-4">
-                  <div className="flex gap-4">
-                    <Button
-                      variant="outline"
-                      className="w-1/2"
-                      onClick={clearAllFilters}
-                    >
-                      Clear All
-                    </Button>
-                    <Button className="w-1/2" onClick={toggleFilters}>
-                      Apply Filters
-                    </Button>
+              {/* Filters Grid Layout */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {/* Age filter */}
+                <div>
+                  <h3 className="font-medium mb-3">Age Range</h3>
+                  <div className="space-y-2">
+                    {ageRanges.map((age) => (
+                      <div key={age.value} className="flex items-center">
+                        <Checkbox
+                          id={`age-${age.value}`}
+                          checked={selectedAges.includes(age.value as AgeRange)}
+                          onCheckedChange={() =>
+                            toggleAgeFilter(age.value as AgeRange)
+                          }
+                        />
+                        <label
+                          htmlFor={`age-${age.value}`}
+                          className="ml-2 text-sm text-slate-600 cursor-pointer"
+                        >
+                          {age.label}
+                        </label>
+                      </div>
+                    ))}
                   </div>
                 </div>
-              )}
+
+                {/* Product type filter */}
+                <div>
+                  <h3 className="font-medium mb-3">Product Type</h3>
+                  <div className="space-y-2">
+                    {productTypes.map((type) => (
+                      <div key={type.value} className="flex items-center">
+                        <Checkbox
+                          id={`type-${type.value}`}
+                          checked={selectedTypes.includes(
+                            type.value as ProductType,
+                          )}
+                          onCheckedChange={() =>
+                            toggleTypeFilter(type.value as ProductType)
+                          }
+                        />
+                        <label
+                          htmlFor={`type-${type.value}`}
+                          className="ml-2 text-sm text-slate-600 cursor-pointer"
+                        >
+                          {type.label}
+                        </label>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Ingredients filter */}
+                <div>
+                  <h3 className="font-medium mb-3">Ingredients</h3>
+                  <div className="space-y-2">
+                    {ingredientTypes.map((ingredient) => (
+                      <div key={ingredient.value} className="flex items-center">
+                        <Checkbox
+                          id={`ingredient-${ingredient.value}`}
+                          checked={selectedIngredients.includes(
+                            ingredient.value as IngredientType,
+                          )}
+                          onCheckedChange={() =>
+                            toggleIngredientFilter(
+                              ingredient.value as IngredientType,
+                            )
+                          }
+                        />
+                        <label
+                          htmlFor={`ingredient-${ingredient.value}`}
+                          className="ml-2 text-sm text-slate-600 cursor-pointer"
+                        >
+                          {ingredient.label}
+                        </label>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
             </div>
           )}
 
           {/* Product grid */}
-          <div className="flex-1 max-w-screen-lg mx-auto bg-white shadow-lg px-4 sm:px-6 lg:px-8">
-            {/* Search and filters aligned with main content */}
-            <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
-              <div className="relative flex-1">
-                <Search className="absolute left-3 top-2.5 h-4 w-4 text-slate-400" />
-                <Input
-                  type="search"
-                  placeholder="Search products..."
-                  className="pl-10 rounded-full font-quicksand w-full"
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                />
-              </div>
-              <div className="flex items-center gap-4">
-                <Button
-                  variant="outline"
-                  className="flex items-center gap-2 font-quicksand"
-                  onClick={toggleFilters}
-                >
-                  <SlidersHorizontal className="h-4 w-4" />
-                  Filters
-                  {activeFilterCount > 0 && (
-                    <Badge className="ml-1 h-5 w-5 p-0 flex items-center justify-center">
-                      {activeFilterCount}
-                    </Badge>
-                  )}
-                </Button>
-              </div>
-            </div>
+          <div>
 
-            {filteredProducts.length > 0 ? (
-              <>
-                <p className="text-sm text-slate-500 mb-6 font-quicksand">
-                  Showing {filteredProducts.length}{" "}
-                  {filteredProducts.length === 1 ? "product" : "products"}
-                </p>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {filteredProducts.map(renderProductCard)}
-                </div>
-              </>
-            ) : (
-              <div className="text-center py-12">
-                <h3 className="text-lg font-medium text-slate-800 mb-2">
-                  No products found
-                </h3>
-                <p className="text-slate-500 mb-6">
-                  Try adjusting your filters or search criteria
-                </p>
-                <Button onClick={clearAllFilters}>Clear All Filters</Button>
+          {/* Products Results */}
+          {filteredProducts.length > 0 ? (
+            <>
+              <p className="text-sm text-slate-500 mb-6 font-quicksand">
+                Showing {filteredProducts.length}{" "}
+                {filteredProducts.length === 1 ? "product" : "products"}
+              </p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {filteredProducts.map(renderProductCard)}
               </div>
-            )}
-          </div>
+            </>
+          ) : (
+            <div className="text-center py-12">
+              <h3 className="text-lg font-medium text-slate-800 mb-2">
+                No products found
+              </h3>
+              <p className="text-slate-500 mb-6">
+                Try adjusting your filters or search criteria
+              </p>
+              <Button onClick={clearAllFilters}>Clear All Filters</Button>
+            </div>
+          )}
         </div>
       </main>
 
