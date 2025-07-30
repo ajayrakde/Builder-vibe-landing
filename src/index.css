@@ -156,4 +156,25 @@
   .touch-target {
     @apply min-h-[44px] min-w-[44px];
   }
+
+  /* Carousel specific improvements */
+  .carousel-container {
+    @apply relative w-full overflow-hidden;
+  }
+
+  .carousel-slide {
+    @apply w-full aspect-video;
+  }
+
+  /* Smooth scrolling for better UX */
+  .smooth-scroll {
+    scroll-behavior: smooth;
+  }
+
+  /* Global layout improvements for large screens */
+  @media (min-width: 1400px) {
+    body {
+      @apply bg-gray-50;
+    }
+  }
 }
