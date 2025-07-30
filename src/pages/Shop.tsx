@@ -61,7 +61,7 @@ const Shop = () => {
 
   const [products, setProducts] = useState<Product[]>([]);
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
-  const [isFilterOpen, setIsFilterOpen] = useState(!isMobile);
+  const [isFilterOpen, setIsFilterOpen] = useState(false); // Default to false (hidden)
 
   // Filter states
   const [searchTerm, setSearchTerm] = useState("");
@@ -372,8 +372,8 @@ const Shop = () => {
 
       <main className="flex-grow">
         <div className="max-w-screen-lg mx-auto bg-white shadow-lg px-4 sm:px-6 lg:px-8 py-8">
-          {/* Search Section */}
-          <div className="mb-8">
+          {/* Search Section - moved down from corners */}
+          <div className="mb-8 mt-8">
             <div className="relative max-w-md mx-auto">
               <Search className="absolute left-3 top-2.5 h-4 w-4 text-slate-400" />
               <Input
@@ -403,10 +403,9 @@ const Shop = () => {
             </Button>
           </div>
 
-          {/* Filters Dropdown Section */}
+          {/* Filters Dropdown Section - appears below search */}
           {isFilterOpen && (
-            <div className="mb-8 p-6 bg-gray-50 rounded-lg border border-gray-200"
-            >
+            <div className="mb-8 p-6 bg-gray-50 rounded-lg border border-gray-200">
               <div className="flex items-center justify-between mb-6">
                 <h2 className="font-semibold text-lg">Filters</h2>
                 <Button
@@ -565,9 +564,6 @@ const Shop = () => {
               </div>
             </div>
           )}
-
-          {/* Product grid */}
-          <div>
 
           {/* Products Results */}
           {filteredProducts.length > 0 ? (
