@@ -75,10 +75,7 @@ const Checkout = () => {
               <p className="text-slate-600 mb-6 font-quicksand">
                 Add some products to your cart before checking out.
               </p>
-              <Button
-                onClick={() => navigate("/shop")}
-                className="font-quicksand"
-              >
+              <Button onClick={() => navigate("/shop")} className="font-quicksand">
                 Continue Shopping
               </Button>
             </div>
@@ -95,7 +92,7 @@ const Checkout = () => {
         <Header />
 
         <main className="flex-grow py-8">
-          <div className="max-w-7xl mx-auto px-4">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             {/* Header */}
             <div className="flex items-center gap-4 mb-8">
               <Button
@@ -122,29 +119,14 @@ const Checkout = () => {
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <RadioGroup
-                      value={selectedAddress}
-                      onValueChange={setSelectedAddress}
-                    >
+                    <RadioGroup value={selectedAddress} onValueChange={setSelectedAddress}>
                       <div className="space-y-4">
                         {addresses.map((address) => (
-                          <div
-                            key={address.id}
-                            className="flex items-start space-x-3"
-                          >
-                            <RadioGroupItem
-                              value={address.id}
-                              id={address.id}
-                              className="mt-1"
-                            />
-                            <Label
-                              htmlFor={address.id}
-                              className="flex-1 cursor-pointer"
-                            >
+                          <div key={address.id} className="flex items-start space-x-3">
+                            <RadioGroupItem value={address.id} id={address.id} className="mt-1" />
+                            <Label htmlFor={address.id} className="flex-1 cursor-pointer">
                               <div className="p-4 border rounded-lg hover:bg-gray-50">
-                                <div className="font-medium font-quicksand">
-                                  {address.type}
-                                </div>
+                                <div className="font-medium font-quicksand">{address.type}</div>
                                 <div className="text-sm text-gray-600 font-quicksand">
                                   {address.name}
                                 </div>
@@ -152,8 +134,7 @@ const Checkout = () => {
                                   {address.line1}, {address.line2}
                                 </div>
                                 <div className="text-sm text-gray-600 font-quicksand">
-                                  {address.city}, {address.state}{" "}
-                                  {address.postalCode}
+                                  {address.city}, {address.state} {address.postalCode}
                                 </div>
                                 <div className="text-sm text-gray-600 font-quicksand">
                                   {address.phone}
@@ -184,18 +165,11 @@ const Checkout = () => {
                       <div className="space-y-3">
                         <div className="flex items-center space-x-3">
                           <RadioGroupItem value="standard" id="standard" />
-                          <Label
-                            htmlFor="standard"
-                            className="flex-1 cursor-pointer"
-                          >
+                          <Label htmlFor="standard" className="flex-1 cursor-pointer">
                             <div className="flex justify-between items-center">
                               <div>
-                                <div className="font-medium font-quicksand">
-                                  Standard Delivery
-                                </div>
-                                <div className="text-sm text-gray-600 font-quicksand">
-                                  3-5 business days
-                                </div>
+                                <div className="font-medium font-quicksand">Standard Delivery</div>
+                                <div className="text-sm text-gray-600 font-quicksand">3-5 business days</div>
                               </div>
                               <div className="font-medium font-quicksand">
                                 {shipping === 0 ? "Free" : `₹${shipping}`}
@@ -205,22 +179,13 @@ const Checkout = () => {
                         </div>
                         <div className="flex items-center space-x-3">
                           <RadioGroupItem value="express" id="express" />
-                          <Label
-                            htmlFor="express"
-                            className="flex-1 cursor-pointer"
-                          >
+                          <Label htmlFor="express" className="flex-1 cursor-pointer">
                             <div className="flex justify-between items-center">
                               <div>
-                                <div className="font-medium font-quicksand">
-                                  Express Delivery
-                                </div>
-                                <div className="text-sm text-gray-600 font-quicksand">
-                                  1-2 business days
-                                </div>
+                                <div className="font-medium font-quicksand">Express Delivery</div>
+                                <div className="text-sm text-gray-600 font-quicksand">1-2 business days</div>
                               </div>
-                              <div className="font-medium font-quicksand">
-                                ₹199
-                              </div>
+                              <div className="font-medium font-quicksand">₹199</div>
                             </div>
                           </Label>
                         </div>
@@ -238,37 +203,23 @@ const Checkout = () => {
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <RadioGroup
-                      value={paymentMethod}
-                      onValueChange={setPaymentMethod}
-                    >
+                    <RadioGroup value={paymentMethod} onValueChange={setPaymentMethod}>
                       <div className="space-y-4">
                         <div className="flex items-center space-x-3">
                           <RadioGroupItem value="card" id="card" />
-                          <Label htmlFor="card" className="font-quicksand">
-                            Credit/Debit Card
-                          </Label>
+                          <Label htmlFor="card" className="font-quicksand">Credit/Debit Card</Label>
                         </div>
                         <div className="flex items-center space-x-3">
                           <RadioGroupItem value="upi" id="upi" />
-                          <Label htmlFor="upi" className="font-quicksand">
-                            UPI
-                          </Label>
+                          <Label htmlFor="upi" className="font-quicksand">UPI</Label>
                         </div>
                         <div className="flex items-center space-x-3">
                           <RadioGroupItem value="netbanking" id="netbanking" />
-                          <Label
-                            htmlFor="netbanking"
-                            className="font-quicksand"
-                          >
-                            Net Banking
-                          </Label>
+                          <Label htmlFor="netbanking" className="font-quicksand">Net Banking</Label>
                         </div>
                         <div className="flex items-center space-x-3">
                           <RadioGroupItem value="cod" id="cod" />
-                          <Label htmlFor="cod" className="font-quicksand">
-                            Cash on Delivery
-                          </Label>
+                          <Label htmlFor="cod" className="font-quicksand">Cash on Delivery</Label>
                         </div>
                       </div>
                     </RadioGroup>
@@ -277,12 +228,7 @@ const Checkout = () => {
                       <div className="mt-6 space-y-4">
                         <div className="grid grid-cols-1 gap-4">
                           <div>
-                            <Label
-                              htmlFor="cardNumber"
-                              className="font-quicksand"
-                            >
-                              Card Number
-                            </Label>
+                            <Label htmlFor="cardNumber" className="font-quicksand">Card Number</Label>
                             <Input
                               id="cardNumber"
                               placeholder="1234 5678 9012 3456"
@@ -291,12 +237,7 @@ const Checkout = () => {
                           </div>
                           <div className="grid grid-cols-2 gap-4">
                             <div>
-                              <Label
-                                htmlFor="expiry"
-                                className="font-quicksand"
-                              >
-                                Expiry Date
-                              </Label>
+                              <Label htmlFor="expiry" className="font-quicksand">Expiry Date</Label>
                               <Input
                                 id="expiry"
                                 placeholder="MM/YY"
@@ -304,9 +245,7 @@ const Checkout = () => {
                               />
                             </div>
                             <div>
-                              <Label htmlFor="cvv" className="font-quicksand">
-                                CVV
-                              </Label>
+                              <Label htmlFor="cvv" className="font-quicksand">CVV</Label>
                               <Input
                                 id="cvv"
                                 placeholder="123"
@@ -315,12 +254,7 @@ const Checkout = () => {
                             </div>
                           </div>
                           <div>
-                            <Label
-                              htmlFor="cardName"
-                              className="font-quicksand"
-                            >
-                              Name on Card
-                            </Label>
+                            <Label htmlFor="cardName" className="font-quicksand">Name on Card</Label>
                             <Input
                               id="cardName"
                               placeholder="John Doe"
@@ -336,9 +270,7 @@ const Checkout = () => {
                 {/* Special Instructions */}
                 <Card>
                   <CardHeader>
-                    <CardTitle className="font-quicksand">
-                      Special Instructions
-                    </CardTitle>
+                    <CardTitle className="font-quicksand">Special Instructions</CardTitle>
                   </CardHeader>
                   <CardContent>
                     <Textarea
@@ -353,9 +285,7 @@ const Checkout = () => {
               <div className="lg:col-span-1">
                 <Card className="sticky top-24">
                   <CardHeader>
-                    <CardTitle className="font-quicksand">
-                      Order Summary
-                    </CardTitle>
+                    <CardTitle className="font-quicksand">Order Summary</CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-4">
                     {/* Items */}
@@ -388,9 +318,7 @@ const Checkout = () => {
                     <div className="space-y-2">
                       <div className="flex justify-between text-sm">
                         <span className="font-quicksand">Subtotal</span>
-                        <span className="font-quicksand">
-                          ₹{subtotal.toFixed(2)}
-                        </span>
+                        <span className="font-quicksand">₹{subtotal.toFixed(2)}</span>
                       </div>
                       <div className="flex justify-between text-sm">
                         <span className="font-quicksand">Shipping</span>
@@ -400,16 +328,12 @@ const Checkout = () => {
                       </div>
                       <div className="flex justify-between text-sm">
                         <span className="font-quicksand">Tax (GST)</span>
-                        <span className="font-quicksand">
-                          ₹{tax.toFixed(2)}
-                        </span>
+                        <span className="font-quicksand">₹{tax.toFixed(2)}</span>
                       </div>
                       <Separator />
                       <div className="flex justify-between font-semibold">
                         <span className="font-quicksand">Total</span>
-                        <span className="font-quicksand">
-                          ���{total.toFixed(2)}
-                        </span>
+                        <span className="font-quicksand">₹{total.toFixed(2)}</span>
                       </div>
                     </div>
 
@@ -418,17 +342,11 @@ const Checkout = () => {
                       <Checkbox id="terms" />
                       <Label htmlFor="terms" className="font-quicksand">
                         I agree to the{" "}
-                        <a
-                          href="/terms"
-                          className="text-[#1a5de6] hover:underline"
-                        >
+                        <a href="/terms" className="text-[#1a5de6] hover:underline">
                           Terms & Conditions
                         </a>{" "}
                         and{" "}
-                        <a
-                          href="/privacy"
-                          className="text-[#1a5de6] hover:underline"
-                        >
+                        <a href="/privacy" className="text-[#1a5de6] hover:underline">
                           Privacy Policy
                         </a>
                       </Label>

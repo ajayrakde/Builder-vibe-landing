@@ -103,7 +103,7 @@ const HeroCarousel = () => {
   }, [autoplay, api]);
 
   return (
-    <section className="w-full max-w-7xl mx-auto px-4 py-6 md:py-10 overflow-hidden">
+    <section className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-10 overflow-hidden">
       <Carousel
         className="w-full relative"
         setApi={(carouselApi) => {
@@ -115,13 +115,15 @@ const HeroCarousel = () => {
         opts={{
           align: "start",
           loop: true,
+          skipSnaps: false,
+          dragFree: false,
         }}
         onMouseEnter={() => setAutoplay(false)}
         onMouseLeave={() => setAutoplay(true)}
       >
-        <CarouselContent>
+        <CarouselContent className="-ml-4">
           {heroSlides.map((slide) => (
-            <CarouselItem key={slide.id}>
+            <CarouselItem key={slide.id} className="pl-4">
               <Card
                 className={cn(
                   "border-0 overflow-hidden rounded-2xl shadow-2xl backdrop-blur-sm",
@@ -129,7 +131,7 @@ const HeroCarousel = () => {
                 )}
               >
                 <CardContent className="p-0">
-                  <div className="flex flex-col md:flex-row h-full">
+                  <div className="flex flex-col md:flex-row h-96">
                     <div className="p-6 md:p-10 flex flex-col justify-center md:w-1/2">
                       <span
                         className={cn(

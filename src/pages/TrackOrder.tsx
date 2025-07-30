@@ -22,37 +22,13 @@ const TrackOrder = () => {
         estimatedDelivery: "Dec 28, 2023",
         currentLocation: "Delhi Distribution Center",
         timeline: [
-          {
-            status: "Order Confirmed",
-            date: "Dec 20, 2023 - 2:30 PM",
-            completed: true,
-          },
-          {
-            status: "Processing",
-            date: "Dec 21, 2023 - 10:15 AM",
-            completed: true,
-          },
-          {
-            status: "Shipped",
-            date: "Dec 22, 2023 - 9:45 AM",
-            completed: true,
-          },
-          {
-            status: "In Transit",
-            date: "Dec 25, 2023 - 11:20 AM",
-            completed: true,
-          },
-          {
-            status: "Out for Delivery",
-            date: "Expected Dec 28, 2023",
-            completed: false,
-          },
-          {
-            status: "Delivered",
-            date: "Expected Dec 28, 2023",
-            completed: false,
-          },
-        ],
+          { status: "Order Confirmed", date: "Dec 20, 2023 - 2:30 PM", completed: true },
+          { status: "Processing", date: "Dec 21, 2023 - 10:15 AM", completed: true },
+          { status: "Shipped", date: "Dec 22, 2023 - 9:45 AM", completed: true },
+          { status: "In Transit", date: "Dec 25, 2023 - 11:20 AM", completed: true },
+          { status: "Out for Delivery", date: "Expected Dec 28, 2023", completed: false },
+          { status: "Delivered", date: "Expected Dec 28, 2023", completed: false },
+        ]
       });
     }
   };
@@ -63,7 +39,7 @@ const TrackOrder = () => {
         <Header />
 
         <main className="flex-grow py-8">
-          <div className="max-w-4xl mx-auto px-4">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-8">
               <h1 className="text-3xl font-bold text-slate-800 mb-4 font-quicksand">
                 Track Your Order
@@ -75,16 +51,12 @@ const TrackOrder = () => {
 
             <Card className="mb-8">
               <CardHeader>
-                <CardTitle className="font-quicksand">
-                  Enter Order Details
-                </CardTitle>
+                <CardTitle className="font-quicksand">Enter Order Details</CardTitle>
               </CardHeader>
               <CardContent>
                 <form onSubmit={handleTrack} className="space-y-4">
                   <div>
-                    <Label htmlFor="orderNumber" className="font-quicksand">
-                      Order Number
-                    </Label>
+                    <Label htmlFor="orderNumber" className="font-quicksand">Order Number</Label>
                     <Input
                       id="orderNumber"
                       type="text"
@@ -114,8 +86,7 @@ const TrackOrder = () => {
                         Order #{trackingData.orderNumber}
                       </h3>
                       <p className="text-slate-600 font-quicksand">
-                        Current Status:{" "}
-                        <Badge className="ml-2">{trackingData.status}</Badge>
+                        Current Status: <Badge className="ml-2">{trackingData.status}</Badge>
                       </p>
                     </div>
                     <div className="text-right">
@@ -131,17 +102,13 @@ const TrackOrder = () => {
                   </div>
 
                   <div className="space-y-4">
-                    <h4 className="font-semibold font-quicksand">
-                      Tracking Timeline
-                    </h4>
+                    <h4 className="font-semibold font-quicksand">Tracking Timeline</h4>
                     {trackingData.timeline.map((step, index) => (
                       <div key={index} className="flex items-start gap-4">
                         <div className="flex flex-col items-center">
-                          <div
-                            className={`w-8 h-8 rounded-full flex items-center justify-center ${
-                              step.completed ? "bg-green-500" : "bg-gray-300"
-                            }`}
-                          >
+                          <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
+                            step.completed ? 'bg-green-500' : 'bg-gray-300'
+                          }`}>
                             {step.completed ? (
                               <CheckCircle className="w-4 h-4 text-white" />
                             ) : (
@@ -149,30 +116,20 @@ const TrackOrder = () => {
                             )}
                           </div>
                           {index < trackingData.timeline.length - 1 && (
-                            <div
-                              className={`w-0.5 h-8 ${
-                                step.completed ? "bg-green-500" : "bg-gray-300"
-                              }`}
-                            />
+                            <div className={`w-0.5 h-8 ${
+                              step.completed ? 'bg-green-500' : 'bg-gray-300'
+                            }`} />
                           )}
                         </div>
                         <div className="flex-1">
-                          <h5
-                            className={`font-medium font-quicksand ${
-                              step.completed
-                                ? "text-green-700"
-                                : "text-gray-600"
-                            }`}
-                          >
+                          <h5 className={`font-medium font-quicksand ${
+                            step.completed ? 'text-green-700' : 'text-gray-600'
+                          }`}>
                             {step.status}
                           </h5>
-                          <p
-                            className={`text-sm font-quicksand ${
-                              step.completed
-                                ? "text-green-600"
-                                : "text-gray-500"
-                            }`}
-                          >
+                          <p className={`text-sm font-quicksand ${
+                            step.completed ? 'text-green-600' : 'text-gray-500'
+                          }`}>
                             {step.date}
                           </p>
                         </div>

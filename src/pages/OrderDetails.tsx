@@ -51,7 +51,7 @@ const OrderDetails = () => {
       shipping: "₹99",
       tax: "₹105",
       total: "₹1,249",
-    },
+    }
   };
 
   return (
@@ -60,7 +60,7 @@ const OrderDetails = () => {
         <Header />
 
         <main className="flex-grow py-8">
-          <div className="max-w-4xl mx-auto px-4">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex items-center gap-4 mb-8">
               <Button variant="ghost" size="icon" asChild>
                 <Link to="/profile?tab=orders">
@@ -101,23 +101,18 @@ const OrderDetails = () => {
                       <Package className="h-8 w-8 text-[#1a5de6]" />
                       <div>
                         <p className="font-medium font-quicksand">
-                          {orderData.status === "Delivered"
-                            ? "Delivered"
-                            : "In Progress"}
+                          {orderData.status === "Delivered" ? "Delivered" : "In Progress"}
                         </p>
                         <p className="text-sm text-slate-600 font-quicksand">
                           {orderData.status === "Delivered"
                             ? `Delivered on ${orderData.deliveryDate}`
-                            : `Expected delivery: ${orderData.deliveryDate}`}
+                            : `Expected delivery: ${orderData.deliveryDate}`
+                          }
                         </p>
                       </div>
                     </div>
                     <div className="mt-4">
-                      <Button
-                        variant="outline"
-                        asChild
-                        className="font-quicksand"
-                      >
+                      <Button variant="outline" asChild className="font-quicksand">
                         <Link to={`/track-order?order=${orderData.id}`}>
                           <Truck className="mr-2 h-4 w-4" />
                           Track Package
@@ -130,16 +125,11 @@ const OrderDetails = () => {
                 {/* Order Items */}
                 <Card>
                   <CardHeader>
-                    <CardTitle className="font-quicksand">
-                      Items Ordered
-                    </CardTitle>
+                    <CardTitle className="font-quicksand">Items Ordered</CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-4">
                     {orderData.items.map((item) => (
-                      <div
-                        key={item.id}
-                        className="flex gap-4 p-4 border rounded-lg"
-                      >
+                      <div key={item.id} className="flex gap-4 p-4 border rounded-lg">
                         <img
                           src={item.image}
                           alt={item.name}
@@ -176,19 +166,11 @@ const OrderDetails = () => {
                   </CardHeader>
                   <CardContent>
                     <div className="space-y-1">
-                      <p className="font-medium font-quicksand">
-                        {orderData.shippingAddress.name}
-                      </p>
+                      <p className="font-medium font-quicksand">{orderData.shippingAddress.name}</p>
+                      <p className="text-slate-600 font-quicksand">{orderData.shippingAddress.line1}</p>
+                      <p className="text-slate-600 font-quicksand">{orderData.shippingAddress.line2}</p>
                       <p className="text-slate-600 font-quicksand">
-                        {orderData.shippingAddress.line1}
-                      </p>
-                      <p className="text-slate-600 font-quicksand">
-                        {orderData.shippingAddress.line2}
-                      </p>
-                      <p className="text-slate-600 font-quicksand">
-                        {orderData.shippingAddress.city},{" "}
-                        {orderData.shippingAddress.state}{" "}
-                        {orderData.shippingAddress.postalCode}
+                        {orderData.shippingAddress.city}, {orderData.shippingAddress.state} {orderData.shippingAddress.postalCode}
                       </p>
                       <p className="text-slate-600 font-quicksand flex items-center gap-1">
                         <Phone className="h-4 w-4" />
@@ -203,50 +185,34 @@ const OrderDetails = () => {
               <div className="lg:col-span-1">
                 <Card>
                   <CardHeader>
-                    <CardTitle className="font-quicksand">
-                      Order Summary
-                    </CardTitle>
+                    <CardTitle className="font-quicksand">Order Summary</CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-4">
                     <div className="space-y-2">
                       <div className="flex justify-between text-sm">
                         <span className="font-quicksand">Subtotal</span>
-                        <span className="font-quicksand">
-                          {orderData.billing.subtotal}
-                        </span>
+                        <span className="font-quicksand">{orderData.billing.subtotal}</span>
                       </div>
                       <div className="flex justify-between text-sm">
                         <span className="font-quicksand">Shipping</span>
-                        <span className="font-quicksand">
-                          {orderData.billing.shipping}
-                        </span>
+                        <span className="font-quicksand">{orderData.billing.shipping}</span>
                       </div>
                       <div className="flex justify-between text-sm">
                         <span className="font-quicksand">Tax</span>
-                        <span className="font-quicksand">
-                          {orderData.billing.tax}
-                        </span>
+                        <span className="font-quicksand">{orderData.billing.tax}</span>
                       </div>
                       <Separator />
                       <div className="flex justify-between font-semibold">
                         <span className="font-quicksand">Total</span>
-                        <span className="font-quicksand">
-                          {orderData.billing.total}
-                        </span>
+                        <span className="font-quicksand">{orderData.billing.total}</span>
                       </div>
                     </div>
 
                     <div className="space-y-2 pt-4">
-                      <Button
-                        variant="outline"
-                        className="w-full font-quicksand"
-                      >
+                      <Button variant="outline" className="w-full font-quicksand">
                         Download Invoice
                       </Button>
-                      <Button
-                        variant="outline"
-                        className="w-full font-quicksand"
-                      >
+                      <Button variant="outline" className="w-full font-quicksand">
                         <Mail className="mr-2 h-4 w-4" />
                         Contact Support
                       </Button>

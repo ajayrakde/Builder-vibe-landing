@@ -242,14 +242,13 @@ const Community = () => {
 
   return (
     <Fragment>
-      <BackgroundElements density="medium" />
-      <div className="min-h-screen flex flex-col">
+      <div className="min-h-screen flex flex-col bg-gradient-to-b from-blue-50 to-white">
         <Header />
 
         <main className="flex-grow">
           {/* Hero section */}
           <section className="bg-gradient-to-b from-[#F8D7DA] to-white pt-16 pb-20 relative overflow-hidden">
-            <div className="max-w-7xl mx-auto px-4 relative z-10">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
               <div className="text-center mb-8">
                 <Badge className="mb-4 bg-white/80 text-primary border-0 py-1 px-4 text-sm">
                   Join Our Community
@@ -279,7 +278,7 @@ const Community = () => {
           </section>
 
           {/* Main content with tabs */}
-          <section className="py-12 px-4">
+          <section className="py-12 px-4 sm:px-6 lg:px-8">
             <div className="max-w-7xl mx-auto">
               <Tabs
                 value={activeTab}
@@ -882,7 +881,7 @@ const Community = () => {
           </section>
 
           {/* Community partners */}
-          <section className="py-12 px-4 bg-slate-50">
+          <section className="py-12 px-4 sm:px-6 lg:px-8 bg-slate-50">
             <div className="max-w-7xl mx-auto text-center">
               <h2 className="text-2xl font-bold text-slate-800 mb-8">
                 Our Community Partners

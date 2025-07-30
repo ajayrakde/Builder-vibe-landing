@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { CartProvider } from "./hooks/use-cart";
 import { CartUIProvider, useCartUI } from "./hooks/use-cart-ui";
 import SlidingCart from "./components/cart/SlidingCart";
+import AppWrapper from "./components/layout/AppWrapper";
 import Index from "./pages/Index";
 import Shop from "./pages/Shop";
 import About from "./pages/About";
@@ -67,7 +68,9 @@ const App = () => (
   <BrowserRouter>
     <CartProvider>
       <CartUIProvider>
-        <AppContent />
+        <AppWrapper>
+          <AppContent />
+        </AppWrapper>
       </CartUIProvider>
     </CartProvider>
   </BrowserRouter>

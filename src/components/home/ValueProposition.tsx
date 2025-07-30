@@ -95,7 +95,7 @@ const features: Feature[] = [
 
 const ValueProposition = () => {
   return (
-    <section className="py-12 px-4 bg-gradient-to-b from-white to-slate-50">
+    <section className="py-12 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-white to-slate-50">
       <div className="max-w-7xl mx-auto">
         <div className="mb-10 text-center">
           <h2 className="text-3xl font-bold text-slate-800 mb-4">

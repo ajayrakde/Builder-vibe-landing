@@ -11,14 +11,13 @@ const Careers = () => {
         <Header />
 
         <main className="flex-grow py-8">
-          <div className="max-w-4xl mx-auto px-4">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-8">
               <h1 className="text-3xl font-bold text-slate-800 mb-4 font-quicksand">
                 Careers at Kanhaa
               </h1>
               <p className="text-slate-600 font-quicksand">
-                Join our mission to provide healthy nutrition for babies
-                everywhere
+                Join our mission to provide healthy nutrition for babies everywhere
               </p>
             </div>
 
@@ -29,9 +28,8 @@ const Careers = () => {
                     Why Work With Us?
                   </h2>
                   <p className="text-slate-600 font-quicksand">
-                    At Kanhaa, we're passionate about creating the best possible
-                    nutrition for babies. Join a team that values innovation,
-                    quality, and making a real difference in families' lives.
+                    At Kanhaa, we're passionate about creating the best possible nutrition for babies.
+                    Join a team that values innovation, quality, and making a real difference in families' lives.
                   </p>
                 </section>
 
@@ -40,10 +38,8 @@ const Careers = () => {
                     Current Openings
                   </h2>
                   <p className="text-slate-600 font-quicksand">
-                    We're always looking for talented individuals who share our
-                    passion for baby nutrition and quality products. Check back
-                    soon for current job openings or send us your resume to
-                    careers@kanhaa.com.
+                    We're always looking for talented individuals who share our passion for baby nutrition and quality products.
+                    Check back soon for current job openings or send us your resume to careers@kanhaa.com.
                   </p>
                 </section>
 
@@ -54,7 +50,9 @@ const Careers = () => {
                   <p className="text-slate-600 font-quicksand mb-4">
                     Interested in joining our team? We'd love to hear from you!
                   </p>
-                  <Button className="font-quicksand">Send Your Resume</Button>
+                  <Button className="font-quicksand">
+                    Send Your Resume
+                  </Button>
                 </section>
               </CardContent>
             </Card>

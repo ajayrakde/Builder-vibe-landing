@@ -33,7 +33,7 @@ const Footer = () => {
 
   return (
     <footer className="bg-[#FEF6E4] pt-12 pb-6">
-      <div className="max-w-7xl mx-auto px-8">
+      <div className="px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-10">
           <div>
             <div className="flex items-center mb-4">

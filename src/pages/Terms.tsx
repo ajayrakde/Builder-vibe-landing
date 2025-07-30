@@ -10,7 +10,7 @@ const Terms = () => {
         <Header />
 
         <main className="flex-grow py-8">
-          <div className="max-w-4xl mx-auto px-4">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-8">
               <h1 className="text-3xl font-bold text-slate-800 mb-4 font-quicksand">
                 Terms & Conditions
@@ -27,8 +27,8 @@ const Terms = () => {
                     Acceptance of Terms
                   </h2>
                   <p className="text-slate-600 font-quicksand">
-                    By accessing and using this website, you accept and agree to
-                    be bound by the terms and provision of this agreement.
+                    By accessing and using this website, you accept and agree to be bound by the terms
+                    and provision of this agreement.
                   </p>
                 </section>
 
@@ -37,9 +37,8 @@ const Terms = () => {
                     Product Information
                   </h2>
                   <p className="text-slate-600 font-quicksand">
-                    We strive to provide accurate product information, but we do
-                    not warrant that product descriptions or content is
-                    accurate, complete, reliable, or error-free.
+                    We strive to provide accurate product information, but we do not warrant that product
+                    descriptions or content is accurate, complete, reliable, or error-free.
                   </p>
                 </section>
 
@@ -48,9 +47,8 @@ const Terms = () => {
                     Orders and Payment
                   </h2>
                   <p className="text-slate-600 font-quicksand">
-                    All orders are subject to acceptance and availability. We
-                    reserve the right to refuse or cancel any order for any
-                    reason. Payment must be received before order processing.
+                    All orders are subject to acceptance and availability. We reserve the right to refuse
+                    or cancel any order for any reason. Payment must be received before order processing.
                   </p>
                 </section>
 
@@ -59,9 +57,8 @@ const Terms = () => {
                     Shipping and Returns
                   </h2>
                   <p className="text-slate-600 font-quicksand">
-                    Shipping times and costs vary by location and product.
-                    Returns are accepted within 30 days of purchase in original
-                    condition.
+                    Shipping times and costs vary by location and product. Returns are accepted within
+                    30 days of purchase in original condition.
                   </p>
                 </section>
 
@@ -70,9 +67,8 @@ const Terms = () => {
                     Limitation of Liability
                   </h2>
                   <p className="text-slate-600 font-quicksand">
-                    Kanhaa shall not be liable for any indirect, incidental,
-                    special, consequential, or punitive damages resulting from
-                    your use of our products or services.
+                    Kanhaa shall not be liable for any indirect, incidental, special, consequential,
+                    or punitive damages resulting from your use of our products or services.
                   </p>
                 </section>
 
@@ -81,8 +77,8 @@ const Terms = () => {
                     Contact Information
                   </h2>
                   <p className="text-slate-600 font-quicksand">
-                    For questions about these Terms & Conditions, please contact
-                    us at legal@kanhaa.com or through our contact page.
+                    For questions about these Terms & Conditions, please contact us at
+                    legal@kanhaa.com or through our contact page.
                   </p>
                 </section>
               </CardContent>

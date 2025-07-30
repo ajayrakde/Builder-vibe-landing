@@ -1,11 +1,18 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate, Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Badge } from "@/components/ui/badge";
-import { Search, SlidersHorizontal, X } from "lucide-react";
+import { Search, SlidersHorizontal, X, ChevronDown } from "lucide-react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+  DropdownMenuCheckboxItem,
+} from "@/components/ui/dropdown-menu";
 import {
   getMockProducts,
   Product,
@@ -61,7 +68,7 @@ const Shop = () => {
 
   const [products, setProducts] = useState<Product[]>([]);
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
-  const [isFilterOpen, setIsFilterOpen] = useState(!isMobile);
+  const [isFilterOpen, setIsFilterOpen] = useState(false); // Default to false (hidden)
 
   // Filter states
   const [searchTerm, setSearchTerm] = useState("");
@@ -299,65 +306,9 @@ const Shop = () => {
         </div>
 
         <CardContent className="p-4">
-          <div className="flex items-center justify-between mb-2">
-            <div className="flex items-center">
-              <span
-                className={cn(
-                  "text-xs px-2 py-0.5 rounded-full mr-2",
-                  product.ageRange === "0-6"
-                    ? "bg-blue-100 text-blue-800"
-                    : product.ageRange === "6-12"
-                      ? "bg-green-100 text-green-800"
-                      : product.ageRange === "12-24"
-                        ? "bg-purple-100 text-purple-800"
-                        : "bg-orange-100 text-orange-800",
-                )}
-              >
-                {product.ageRange === "0-6"
-                  ? "0-6 months"
-                  : product.ageRange === "6-12"
-                    ? "6-12 months"
-                    : product.ageRange === "12-24"
-                      ? "12-24 months"
-                      : "24+ months"}
-              </span>
-              <span
-                className={cn(
-                  "text-xs px-2 py-0.5 rounded-full",
-                  product.productType === "cereals"
-                    ? "bg-yellow-100 text-yellow-800"
-                    : product.productType === "purees"
-                      ? "bg-pink-100 text-pink-800"
-                      : product.productType === "finger-foods"
-                        ? "bg-indigo-100 text-indigo-800"
-                        : product.productType === "snacks"
-                          ? "bg-red-100 text-red-800"
-                          : "bg-teal-100 text-teal-800",
-                )}
-              >
-                {product.productType
-                  .split("-")
-                  .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-                  .join(" ")}
-              </span>
-            </div>
-            {product.rating && (
-              <div className="flex items-center">
-                <span className="text-yellow-500">★</span>
-                <span className="ml-1 text-sm text-slate-600">
-                  {product.rating}
-                </span>
-              </div>
-            )}
-          </div>
-
-          <h3 className="font-semibold text-slate-800 text-lg mb-1">
+          <h3 className="font-semibold text-slate-800 text-lg mb-4">
             {product.title}
           </h3>
-
-          <p className="text-slate-600 text-sm mb-4 line-clamp-2">
-            {product.description}
-          </p>
 
           <div className="flex items-center justify-between">
             <div className="flex items-baseline gap-2">
@@ -423,257 +374,208 @@ const Shop = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-white">
+    <div className="min-h-screen flex flex-col bg-gradient-to-b from-blue-50 to-white">
       <Header />
 
       <main className="flex-grow">
-        <div className="max-w-7xl mx-auto px-4 pb-16">
-          <div className="flex flex-col md:flex-row gap-8 mt-8">
-            {/* Filters sidebar */}
-            {isFilterOpen && (
-              <div
-                className={cn(
-                  "bg-white p-5 rounded-lg shadow-sm",
-                  isMobile
-                    ? "fixed inset-0 z-50 overflow-auto"
-                    : "sticky top-24 h-fit w-full md:w-[188px]",
-                )}
-              >
-                <div className="flex items-center justify-between mb-6">
-                  <h2 className="font-semibold text-lg">Filters</h2>
-                  {isMobile && (
-                    <Button variant="ghost" size="icon" onClick={toggleFilters}>
-                      <X className="h-5 w-5" />
-                    </Button>
-                  )}
-                </div>
-
-                {/* Active filters */}
-                {activeFilterCount > 0 && (
-                  <div className="mb-4">
-                    <div className="flex items-center justify-between mb-2">
-                      <h3 className="text-sm font-medium">Active Filters</h3>
-                      <Button
-                        variant="ghost"
-                        className="text-xs h-auto p-1"
-                        onClick={clearAllFilters}
-                      >
-                        Clear All
-                      </Button>
-                    </div>
-                    <div className="flex flex-wrap gap-2">
-                      {searchTerm && (
-                        <Badge
-                          variant="secondary"
-                          className="flex gap-1 items-center"
-                        >
-                          Search: {searchTerm}
-                          <X
-                            className="h-3 w-3 cursor-pointer"
-                            onClick={() => setSearchTerm("")}
-                          />
-                        </Badge>
-                      )}
-
-                      {selectedAges.map((age) => (
-                        <Badge
-                          key={age}
-                          variant="secondary"
-                          className="flex gap-1 items-center"
-                        >
-                          {ageRanges.find((a) => a.value === age)?.label}
-                          <X
-                            className="h-3 w-3 cursor-pointer"
-                            onClick={() => toggleAgeFilter(age)}
-                          />
-                        </Badge>
-                      ))}
-
-                      {selectedTypes.map((type) => (
-                        <Badge
-                          key={type}
-                          variant="secondary"
-                          className="flex gap-1 items-center"
-                        >
-                          {productTypes.find((t) => t.value === type)?.label}
-                          <X
-                            className="h-3 w-3 cursor-pointer"
-                            onClick={() => toggleTypeFilter(type)}
-                          />
-                        </Badge>
-                      ))}
-
-                      {selectedIngredients.map((ingredient) => (
-                        <Badge
-                          key={ingredient}
-                          variant="secondary"
-                          className="flex gap-1 items-center"
-                        >
-                          {
-                            ingredientTypes.find((i) => i.value === ingredient)
-                              ?.label
-                          }
-                          <X
-                            className="h-3 w-3 cursor-pointer"
-                            onClick={() => toggleIngredientFilter(ingredient)}
-                          />
-                        </Badge>
-                      ))}
-                    </div>
-                  </div>
-                )}
-
-                {/* Age filter */}
-                <div className="mb-6">
-                  <h3 className="font-medium mb-3">Age</h3>
-                  <div className="space-y-2">
-                    {ageRanges.map((age) => (
-                      <div key={age.value} className="flex items-center">
-                        <Checkbox
-                          id={`age-${age.value}`}
-                          checked={selectedAges.includes(age.value as AgeRange)}
-                          onCheckedChange={() =>
-                            toggleAgeFilter(age.value as AgeRange)
-                          }
-                        />
-                        <label
-                          htmlFor={`age-${age.value}`}
-                          className="ml-2 text-sm text-slate-600 cursor-pointer"
-                        >
-                          {age.label}
-                        </label>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Product type filter */}
-                <div className="mb-6">
-                  <h3 className="font-medium mb-3">Product Type</h3>
-                  <div className="space-y-2">
-                    {productTypes.map((type) => (
-                      <div key={type.value} className="flex items-center">
-                        <Checkbox
-                          id={`type-${type.value}`}
-                          checked={selectedTypes.includes(
-                            type.value as ProductType,
-                          )}
-                          onCheckedChange={() =>
-                            toggleTypeFilter(type.value as ProductType)
-                          }
-                        />
-                        <label
-                          htmlFor={`type-${type.value}`}
-                          className="ml-2 text-sm text-slate-600 cursor-pointer"
-                        >
-                          {type.label}
-                        </label>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Ingredients filter */}
-                <div className="mb-6">
-                  <h3 className="font-medium mb-3">Ingredients</h3>
-                  <div className="space-y-2">
-                    {ingredientTypes.map((ingredient) => (
-                      <div key={ingredient.value} className="flex items-center">
-                        <Checkbox
-                          id={`ingredient-${ingredient.value}`}
-                          checked={selectedIngredients.includes(
-                            ingredient.value as IngredientType,
-                          )}
-                          onCheckedChange={() =>
-                            toggleIngredientFilter(
-                              ingredient.value as IngredientType,
-                            )
-                          }
-                        />
-                        <label
-                          htmlFor={`ingredient-${ingredient.value}`}
-                          className="ml-2 text-sm text-slate-600 cursor-pointer"
-                        >
-                          {ingredient.label}
-                        </label>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {isMobile && (
-                  <div className="sticky bottom-0 bg-white pt-4 pb-4 border-t mt-4">
-                    <div className="flex gap-4">
-                      <Button
-                        variant="outline"
-                        className="w-1/2"
-                        onClick={clearAllFilters}
-                      >
-                        Clear All
-                      </Button>
-                      <Button className="w-1/2" onClick={toggleFilters}>
-                        Apply Filters
-                      </Button>
-                    </div>
-                  </div>
-                )}
-              </div>
-            )}
-
-            {/* Product grid */}
-            <div className="flex-1">
-              {/* Search and filters aligned with main content */}
-              <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
-                <div className="relative flex-1">
-                  <Search className="absolute left-3 top-2.5 h-4 w-4 text-slate-400" />
-                  <Input
-                    type="search"
-                    placeholder="Search products..."
-                    className="pl-10 rounded-full font-quicksand w-full"
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                  />
-                </div>
-                <div className="flex items-center gap-4">
-                  <Button
-                    variant="outline"
-                    className="flex items-center gap-2 font-quicksand"
-                    onClick={toggleFilters}
-                  >
-                    <SlidersHorizontal className="h-4 w-4" />
-                    Filters
-                    {activeFilterCount > 0 && (
-                      <Badge className="ml-1 h-5 w-5 p-0 flex items-center justify-center">
-                        {activeFilterCount}
-                      </Badge>
-                    )}
-                  </Button>
-                </div>
-              </div>
-
-              {filteredProducts.length > 0 ? (
-                <>
-                  <p className="text-sm text-slate-500 mb-6 font-quicksand">
-                    Showing {filteredProducts.length}{" "}
-                    {filteredProducts.length === 1 ? "product" : "products"}
-                  </p>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {filteredProducts.map(renderProductCard)}
-                  </div>
-                </>
-              ) : (
-                <div className="text-center py-12">
-                  <h3 className="text-lg font-medium text-slate-800 mb-2">
-                    No products found
-                  </h3>
-                  <p className="text-slate-500 mb-6">
-                    Try adjusting your filters or search criteria
-                  </p>
-                  <Button onClick={clearAllFilters}>Clear All Filters</Button>
-                </div>
-              )}
+        <div className="max-w-screen-lg mx-auto bg-white shadow-lg px-4 sm:px-6 lg:px-8 py-8">
+          {/* First Row: Search Bar and Show/Hide Filter Button - End to End Width */}
+          <div className="mb-4 mt-8 flex gap-4 items-center">
+            {/* Search Bar - Extended to full width */}
+            <div className="relative flex-1">
+              <Search className="absolute left-3 top-2.5 h-4 w-4 text-slate-400" />
+              <Input
+                type="search"
+                placeholder="Search products..."
+                className="pl-10 rounded-full font-quicksand w-full"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
             </div>
+
+            {/* Filter Toggle Button - At the right end */}
+            <Button
+              variant="outline"
+              className="flex items-center gap-2 font-quicksand whitespace-nowrap"
+              onClick={toggleFilters}
+            >
+              <SlidersHorizontal className="h-4 w-4" />
+              {isFilterOpen ? 'Hide Filters' : 'Show Filters'}
+              {activeFilterCount > 0 && (
+                <Badge className="ml-1 h-5 w-5 p-0 flex items-center justify-center">
+                  {activeFilterCount}
+                </Badge>
+              )}
+            </Button>
           </div>
+
+          {/* Second Row: Applied Filters (shown when filters are applied) */}
+          {activeFilterCount > 0 && (
+            <div className="mb-4">
+              <div className="flex flex-wrap gap-2">
+                {searchTerm && (
+                  <Badge
+                    variant="secondary"
+                    className="flex gap-1 items-center"
+                  >
+                    Search: {searchTerm}
+                    <X
+                      className="h-3 w-3 cursor-pointer"
+                      onClick={() => setSearchTerm("")}
+                    />
+                  </Badge>
+                )}
+
+                {selectedAges.map((age) => (
+                  <Badge
+                    key={age}
+                    variant="secondary"
+                    className="flex gap-1 items-center"
+                  >
+                    {ageRanges.find((a) => a.value === age)?.label}
+                    <X
+                      className="h-3 w-3 cursor-pointer"
+                      onClick={() => toggleAgeFilter(age)}
+                    />
+                  </Badge>
+                ))}
+
+                {selectedTypes.map((type) => (
+                  <Badge
+                    key={type}
+                    variant="secondary"
+                    className="flex gap-1 items-center"
+                  >
+                    {productTypes.find((t) => t.value === type)?.label}
+                    <X
+                      className="h-3 w-3 cursor-pointer"
+                      onClick={() => toggleTypeFilter(type)}
+                    />
+                  </Badge>
+                ))}
+
+                {selectedIngredients.map((ingredient) => (
+                  <Badge
+                    key={ingredient}
+                    variant="secondary"
+                    className="flex gap-1 items-center"
+                  >
+                    {
+                      ingredientTypes.find((i) => i.value === ingredient)
+                        ?.label
+                    }
+                    <X
+                      className="h-3 w-3 cursor-pointer"
+                      onClick={() => toggleIngredientFilter(ingredient)}
+                    />
+                  </Badge>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Third Row: Filter Dropdowns (Age Range, Product Type, Ingredients) */}
+          {isFilterOpen && (
+            <div className="mb-8 flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
+              {/* Filter Dropdowns */}
+              <div className="flex flex-col sm:flex-row gap-4">
+                {/* Age Range Dropdown */}
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button variant="outline" className="flex items-center gap-2 font-quicksand whitespace-nowrap">
+                      Age Range {selectedAges.length > 0 && `(${selectedAges.length})`}
+                      <ChevronDown className="h-4 w-4" />
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent className="w-56">
+                    {ageRanges.map((age) => (
+                      <DropdownMenuCheckboxItem
+                        key={age.value}
+                        checked={selectedAges.includes(age.value as AgeRange)}
+                        onCheckedChange={() => toggleAgeFilter(age.value as AgeRange)}
+                      >
+                        {age.label}
+                      </DropdownMenuCheckboxItem>
+                    ))}
+                  </DropdownMenuContent>
+                </DropdownMenu>
+
+                {/* Product Type Dropdown */}
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button variant="outline" className="flex items-center gap-2 font-quicksand whitespace-nowrap">
+                      Product Type {selectedTypes.length > 0 && `(${selectedTypes.length})`}
+                      <ChevronDown className="h-4 w-4" />
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent className="w-56">
+                    {productTypes.map((type) => (
+                      <DropdownMenuCheckboxItem
+                        key={type.value}
+                        checked={selectedTypes.includes(type.value as ProductType)}
+                        onCheckedChange={() => toggleTypeFilter(type.value as ProductType)}
+                      >
+                        {type.label}
+                      </DropdownMenuCheckboxItem>
+                    ))}
+                  </DropdownMenuContent>
+                </DropdownMenu>
+
+                {/* Ingredients Dropdown */}
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button variant="outline" className="flex items-center gap-2 font-quicksand whitespace-nowrap">
+                      Ingredients {selectedIngredients.length > 0 && `(${selectedIngredients.length})`}
+                      <ChevronDown className="h-4 w-4" />
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent className="w-56">
+                    {ingredientTypes.map((ingredient) => (
+                      <DropdownMenuCheckboxItem
+                        key={ingredient.value}
+                        checked={selectedIngredients.includes(ingredient.value as IngredientType)}
+                        onCheckedChange={() => toggleIngredientFilter(ingredient.value as IngredientType)}
+                      >
+                        {ingredient.label}
+                      </DropdownMenuCheckboxItem>
+                    ))}
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              </div>
+
+              {/* Clear All Button */}
+              <Button
+                variant="ghost"
+                className="text-sm font-quicksand whitespace-nowrap"
+                onClick={clearAllFilters}
+              >
+                Clear All
+              </Button>
+            </div>
+          )}
+
+          {/* Products Results */}
+          {filteredProducts.length > 0 ? (
+            <>
+              <p className="text-sm text-slate-500 mb-6 font-quicksand">
+                Showing {filteredProducts.length}{" "}
+                {filteredProducts.length === 1 ? "product" : "products"}
+              </p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {filteredProducts.map(renderProductCard)}
+              </div>
+            </>
+          ) : (
+            <div className="text-center py-12">
+              <h3 className="text-lg font-medium text-slate-800 mb-2">
+                No products found
+              </h3>
+              <p className="text-slate-500 mb-6">
+                Try adjusting your filters or search criteria
+              </p>
+              <Button onClick={clearAllFilters}>Clear All Filters</Button>
+            </div>
+          )}
         </div>
       </main>
 

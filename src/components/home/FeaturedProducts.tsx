@@ -12,7 +12,7 @@ const FeaturedProducts = () => {
   );
 
   return (
-    <section className="py-12 px-4 max-w-7xl mx-auto">
+    <section className="py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
       <div className="mb-10 text-center">
         <h2 className="text-3xl font-bold text-slate-800 mb-4">
           Loved by Little Ones
@@ -64,68 +64,14 @@ const ProductCard = ({ product }: ProductCardProps) => {
       </div>
 
       <CardContent className="p-4">
-        <div className="flex items-center mb-2">
-          <span
-            className={cn(
-              "text-xs px-2 py-0.5 rounded-full mr-2",
-              product.ageRange === "0-6"
-                ? "bg-blue-100 text-blue-800"
-                : product.ageRange === "6-12"
-                  ? "bg-green-100 text-green-800"
-                  : product.ageRange === "12-24"
-                    ? "bg-purple-100 text-purple-800"
-                    : "bg-orange-100 text-orange-800",
-            )}
-          >
-            {product.ageRange === "0-6"
-              ? "0-6 months"
-              : product.ageRange === "6-12"
-                ? "6-12 months"
-                : product.ageRange === "12-24"
-                  ? "12-24 months"
-                  : "24+ months"}
-          </span>
-          <span
-            className={cn(
-              "text-xs px-2 py-0.5 rounded-full",
-              product.productType === "cereals"
-                ? "bg-yellow-100 text-yellow-800"
-                : product.productType === "purees"
-                  ? "bg-pink-100 text-pink-800"
-                  : product.productType === "finger-foods"
-                    ? "bg-indigo-100 text-indigo-800"
-                    : product.productType === "snacks"
-                      ? "bg-red-100 text-red-800"
-                      : "bg-teal-100 text-teal-800",
-            )}
-          >
-            {product.productType
-              .split("-")
-              .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-              .join(" ")}
-          </span>
-        </div>
-
-        <h3 className="font-semibold text-slate-800 text-lg mb-1">
+        <h3 className="font-semibold text-slate-800 text-lg mb-4">
           {product.title}
         </h3>
-
-        <p className="text-slate-600 text-sm mb-4 line-clamp-2">
-          {product.description}
-        </p>
 
         <div className="flex items-baseline justify-between">
           <span className="text-lg font-semibold text-slate-800">
             ₹{product.priceRange.minPrice.amount}
           </span>
-          {product.rating && (
-            <div className="flex items-center">
-              <span className="text-yellow-500">★</span>
-              <span className="ml-1 text-sm text-slate-600">
-                {product.rating}
-              </span>
-            </div>
-          )}
         </div>
       </CardContent>
 
