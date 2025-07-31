@@ -1,43 +1,64 @@
 # Builder Vibe Landing
 
-This repository contains a React application bootstrapped with Vite.
+Builder Vibe Landing is a demo e‑commerce front end built with **React**, **TypeScript** and **Vite**. It showcases a catalog, blog pages, a shopping cart and checkout flow styled with Tailwind and shadcn‑ui components.
+
+## Features
+
+- Modern React application using Vite for fast builds and HMR
+- TypeScript for type safety
+- Tailwind CSS and shadcn‑ui for styling
+- Routing with React Router
+- Mock catalog and blog pages that can be wired to a backend
+- Example shopping cart and checkout screens
 
 ## Getting Started
 
-Follow these steps to run the app locally:
+### Prerequisites
 
-1. **Clone the repository**
-   ```bash
-   git clone <repository-url>
-   cd Builder-vibe-landing
-   ```
+- Node.js 18+ and npm
+- [nvm](https://github.com/nvm-sh/nvm) is recommended to manage Node versions
 
-2. **Install dependencies**
-   ```bash
-   npm install
-   ```
+### Installation
 
-3. **Run the development server**
-   ```bash
-   npm run dev
-   ```
-   The app should be available at http://localhost:8080.
+Clone the repository and install dependencies:
 
-## Building for Production
+```bash
+git clone <repository-url>
+cd Builder-vibe-landing
+npm install
+```
 
-Create an optimized build with:
+Copy `.env.example` to `.env.local` and fill in any required environment variables:
+
+```bash
+cp .env.example .env.local
+```
+
+### Running Locally
+
+Start the development server on port `8080`:
+
+```bash
+npm run dev
+```
+
+Open `http://localhost:8080` in your browser to view the app.
+
+### Building for Production
+
+Generate an optimized build in the `dist/` directory:
 
 ```bash
 npm run build
 ```
 
-The static files will be generated in the `dist/` directory. You can preview the build locally with:
+Preview the production build locally with:
 
 ```bash
 npm run preview
 ```
 
-## Linting
+### Linting
 
 Run ESLint to check code quality:
 
@@ -45,7 +66,18 @@ Run ESLint to check code quality:
 npm run lint
 ```
 
-## Deploying
+## Deployment
 
-Deploy the contents of the `dist/` folder to your static hosting provider of choice.
+The project includes a GitHub Action that provisions Azure resources and deploys the front end to Azure Static Web Apps. See the [Deployment Runbook](RUNBOOK.md) for detailed steps.
+
+## Repository Structure
+
+- `src/` – Application source code
+- `public/` – Static assets served as‑is
+- `infra/` – Reusable GitHub Action for Azure infrastructure
+- `.github/workflows/` – CI workflows
+
+## License
+
+See [copyright-notice.md](copyright-notice.md) for licensing information.
 
