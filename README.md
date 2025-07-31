@@ -68,7 +68,7 @@ npm run lint
 
 ## Deployment
 
-The project includes a GitHub Action that provisions Azure resources and deploys the front end to Azure Static Web Apps. See the [Deployment Runbook](RUNBOOK.md) for detailed steps.
+The project includes GitHub Actions that provision Azure resources and deploy the front end to Azure Static Web Apps. A second workflow `deploy-medusa-aci.yml` can deploy a Medusa backend to Azure Container Instances. See the [Deployment Runbook](RUNBOOK.md) for detailed steps.
 
 ## Repository Structure
 

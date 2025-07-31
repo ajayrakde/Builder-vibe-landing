@@ -1,0 +1,39 @@
+name: Deploy Medusa ACI
+
+on:
+  workflow_dispatch:
+
+env:
+  RESOURCE_GROUP: myapp-rg
+  CONTAINER_NAME: medusa-api
+  LOCATION: eastus
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Login to Azure
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Deploy Medusa container
+        run: |
+          az container delete --resource-group "$RESOURCE_GROUP" --name "$CONTAINER_NAME" --yes || true
+          az container create \
+            --resource-group "$RESOURCE_GROUP" \
+            --name "$CONTAINER_NAME" \
+            --image medusajs/medusa:latest \
+            --dns-name-label "$CONTAINER_NAME" \
+            --ports 9000 \
+            --cpu 1 --memory 2 \
+            --restart-policy Always \
+            --location "$LOCATION" \
+            --environment-variables \
+              DATABASE_URL=${{ secrets.DATABASE_URL }} \
+              REDIS_URL=${{ secrets.REDIS_URL }} \
+              MEDUSA_ADMIN_CORS=${{ secrets.MEDUSA_ADMIN_CORS }} \
+              MEDUSA_STORE_CORS=${{ secrets.MEDUSA_STORE_CORS }}
+
