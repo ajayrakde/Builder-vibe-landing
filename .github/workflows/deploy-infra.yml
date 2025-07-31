@@ -1,0 +1,22 @@
+name: Deploy Infrastructure
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Deploy Azure resources
+        uses: ./infra/actions/deploy
+        with:
+          azure-creds: ${{ secrets.AZURE_CREDENTIALS }}
+          resource-group: myapp-rg
+          location: eastus
+          acr-name: myappacr
+          static-web-app: myapp-swa
+          container-name: myapp-backend
+          postgres-name: myapp-postgres
+          redis-name: myapp-cache
+
